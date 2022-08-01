@@ -17,7 +17,6 @@ public class Game extends JFrame {
         timer = new Timer(0, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.revalidate();
                 frame.repaint();
             }
         });
@@ -25,14 +24,7 @@ public class Game extends JFrame {
         // Aprox. 60 FPS
         timer.setDelay(17);
         timer.start();
-//        for (;;) {frame.repaint();}
     }
-
-//    public void keyPressed(KeyEvent e) {
-//        char key = e.getKeyChar();
-//    }
-//    public void keyReleased (KeyEvent e) {}
-//    public void keyTyped(KeyEvent e) {}
 
     public static void main(String[] args) {
         new Game();
