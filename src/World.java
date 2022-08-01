@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.Random;
 
 public class World extends JPanel {
     public Json json;
@@ -12,14 +12,39 @@ public class World extends JPanel {
     public int player_y = 0;
     public int screen_x = 0;
     public int screen_y = 0;
+    public int tile_click = 0;
 
     public World() {
         JPanel panel = new JPanel();
         add(panel);
 
         json = new Json();
+
         json.json_parse();
-        json.get_world("Villages");
+        json.get_player();
+        json.get_world("Calibration");
+    }
+
+    public void world_constructor() {
+        Random rn = new Random();
+        for (int i = 0; i < this.json.world_height; i++) {
+            for (int j = 0; j < this.json.world_width; j++) {
+                int rand = rn.nextInt() % 101;
+                if (rand < 50) {
+                    this.json.world_tiles[i][j] = 1;
+                } else if (rand >= 50 & rand < 60) {
+                    this.json.world_tiles[i][j] = 2;
+                } else if (rand >= 60 & rand < 70) {
+                    this.json.world_tiles[i][j] = 3;
+                } else if (rand >= 70 & rand < 80) {
+                    this.json.world_tiles[i][j] = 4;
+                } else if (rand >= 80 & rand < 90) {
+                    this.json.world_tiles[i][j] = 5;
+                } else if (rand >= 90) {
+                    this.json.world_tiles[i][j] = 6;
+                }
+            }
+        }
     }
 
     public int get_player_screen_x() {
@@ -47,8 +72,29 @@ public class World extends JPanel {
             if (!this.pause) {
                 this.player_x -= 1;
             }
+        } else if (e.getKeyChar() == 'e' && this.player_x > 0) {
+            System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
+            this.json.world_tiles[this.player_y][this.player_x] = tile_click;
+            System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
         } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
+        } else if (e.getKeyChar() == 'x') {
+            this.json.get_world("Villages");
+        } else if (e.getKeyChar() == 'z') {
+            this.json.get_world("Calibration");
+//            this.world_constructor();
+        } else if (e.getKeyChar() == '1') {
+            this.tile_click = 1;
+        } else if (e.getKeyChar() == '2') {
+            this.tile_click = 2;
+        } else if (e.getKeyChar() == '3') {
+            this.tile_click = 3;
+        } else if (e.getKeyChar() == '4') {
+            this.tile_click = 4;
+        } else if (e.getKeyChar() == '5') {
+            this.tile_click = 5;
+        } else if (e.getKeyChar() == '6') {
+            this.tile_click = 6;
         }
 
         this.screen_x = this.player_x - this.screen_width / 2;
