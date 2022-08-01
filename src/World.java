@@ -72,7 +72,9 @@ public class World extends JPanel {
             if (!this.pause) {
                 this.player_x -= 1;
             }
-        } else if (e.getKeyChar() == 'e' && this.player_x > 0) {
+        }
+
+        if (e.getKeyChar() == 'e' && this.player_x > 0) {
             System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
             this.json.world_tiles[this.player_y][this.player_x] = tile_click;
             System.out.println(this.json.world_tiles[this.player_y][this.player_x]);

@@ -1,8 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -19,8 +17,8 @@ public class Window extends JPanel implements KeyListener {
     BufferedImage img5 = null;
     BufferedImage img6 = null;
 
-    private JButton world_constructor_button = null;
-    private JButton world_redactor_button;
+    private final JButton world_constructor_button;
+    private final JButton world_redactor_button;
     private final JButton exit_button;
     private final JButton save_button;
 
@@ -36,7 +34,6 @@ public class Window extends JPanel implements KeyListener {
         try {img6 = ImageIO.read(new File("src/Tiles/6.jpeg"));} catch (IOException ignored) {}
 
         JPanel panel = new JPanel();
-//        world.world_constructor();
         panel.setFocusable(true);
         panel.requestFocusInWindow();
         panel.addKeyListener(this);
@@ -102,11 +99,13 @@ public class Window extends JPanel implements KeyListener {
         g2d.drawImage(this.img5, 1250, 128, null);
         g2d.drawImage(this.img6, 1250, 160, null);
 
+
+
         if (this.world.pause) {
             g2d.setColor(new Color(255, 255, 255, 155));
             g2d.fillRect(0, 0, 1280, 720);
 
-            if (this.world.json.mode == 1) { // TODO
+            if (this.world.json.mode == 1) {
                 this.world_constructor_button.setVisible(true);
             }
             if (this.world.json.mode == 0) {
@@ -115,20 +114,16 @@ public class Window extends JPanel implements KeyListener {
             this.exit_button.setVisible(true);
             this.save_button.setVisible(true);
 
-            if (this.world.json.mode == 1) { // TODO
+            if (this.world.json.mode == 1) {
                 this.world_constructor_button.addActionListener(e -> world.world_constructor());
             }
             this.exit_button.addActionListener(e -> world.pause = false);
             this.save_button.addActionListener(e -> {
-//                    world.json.set_world();
                 System.out.println("Save in developing(");
             });
-            this.world_redactor_button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    world.json.mode = 1;
-                    System.out.println(world.json.mode);
-                }
+            this.world_redactor_button.addActionListener(e -> {
+                world.json.mode = 1;
+                System.out.println(world.json.mode);
             });
         } else {
             this.world_redactor_button.setVisible(false);
