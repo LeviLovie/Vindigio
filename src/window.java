@@ -1,60 +1,48 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 public class window extends JPanel {
+    World world;
+    {world = new World();}
+
     public window() {
         JPanel panel = new JPanel();
-
-        JLabel vindigio_lable = new JLabel("Vindigio");
-
-        panel.add(vindigio_lable);
+        world.world_constructor();
+        panel.setFocusable(true);
+        panel.requestFocusInWindow();
+        panel.addKeyListener(world);
+        add(world);
         add(panel);
     }
 
     public void paintComponent(Graphics g) {
-//        World_Construct();
+        super.paintComponent(g);
 
         g.setColor(Color.black);
-
-        final int width_tiles = 1280 / 20;
-        final int height_tiles = 720 / 20;
-//        System.out.println(width_tiles + "/" + height_tiles);
-        int[][] world_tiles = new int[width_tiles][height_tiles];
-
-        Random rand = new Random();
-        for (int i = 0; i < 720; i += 20) {
-            for (int j = 0; j < 1280; j += 20) {
-                int randomNum = rand.nextInt((100 - 0) + 1) + 0;
-
-                if (randomNum > 10 & randomNum <= 90) {
+        for (int i = 0; i < this.world.world_width; i += 1) {
+            for (int j = 0; j < this.world.world_height; j += 1) {
+                if (this.world.public_world_tiles[j][i] == 1) {
                     g.setColor(Color.GREEN);
-                } else if (randomNum <= 10) {
+                } else if (this.world.public_world_tiles[j][i] == 2) {
                     g.setColor(Color.MAGENTA);
-                } else if (randomNum > 90 & randomNum <= 95) {
+                } else if (this.world.public_world_tiles[j][i] == 3) {
                     g.setColor(Color.ORANGE);
-                } else if (randomNum > 95) {
+                } else {
                     g.setColor(Color.CYAN);
                 }
 
-                g.fillRect(j, i, 20, 20);
-//                System.out.println(i + "/" + j);
+                g.fillRect(i * 20, j * 20, 20, 20);
             }
         }
 
-//        public static int randInt(int min, int max) {
-//            Random rand;
-//            int randomNum = rand.nextInt((max - min) + 1) + min;
-//            return randomNum;
-//        }
+        g.setColor(Color.RED);
+        g.fillRect(Math.round(this.world.player_coordinate[0] * 20), Math.round(this.world.player_coordinate[1] * 20), 20, 20);
 
-//        g.setColor(Color.black);
-//        g.fillOval(10, 10, 100, 50);
+        System.out.println(this.world.player_coordinate[0] + "," + this.world.player_coordinate[1]);
+
+        if (this.world.pause) {
+            g.setColor(new Color(255, 255, 255, 155));
+            g.fillRect(0, 0, 1280, 720);
+        }
     }
-
-//    public int[][] World_Construct() {
-//        final int width_tiles = 1280 / 720;
-//        int[][] world_tiles = new int[1280/20][720/20];
-//        return world_tiles;
-//    }
 }

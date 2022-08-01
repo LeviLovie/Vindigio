@@ -1,17 +1,40 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Game extends JFrame {
+    JFrame frame = new JFrame();
     public Game() {
-        JFrame frame = new JFrame();
         frame.setTitle("Vindigio");
         frame.setLocation(0, 0);
         frame.setSize(1280, 720);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setResizable(false);
         frame.add(new window());
         frame.setVisible(true);
 
-//        while (true) {frame.repaint();}
+        Timer timer;
+        timer = new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+        timer.setRepeats(true);
+        // Aprox. 60 FPS
+        timer.setDelay(17);
+        timer.start();
+//        for (;;) {frame.repaint();}
     }
+
+//    public void keyPressed(KeyEvent e) {
+//        char key = e.getKeyChar();
+//    }
+//    public void keyReleased (KeyEvent e) {}
+//    public void keyTyped(KeyEvent e) {}
 
     public static void main(String[] args) {
         new Game();
