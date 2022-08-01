@@ -1,69 +1,81 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class Window extends JPanel {
+
+public class Window extends JPanel implements KeyListener {
     World world;
-    {world = new World();}
+    BufferedImage img0 = null;
+    BufferedImage img1 = null;
+    BufferedImage img2 = null;
+    BufferedImage img3 = null;
+    BufferedImage img4 = null;
+    BufferedImage img5 = null;
+    BufferedImage img6 = null;
 
     public Window() {
+        world = new World();
+
+        try {img0 = ImageIO.read(new File("src/Tiles/0.png"));}  catch (IOException e) {}
+        try {img1 = ImageIO.read(new File("src/Tiles/1.jpeg"));} catch (IOException e) {}
+        try {img2 = ImageIO.read(new File("src/Tiles/2.jpeg"));} catch (IOException e) {}
+        try {img3 = ImageIO.read(new File("src/Tiles/3.jpeg"));} catch (IOException e) {}
+        try {img4 = ImageIO.read(new File("src/Tiles/4.jpeg"));} catch (IOException e) {}
+        try {img5 = ImageIO.read(new File("src/Tiles/5.jpeg"));} catch (IOException e) {}
+        try {img6 = ImageIO.read(new File("src/Tiles/6.jpeg"));} catch (IOException e) {}
+
         JPanel panel = new JPanel();
-        world.world_constructor();
+//        world.world_constructor();
         panel.setFocusable(true);
         panel.requestFocusInWindow();
-        panel.addKeyListener(world);
+        panel.addKeyListener(this);
         add(world);
         add(panel);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
 
         int sprite_size = this.world.sprite_size;
-        int player_screen_x = this.world.player_x - this.world.screen_x;
-        int player_screen_y = this.world.player_y - this.world.screen_y;
+        int x, y;
 
-        // вычисляем координаты левой верхней точки экрана
-        this.world.screen_x = this.world.player_x - this.world.screen_width / 2;
-        this.world.screen_y = this.world.player_y - this.world.screen_height / 2;
-
-        // проверяем, что экран не выходит за пределы мира
-        if (this.world.screen_x < 0) {
-            this.world.screen_x = 0;
-        } else if (this.world.screen_x + this.world.screen_width > this.world.json.world_width) {
-            this.world.screen_x = this.world.json.world_width - this.world.screen_width;
-        }
-        if (this.world.screen_y < 0) {
-            this.world.screen_y = 0;
-        } else if (this.world.screen_y + this.world.screen_height > this.world.json.world_height) {
-            this.world.screen_y = this.world.json.world_height - this.world.screen_height;
-        }
-
-        g.setColor(Color.black);
+        g2d.setColor(Color.MAGENTA);
         for (int i = 0; i < this.world.screen_width; i++) {
             for (int j = 0; j < this.world.screen_height; j++) {
-                if (this.world.json.world_tiles[j + this.world.screen_y][i + this.world.screen_x] == 1) {
-                    g.setColor(Color.GREEN);
-                } else if (this.world.json.world_tiles[j + this.world.screen_y][i + this.world.screen_x] == 2) {
-                    g.setColor(Color.MAGENTA);
-                } else if (this.world.json.world_tiles[j + this.world.screen_y][i + this.world.screen_x] == 3) {
-                    g.setColor(Color.ORANGE);
+                x = i + this.world.screen_x;
+                y = j + this.world.screen_y;
+                if (this.world.json.world_tiles[y][x] == 1) {
+                    g2d.drawImage(this.img1, i * sprite_size, j * sprite_size, null);
+                } else if (this.world.json.world_tiles[y][x] == 2) {
+                    g2d.drawImage(this.img2, i * sprite_size, j * sprite_size, null);
+                } else if (this.world.json.world_tiles[y][x] == 3) {
+                    g2d.drawImage(this.img3, i * sprite_size, j * sprite_size, null);
                 } else {
-                    g.setColor(Color.CYAN);
+                    g2d.drawImage(this.img4, i * sprite_size, j * sprite_size, null);
                 }
-
-//                g.fillRect((i + this.world.screen_x) * sprite_size, (j + this.world.screen_y) * sprite_size, sprite_size, sprite_size);
-                g.fillRect(i * sprite_size, j * sprite_size, sprite_size, sprite_size);
             }
         }
 
-        g.setColor(Color.RED);
-        g.fillRect(player_screen_x * sprite_size, player_screen_y * sprite_size, sprite_size, sprite_size);
-
-//        System.out.println(this.world.player_x + "," + this.world.player_y);
+        int player_screen_x = this.world.get_player_screen_x();
+        int player_screen_y = this.world.get_player_screen_y();
+        g2d.drawImage(this.img0, player_screen_x * sprite_size, player_screen_y * sprite_size,null);
 
         if (this.world.pause) {
-            g.setColor(new Color(255, 255, 255, 155));
-            g.fillRect(0, 0, this.world.screen_width, this.world.screen_height);
+            g2d.setColor(new Color(255, 255, 255, 155));
+            g2d.fillRect(0, 0, this.world.screen_width, this.world.screen_height);
         }
     }
+
+    public void keyPressed(KeyEvent e) {
+        this.world.keyPressed(e);
+        this.revalidate();
+    }
+    public void keyReleased (KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
 }
