@@ -56,8 +56,12 @@ public class Window extends JPanel implements KeyListener {
                     g2d.drawImage(this.img2, i * sprite_size, j * sprite_size, null);
                 } else if (this.world.json.world_tiles[y][x] == 3) {
                     g2d.drawImage(this.img3, i * sprite_size, j * sprite_size, null);
-                } else {
+                } else if (this.world.json.world_tiles[y][x] == 4) {
                     g2d.drawImage(this.img4, i * sprite_size, j * sprite_size, null);
+                } else if (this.world.json.world_tiles[y][x] == 5) {
+                    g2d.drawImage(this.img5, i * sprite_size, j * sprite_size, null);
+                } else if (this.world.json.world_tiles[y][x] == 6) {
+                    g2d.drawImage(this.img6, i * sprite_size, j * sprite_size, null);
                 }
             }
         }
@@ -68,7 +72,16 @@ public class Window extends JPanel implements KeyListener {
 
         if (this.world.pause) {
             g2d.setColor(new Color(255, 255, 255, 155));
-            g2d.fillRect(0, 0, this.world.screen_width, this.world.screen_height);
+            g2d.fillRect(0, 0, 1280, 720);
+
+            if (this.world.pause_dialog) {
+                g2d.setColor(Color.ORANGE);
+                g2d.fillRect(
+                        world.json.dialog_x, world.json.dialog_y, world.json.dialog_width, world.json.dialog_height
+                );
+//                JLabel dialog_window_text_1 = new JLabel(world.json.dialog_text);
+//                add(dialog_window_text_1);
+            }
         }
     }
 

@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class World extends JPanel {
     public Json json;
     public boolean pause = false;
+    public boolean pause_dialog = false;
     public final int sprite_size = 32;
     public final int screen_width = (1280 / sprite_size) - 3;
     public final int screen_height = (720 / sprite_size) - 1;
@@ -19,7 +19,8 @@ public class World extends JPanel {
 
         json = new Json();
         json.json_parse();
-        json.get_world("Villages");
+        json.get_world("Calibration");
+        json.get_dialog("one");
     }
 
     public int get_player_screen_x() {
@@ -49,6 +50,13 @@ public class World extends JPanel {
             }
         } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
+        } else if (e.getKeyChar() == 'x') {
+            this.json.get_world("Villages");
+        } else if (e.getKeyChar() == 'z') {
+            this.json.get_world("Calibration");
+        } else if (e.getKeyChar() == 'q') {
+            this.pause = true;
+            this.pause_dialog = true;
         }
 
         this.screen_x = this.player_x - this.screen_width / 2;
