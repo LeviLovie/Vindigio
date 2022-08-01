@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Json.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/KeyReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Worlds.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Date.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

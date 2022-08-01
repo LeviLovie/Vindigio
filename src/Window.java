@@ -1,11 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class window extends JPanel {
+public class Window extends JPanel {
     World world;
     {world = new World();}
 
-    public window() {
+    public Window() {
         JPanel panel = new JPanel();
         world.world_constructor();
         panel.setFocusable(true);
@@ -22,19 +22,36 @@ public class window extends JPanel {
         int player_screen_x = this.world.player_x - this.world.screen_x;
         int player_screen_y = this.world.player_y - this.world.screen_y;
 
+        // вычисляем координаты левой верхней точки экрана
+        this.world.screen_x = this.world.player_x - this.world.screen_width / 2;
+        this.world.screen_y = this.world.player_y - this.world.screen_height / 2;
+
+        // проверяем, что экран не выходит за пределы мира
+        if (this.world.screen_x < 0) {
+            this.world.screen_x = 0;
+        } else if (this.world.screen_x + this.world.screen_width > this.world.json.world_width) {
+            this.world.screen_x = this.world.json.world_width - this.world.screen_width;
+        }
+        if (this.world.screen_y < 0) {
+            this.world.screen_y = 0;
+        } else if (this.world.screen_y + this.world.screen_height > this.world.json.world_height) {
+            this.world.screen_y = this.world.json.world_height - this.world.screen_height;
+        }
+
         g.setColor(Color.black);
         for (int i = 0; i < this.world.screen_width; i++) {
             for (int j = 0; j < this.world.screen_height; j++) {
-                if (this.world.screen_tiles[j][i] == 1) {
+                if (this.world.json.world_tiles[j + this.world.screen_y][i + this.world.screen_x] == 1) {
                     g.setColor(Color.GREEN);
-                } else if (this.world.screen_tiles[j][i] == 2) {
+                } else if (this.world.json.world_tiles[j + this.world.screen_y][i + this.world.screen_x] == 2) {
                     g.setColor(Color.MAGENTA);
-                } else if (this.world.screen_tiles[j][i] == 3) {
+                } else if (this.world.json.world_tiles[j + this.world.screen_y][i + this.world.screen_x] == 3) {
                     g.setColor(Color.ORANGE);
                 } else {
                     g.setColor(Color.CYAN);
                 }
 
+//                g.fillRect((i + this.world.screen_x) * sprite_size, (j + this.world.screen_y) * sprite_size, sprite_size, sprite_size);
                 g.fillRect(i * sprite_size, j * sprite_size, sprite_size, sprite_size);
             }
         }

@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Game extends JFrame {
     JFrame frame = new JFrame();
@@ -12,7 +10,7 @@ public class Game extends JFrame {
         frame.setSize(1280, 720 + 28);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.add(new window());
+        frame.add(new Window());
         frame.setVisible(true);
 
         Timer timer;
