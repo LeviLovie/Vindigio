@@ -27,6 +27,8 @@ public class World extends JPanel implements KeyListener {
     public int world_height;
     private int[][] world_tiles;
 
+    public String load_world = "Villages";
+
     public int player_x = 0;
     public int player_y = 0;
 
@@ -37,14 +39,18 @@ public class World extends JPanel implements KeyListener {
         try {
             JSONObject jsonO = (JSONObject)parser.parse(new FileReader("src/Worlds.json"));
 
-            JSONObject size = (JSONObject) jsonO.get("size");
+            JSONObject worlds = (JSONObject) jsonO.get("worlds");
+            JSONObject world = (JSONObject) worlds.get(load_world);
+
+            JSONObject size = (JSONObject) world.get("size");
+
             this.world_width = ((Long) size.get("width")).intValue();
             this.world_height = ((Long) size.get("height")).intValue();
 
             this.world_tiles = new int[this.world_height][this.world_width];
 
             // Now we try to take the data from "presentationSlides" array
-            JSONArray columnsContent = (JSONArray) jsonO.get("tiles");
+            JSONArray columnsContent = (JSONArray) world.get("tiles");
             Iterator columnI = columnsContent.iterator();
 
             int column = 0;
