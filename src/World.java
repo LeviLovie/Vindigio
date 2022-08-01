@@ -14,33 +14,34 @@ public class World extends JPanel implements KeyListener {
     public World() {
         JPanel panel = new JPanel();
         add(panel);
-
-        player_coordinate[0] = 0;
-        player_coordinate[1] = 0;
     }
 
     JSONParser parser = new JSONParser();
 
     public boolean pause = false;
     public final int sprite_size = 20;
-    public final int world_width = 1280 / sprite_size;
-    public final int world_height = 720 / sprite_size;
-    public int width_tiles;
-    public int height_tiles;
-    private int[][] private_world_tiles;
-    public int[][] public_world_tiles = new int[world_height][world_width];
+    public final int screen_width = (1280 / sprite_size) - 3;
+    public final int screen_height = (720 / sprite_size) - 1;
+    public int[][] screen_tiles = new int[screen_height][screen_width];
+    public int world_width;
+    public int world_height;
+    private int[][] world_tiles;
 
-    public int[] player_coordinate = new int[2];
+    public int player_x = 0;
+    public int player_y = 0;
+
+    public int screen_x = 0;
+    public int screen_y = 0;
 
     public void world_constructor() {
         try {
             JSONObject jsonO = (JSONObject)parser.parse(new FileReader("src/Worlds.json"));
 
             JSONObject size = (JSONObject) jsonO.get("size");
-            this.width_tiles = ((Long) size.get("width")).intValue();
-            this.height_tiles = ((Long) size.get("height")).intValue();
+            this.world_width = ((Long) size.get("width")).intValue();
+            this.world_height = ((Long) size.get("height")).intValue();
 
-            this.private_world_tiles= new int[this.world_height * 2][this.world_width * 2];
+            this.world_tiles = new int[this.world_height][this.world_width];
 
             // Now we try to take the data from "presentationSlides" array
             JSONArray columnsContent = (JSONArray) jsonO.get("tiles");
@@ -53,7 +54,7 @@ public class World extends JPanel implements KeyListener {
 
                 int row = 0;
                 while (rowI.hasNext()) {
-                    this.private_world_tiles[column][row] = ((Long) rowI.next()).intValue();
+                    this.world_tiles[column][row] = ((Long) rowI.next()).intValue();
                     row++;
                 }
 
@@ -63,9 +64,9 @@ public class World extends JPanel implements KeyListener {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < this.world_height; i++) {
+        for (int i = 0; i < this.screen_height; i++) {
             //            System.arraycopy(this.private_world_tiles[i], 0, this.public_world_tiles[i], 0, height_tiles);
-            System.arraycopy(private_world_tiles[i], 0, public_world_tiles[i], 0, this.world_width);
+            System.arraycopy(world_tiles[i], 0, screen_tiles[i], 0, this.screen_width);
         }
     }
 
@@ -74,60 +75,51 @@ public class World extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
 //        this.key = e.getKeyChar();
         System.out.println(e.getKeyChar());
-//        System.out.println(this.player_coordinate[0] + "/" + this.player_coordinate[1]);
+//        System.out.println(this.player_x + "/" + this.player_y);
 
-        if (e.getKeyChar() == 's' & this.player_coordinate[1] < height_tiles) {
+        if (e.getKeyChar() == 's' && this.player_y < world_height) {
 //            System.out.println("D");
             if (!this.pause) {
-                this.player_coordinate[1] += 1;
+                this.player_y += 1;
             }
-        } else if (e.getKeyChar() == 'w' & this.player_coordinate[1] > 0) {
+        } else if (e.getKeyChar() == 'w' && this.player_y > 0) {
             if (!this.pause) {
-                this.player_coordinate[1] -= 1;
+                this.player_y -= 1;
             }
-        } else if (e.getKeyChar() == 'd' & this.player_coordinate[0] < width_tiles) {
+        } else if (e.getKeyChar() == 'd' && this.player_x < world_width) {
             if (!this.pause) {
-                this.player_coordinate[0] += 1;
+                this.player_x += 1;
             }
-        } else if (e.getKeyChar() == 'a' & this.player_coordinate[0] > 0) {
+        } else if (e.getKeyChar() == 'a' && this.player_x > 0) {
             if (!this.pause) {
-                this.player_coordinate[0] -= 1;
+                this.player_x -= 1;
             }
         } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
         }
 
-        for (int i = 0; i < this.world_height; i++) {
-            for (int j = 0; j < this.world_width; j++) {
-                if (player_coordinate[0] > 32) {
-                    public_world_tiles[i][j] = private_world_tiles[i][j + player_coordinate[0] - 32];
-                } else {
-                    public_world_tiles[i][j] = private_world_tiles[i][j];
-                }
-            }
+        // вычисляем координаты левой верхней точки экрана
+        this.screen_x = this.player_x - this.screen_width / 2;
+        this.screen_y = this.player_y - this.screen_height / 2;
+
+        // проверяем, что экран не выходит за пределы мира
+        if (this.screen_x < 0) {
+            this.screen_x = 0;
+        } else if (this.screen_x + this.screen_width > this.world_width) {
+            this.screen_x = this.world_width - this.screen_width;
+        }
+        if (this.screen_y < 0) {
+            this.screen_y = 0;
+        } else if (this.screen_y + this.screen_height > this.world_height) {
+            this.screen_y = this.world_height - this.screen_height;
         }
 
-//        if (player_coordinate[1] > 16) {
-//            for (int i = 0; i < this.world_height; i++) {
-//                for (int j = 0; j < this.world_width; j++) {
-//                    public_world_tiles[i][j] = private_world_tiles[i + player_coordinate[1] - 16][j + player_coordinate[0] - 16];
-//                }
-//            }
-//        } else if (player_coordinate[1] > 16 player_coordinate[0] > 16) {
-//            for (int i = 0; i < this.world_height; i++) {
-//                for (int j = 0; j < this.world_width; j++) {
-//                    public_world_tiles[i][j] = private_world_tiles[i + player_coordinate[1] - 16][j + player_coordinate[0] - 16];
-//                }
-//            }
-//        } else {
-//            for (int i = 0; i < this.world_height; i++) {
-//                for (int j = 0; j < this.world_width; j++) {
-//                    public_world_tiles[i][j] = private_world_tiles[i][j];
-//                }
-//            }
-//        }
+        System.out.println("player: " + this.player_x + ", " + this.player_y + "; screen: " + this.screen_x + ", " + this.screen_y);
 
-//        System.out.println(this.player_coordinate[0] + "," + this.player_coordinate[1]);
+        // копируем на экран элементы из мира с учетом найденного положения экрана
+        for (int i = 0; i < this.screen_height; i++) {
+            System.arraycopy(this.world_tiles[i + this.screen_y], this.screen_x, screen_tiles[i], 0, this.screen_width);
+        }
     }
     public void keyReleased (KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}

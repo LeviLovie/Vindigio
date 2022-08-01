@@ -9,7 +9,7 @@ public class Game extends JFrame {
     public Game() {
         frame.setTitle("Vindigio");
         frame.setLocation(0, 0);
-        frame.setSize(1280, 720);
+        frame.setSize(1280, 720 + 28);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.add(new window());
