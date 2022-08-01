@@ -72,31 +72,33 @@ public class World extends JPanel {
             if (!this.pause) {
                 this.player_x -= 1;
             }
-        }
-
-        if (e.getKeyChar() == 'e' && this.player_x > 0) {
-            System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
-            this.json.world_tiles[this.player_y][this.player_x] = tile_click;
-            System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
         } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
-        } else if (e.getKeyChar() == 'x') {
-            this.json.get_world("Villages");
-        } else if (e.getKeyChar() == 'z') {
-            this.json.get_world("Calibration");
+        }
+
+        if (this.json.mode == 1) {
+            if (e.getKeyChar() == 'x') {
+                this.json.get_world("Villages");
+            } else if (e.getKeyChar() == 'z') {
+                this.json.get_world("Calibration");
 //            this.world_constructor();
-        } else if (e.getKeyChar() == '1') {
-            this.tile_click = 1;
-        } else if (e.getKeyChar() == '2') {
-            this.tile_click = 2;
-        } else if (e.getKeyChar() == '3') {
-            this.tile_click = 3;
-        } else if (e.getKeyChar() == '4') {
-            this.tile_click = 4;
-        } else if (e.getKeyChar() == '5') {
-            this.tile_click = 5;
-        } else if (e.getKeyChar() == '6') {
-            this.tile_click = 6;
+            } else if (e.getKeyChar() == '1') {
+                this.tile_click = 1;
+            } else if (e.getKeyChar() == '2') {
+                this.tile_click = 2;
+            } else if (e.getKeyChar() == '3') {
+                this.tile_click = 3;
+            } else if (e.getKeyChar() == '4') {
+                this.tile_click = 4;
+            } else if (e.getKeyChar() == '5') {
+                this.tile_click = 5;
+            } else if (e.getKeyChar() == '6') {
+                this.tile_click = 6;
+            } else if (e.getKeyChar() == 'e' && this.player_x > 0) {
+                System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
+                this.json.world_tiles[this.player_y][this.player_x] = tile_click;
+                System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
+            }
         }
 
         this.screen_x = this.player_x - this.screen_width / 2;

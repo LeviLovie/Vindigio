@@ -19,6 +19,7 @@ public class Window extends JPanel implements KeyListener {
 
     private final JButton world_constructor_button;
     private final JButton world_redactor_button;
+    private JButton game_button;
     private final JButton exit_button;
     private final JButton save_button;
 
@@ -42,6 +43,9 @@ public class Window extends JPanel implements KeyListener {
         this.world_redactor_button = new JButton("World redactor mode");
         this.world_redactor_button.setVisible(false);
 
+        this.game_button = new JButton("Back to game");
+        this.game_button.setVisible(false);
+
         this.world_constructor_button = new JButton("Auto world generate");
         this.world_constructor_button.setVisible(false);
 
@@ -51,7 +55,8 @@ public class Window extends JPanel implements KeyListener {
         this.save_button = new JButton("Save");
         this.save_button.setVisible(false);
 
-        add(world_redactor_button); // TODO comment this line for finis compilation
+        add(this.world_redactor_button); // TODO comment this and next line for finis compilation
+        add(this.game_button);
         add(this.world_constructor_button);
         add(this.exit_button);
         add(this.save_button);
@@ -92,12 +97,14 @@ public class Window extends JPanel implements KeyListener {
         int player_screen_y = this.world.get_player_screen_y();
         g2d.drawImage(this.img0, player_screen_x * sprite_size, player_screen_y * sprite_size,null);
 
-        g2d.drawImage(this.img1, 1250, 0, null);
-        g2d.drawImage(this.img2, 1250, 32, null);
-        g2d.drawImage(this.img3, 1250, 64, null);
-        g2d.drawImage(this.img4, 1250, 96, null);
-        g2d.drawImage(this.img5, 1250, 128, null);
-        g2d.drawImage(this.img6, 1250, 160, null);
+        if (this.world.json.mode == 1) {
+            g2d.drawImage(this.img1, 1250, 0, null);
+            g2d.drawImage(this.img2, 1250, 32, null);
+            g2d.drawImage(this.img3, 1250, 64, null);
+            g2d.drawImage(this.img4, 1250, 96, null);
+            g2d.drawImage(this.img5, 1250, 128, null);
+            g2d.drawImage(this.img6, 1250, 160, null);
+        }
 
 
 
@@ -110,6 +117,8 @@ public class Window extends JPanel implements KeyListener {
             }
             if (this.world.json.mode == 0) {
                 this.world_redactor_button.setVisible(true);
+            } else {
+                this.game_button.setVisible(true);
             }
             this.exit_button.setVisible(true);
             this.save_button.setVisible(true);
@@ -119,12 +128,11 @@ public class Window extends JPanel implements KeyListener {
             }
             this.exit_button.addActionListener(e -> world.pause = false);
             this.save_button.addActionListener(e -> System.out.println("Save in developing("));
-            this.world_redactor_button.addActionListener(e -> {
-                world.json.mode = 1;
-                System.out.println(world.json.mode);
-            });
+            this.world_redactor_button.addActionListener(e -> world.json.mode = 1);
+            this.game_button.addActionListener(e -> world.json.mode = 0);
         } else {
             this.world_redactor_button.setVisible(false);
+            this.game_button.setVisible(false);
             if (this.world_constructor_button != null) {
                 this.world_constructor_button.setVisible(false);
             }
