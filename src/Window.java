@@ -118,9 +118,7 @@ public class Window extends JPanel implements KeyListener {
                 this.world_constructor_button.addActionListener(e -> world.world_constructor());
             }
             this.exit_button.addActionListener(e -> world.pause = false);
-            this.save_button.addActionListener(e -> {
-                System.out.println("Save in developing(");
-            });
+            this.save_button.addActionListener(e -> System.out.println("Save in developing("));
             this.world_redactor_button.addActionListener(e -> {
                 world.json.mode = 1;
                 System.out.println(world.json.mode);
