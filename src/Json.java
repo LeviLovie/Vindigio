@@ -15,7 +15,7 @@ public class Json {
 
     public void json_parse() {
         try {
-            jsonO = (JSONObject) parser.parse(new FileReader("src/Worlds.json"));
+            jsonO = (JSONObject) parser.parse(new FileReader("src/Date.json"));
             worlds = (JSONObject) jsonO.get("worlds");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
