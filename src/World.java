@@ -147,19 +147,43 @@ public class World extends JPanel {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == 's' && this.player.y < this.world.height) {
             if (!this.pause) {
-                this.player.y += 1;
+                if (
+                        this.world.tiles[this.player.y + 1][this.player.x] != 7 &&
+                                this.world.tiles[this.player.y + 1][this.player.x] != 9 &&
+                                this.world.tiles[this.player.y + 1][this.player.x] != 10
+                ) {
+                    this.player.y += 1;
+                }
             }
         } else if (e.getKeyChar() == 'w' && this.player.y > 0) {
             if (!this.pause) {
-                this.player.y -= 1;
+                if (
+                        this.world.tiles[this.player.y - 1][this.player.x] != 7 &&
+                                this.world.tiles[this.player.y - 1][this.player.x] != 9 &&
+                                this.world.tiles[this.player.y - 1][this.player.x] != 10
+                ) {
+                    this.player.y -= 1;
+                }
             }
         } else if (e.getKeyChar() == 'd' && this.player.x < this.world.width) {
             if (!this.pause) {
-                this.player.x += 1;
+                if (
+                        this.world.tiles[this.player.y][this.player.x + 1] != 7 &&
+                                this.world.tiles[this.player.y][this.player.x + 1] != 9 &&
+                                this.world.tiles[this.player.y][this.player.x + 1] != 10
+                ) {
+                    this.player.x += 1;
+                }
             }
         } else if (e.getKeyChar() == 'a' && this.player.x > 0) {
             if (!this.pause) {
-                this.player.x -= 1;
+                if (
+                        this.world.tiles[this.player.y][this.player.x - 1] != 7 &&
+                                this.world.tiles[this.player.y][this.player.x - 1] != 9 &&
+                                this.world.tiles[this.player.y][this.player.x - 1] != 10
+                ) {
+                    this.player.x -= 1;
+                }
             }
         } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
