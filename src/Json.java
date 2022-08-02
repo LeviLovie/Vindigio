@@ -33,6 +33,19 @@ public class Json {
         }
     }
 
+    public String[] list_worlds() {
+        JSONObject jsonO = this.json_parse();
+        JSONObject worlds = (JSONObject) jsonO.get("worlds");
+        String[] world_names = new String[worlds.size()];
+
+        int i = 0;
+        for (Iterator iterator = worlds.keySet().iterator(); iterator.hasNext(); i++) {
+            world_names[i] = (String) iterator.next();
+        }
+
+        return world_names;
+    }
+
     public DataPlayer load_player() {
         JSONObject jsonO = this.json_parse();
 
@@ -48,11 +61,14 @@ public class Json {
     public void save_player(DataPlayer player) {
         JSONObject jsonO = this.json_parse();
 
-        JSONObject json_player = (JSONObject) jsonO.get("player");
-        JSONObject coordinate = (JSONObject) json_player.get("coordinate");
-
+        JSONObject coordinate = new JSONObject();
         coordinate.put("x", player.x);
         coordinate.put("y", player.y);
+
+        JSONObject json_player = new JSONObject();
+        json_player.put("coordinate", coordinate);
+
+        jsonO.put("player", json_player);
 
         this.json_save(jsonO);
     }
@@ -68,13 +84,13 @@ public class Json {
         int world_height = ((Long) size.get("height")).intValue();
         int[][] world_tiles = new int[world_height][world_width];
 
-        JSONArray columnsContent = (JSONArray) world.get("tiles");
-        Iterator columnI = columnsContent.iterator();
+        JSONArray tiles = (JSONArray) world.get("tiles");
+        Iterator columnI = tiles.iterator();
 
         int column = 0;
         while (columnI.hasNext()) {
-            JSONArray rowsContent = (JSONArray) columnI.next();
-            Iterator rowI = rowsContent.iterator();
+            JSONArray tilesRow = (JSONArray) columnI.next();
+            Iterator rowI = tilesRow.iterator();
 
             int row = 0;
             while (rowI.hasNext()) {
@@ -89,25 +105,36 @@ public class Json {
     }
 
     public void save_world(DataWorld world) {
-        JSONObject jsonO = this.json_parse();
-
-        JSONObject worlds = (JSONObject) jsonO.get("worlds");
-        JSONObject json_world = (JSONObject) worlds.get(world.name);
-        JSONObject size = (JSONObject) json_world.get("size");
-
+        JSONObject size = new JSONObject();
         size.put("width", world.width);
         size.put("height", world.height);
 
-        JSONArray columnsContent = new JSONArray();
+        JSONArray tiles = new JSONArray();
         for (int i = 0; i < world.height; i++) {
-            JSONArray rowsContent = new JSONArray();
+            JSONArray tilesRow = new JSONArray();
             for (int j = 0; j < world.width; j++) {
-                rowsContent.add(world.tiles[i][j]);
+                tilesRow.add(world.tiles[i][j]);
             }
-            columnsContent.add(rowsContent);
+            tiles.add(tilesRow);
         }
 
-        json_world.put("tiles", columnsContent);
+        JSONObject json_world = new JSONObject();
+        json_world.put("size", size);
+        json_world.put("tiles", tiles);
+
+        JSONObject jsonO = this.json_parse();
+
+        JSONObject worlds = (JSONObject) jsonO.get("worlds");
+        worlds.put(world.name, json_world);
+
+        this.json_save(jsonO);
+    }
+
+    public void delete_world(String world_name) {
+        JSONObject jsonO = this.json_parse();
+
+        JSONObject worlds = (JSONObject) jsonO.get("worlds");
+        worlds.remove(world_name);
 
         this.json_save(jsonO);
     }
