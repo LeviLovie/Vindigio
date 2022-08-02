@@ -5,11 +5,15 @@ import java.util.Random;
 public class World extends JPanel {
     public Json json;
     public boolean pause = false;
+    public int mode = 0;
+
     public final int sprite_size = 32;
-    public final int screen_width = (1280 / sprite_size) - 3;
-    public final int screen_height = (720 / sprite_size) - 1;
-    public int player_x = 0;
-    public int player_y = 0;
+
+    public DataWorld world;
+
+    public int screen_width = (1280 / sprite_size) - 3;
+    public int screen_height = (720 / sprite_size);
+    public DataPlayer player;
     public int screen_x = 0;
     public int screen_y = 0;
     public int tile_click = 0;
@@ -19,68 +23,66 @@ public class World extends JPanel {
         add(panel);
 
         json = new Json();
-
-        json.json_parse();
-        json.get_player();
-        json.get_world("Calibration");
+        this.player = json.load_player();
+        this.world = json.load_world("Calibration");
     }
 
     public void world_constructor() {
         Random rn = new Random();
-        for (int i = 0; i < this.json.world_height; i++) {
-            for (int j = 0; j < this.json.world_width; j++) {
+        for (int i = 0; i < this.world.height; i++) {
+            for (int j = 0; j < this.world.width; j++) {
                 int rand = rn.nextInt() % 101;
                 if (rand < 50) {
-                    this.json.world_tiles[i][j] = 1;
+                    this.world.tiles[i][j] = 1;
                 } else if (rand < 60) {
-                    this.json.world_tiles[i][j] = 2;
+                    this.world.tiles[i][j] = 2;
                 } else if (rand < 70) {
-                    this.json.world_tiles[i][j] = 3;
+                    this.world.tiles[i][j] = 3;
                 } else if (rand < 80) {
-                    this.json.world_tiles[i][j] = 4;
+                    this.world.tiles[i][j] = 4;
                 } else if (rand < 90) {
-                    this.json.world_tiles[i][j] = 5;
+                    this.world.tiles[i][j] = 5;
                 } else {
-                    this.json.world_tiles[i][j] = 6;
+                    this.world.tiles[i][j] = 6;
                 }
             }
         }
     }
 
     public int get_player_screen_x() {
-        return this.player_x - this.screen_x;
+        return this.player.x - this.screen_x;
     }
 
     public int get_player_screen_y() {
-        return this.player_y - this.screen_y;
+        return this.player.y - this.screen_y;
     }
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == 's' && this.player_y < this.json.world_height) {
+        if (e.getKeyChar() == 's' && this.player.y < this.world.height) {
             if (!this.pause) {
-                this.player_y += 1;
+                this.player.y += 1;
             }
-        } else if (e.getKeyChar() == 'w' && this.player_y > 0) {
+        } else if (e.getKeyChar() == 'w' && this.player.y > 0) {
             if (!this.pause) {
-                this.player_y -= 1;
+                this.player.y -= 1;
             }
-        } else if (e.getKeyChar() == 'd' && this.player_x < this.json.world_width) {
+        } else if (e.getKeyChar() == 'd' && this.player.x < this.world.width) {
             if (!this.pause) {
-                this.player_x += 1;
+                this.player.x += 1;
             }
-        } else if (e.getKeyChar() == 'a' && this.player_x > 0) {
+        } else if (e.getKeyChar() == 'a' && this.player.x > 0) {
             if (!this.pause) {
-                this.player_x -= 1;
+                this.player.x -= 1;
             }
         } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
         }
 
-        if (this.json.mode == 1) {
+        if (this.mode == 1) {
             if (e.getKeyChar() == 'x') {
-                this.json.get_world("Villages");
+                this.json.load_world("Villages");
             } else if (e.getKeyChar() == 'z') {
-                this.json.get_world("Calibration");
+                this.json.load_world("Calibration");
 //            this.world_constructor();
             } else if (e.getKeyChar() == '1') {
                 this.tile_click = 1;
@@ -94,25 +96,25 @@ public class World extends JPanel {
                 this.tile_click = 5;
             } else if (e.getKeyChar() == '6') {
                 this.tile_click = 6;
-            } else if (e.getKeyChar() == 'e' && this.player_x > 0) {
-                System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
-                this.json.world_tiles[this.player_y][this.player_x] = tile_click;
-                System.out.println(this.json.world_tiles[this.player_y][this.player_x]);
+            } else if (e.getKeyChar() == 'e' && this.player.x > 0) {
+                System.out.println(this.world.tiles[this.player.y][this.player.x]);
+                this.world.tiles[this.player.y][this.player.x] = tile_click;
+                System.out.println(this.world.tiles[this.player.y][this.player.x]);
             }
         }
 
-        this.screen_x = this.player_x - this.screen_width / 2;
-        this.screen_y = this.player_y - this.screen_height / 2;
+        this.screen_x = this.player.x - this.screen_width / 2;
+        this.screen_y = this.player.y - this.screen_height / 2;
 
         if (this.screen_x < 0) {
             this.screen_x = 0;
-        } else if (this.screen_x + this.screen_width > this.json.world_width) {
-            this.screen_x = this.json.world_width - this.screen_width;
+        } else if (this.screen_x + this.screen_width > this.world.width) {
+            this.screen_x = this.world.width - this.screen_width;
         }
         if (this.screen_y < 0) {
             this.screen_y = 0;
-        } else if (this.screen_y + this.screen_height > this.json.world_height) {
-            this.screen_y = this.json.world_height - this.screen_height;
+        } else if (this.screen_y + this.screen_height > this.world.height) {
+            this.screen_y = this.world.height - this.screen_height;
         }
     }
 }

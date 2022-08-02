@@ -77,17 +77,17 @@ public class Window extends JPanel implements KeyListener {
             for (int j = 0; j < this.world.screen_height; j++) {
                 x = i + this.world.screen_x;
                 y = j + this.world.screen_y;
-                if (this.world.json.world_tiles[y][x] == 1) {
+                if (this.world.world.tiles[y][x] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.json.world_tiles[y][x] == 2) {
+                } else if (this.world.world.tiles[y][x] == 2) {
                     g2d.drawImage(this.img2, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.json.world_tiles[y][x] == 3) {
+                } else if (this.world.world.tiles[y][x] == 3) {
                     g2d.drawImage(this.img3, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.json.world_tiles[y][x] == 4) {
+                } else if (this.world.world.tiles[y][x] == 4) {
                     g2d.drawImage(this.img4, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.json.world_tiles[y][x] == 5) {
+                } else if (this.world.world.tiles[y][x] == 5) {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.json.world_tiles[y][x] == 6) {
+                } else if (this.world.world.tiles[y][x] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
                 }
             }
@@ -97,7 +97,7 @@ public class Window extends JPanel implements KeyListener {
         int player_screen_y = this.world.get_player_screen_y();
         g2d.drawImage(this.img0, player_screen_x * sprite_size, player_screen_y * sprite_size,null);
 
-        if (this.world.json.mode == 1) {
+        if (this.world.mode == 1) {
             g2d.drawImage(this.img1, 1250, 0, null);
             g2d.drawImage(this.img2, 1250, 32, null);
             g2d.drawImage(this.img3, 1250, 64, null);
@@ -106,18 +106,24 @@ public class Window extends JPanel implements KeyListener {
             g2d.drawImage(this.img6, 1250, 160, null);
         }
 
-
+        if (this.world.mode == 1) {
+            // world redactor mode
+            this.world.screen_width =  (1280 / this.world.sprite_size) - 3;
+        } else if (this.world.mode == 0) {
+            // game mode
+            this.world.screen_width = (1280 / this.world.sprite_size) - 2;
+        }
 
         if (this.world.pause) {
             g2d.setColor(new Color(255, 255, 255, 155));
             g2d.fillRect(0, 0, 1280, 720);
 
-            if (this.world.json.mode == 1) {
+            if (this.world.mode == 1) {
                 // world redactor mode
                 this.world_constructor_button.setVisible(true);
                 this.world_redactor_button.setVisible(false);
                 this.game_button.setVisible(true);
-            } else if (this.world.json.mode == 0) {
+            } else if (this.world.mode == 0) {
                 // game mode
                 this.world_redactor_button.setVisible(true);
                 this.game_button.setVisible(false);
@@ -129,17 +135,19 @@ public class Window extends JPanel implements KeyListener {
 
             this.exit_button.addActionListener(e -> world.pause = false);
             this.save_button.addActionListener(e -> {
-                if (this.world.json.mode == 1) {
+                if (this.world.mode == 1) {
                     // world redactor mode
                     // TODO json world save
-                } else if (this.world.json.mode == 0) {
+                    this.world.json.save_world(this.world.world);
+                } else if (this.world.mode == 0) {
                     // game mode
                     // TODO json player save
+                    this.world.json.save_player(this.world.player);
                 }
             });
             this.world_constructor_button.addActionListener(e -> world.world_constructor());
-            this.world_redactor_button.addActionListener(e -> world.json.mode = 1);
-            this.game_button.addActionListener(e -> world.json.mode = 0);
+            this.world_redactor_button.addActionListener(e -> world.mode = 1);
+            this.game_button.addActionListener(e -> world.mode = 0);
         } else {
             this.world_redactor_button.setVisible(false);
             this.game_button.setVisible(false);
