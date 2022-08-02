@@ -12,10 +12,11 @@ public class World extends JPanel {
     public DataWorld world;
 
     public int screen_width = (1280 / sprite_size) - 3;
-    public int screen_height = (720 / sprite_size);
+    public int screen_height = Math.round(720 / sprite_size);
     public DataPlayer player;
     public int screen_x = 0;
     public int screen_y = 0;
+    public String tile_click_any;
     public int tile_click = 0;
 
     public World() {
@@ -131,18 +132,36 @@ public class World extends JPanel {
             } else if (e.getKeyChar() == 'z') {
                 this.json.load_world("Calibration");
 //            this.world_constructor();
+            } else if (e.getKeyChar() == '0') {
+                this.tile_click_any = "";
+                this.tile_click = 0;
             } else if (e.getKeyChar() == '1') {
-                this.tile_click = 1;
+                this.tile_click_any += "1";
+                this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == '2') {
-                this.tile_click = 2;
+                this.tile_click_any += "2";
+                this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == '3') {
-                this.tile_click = 3;
+                this.tile_click_any += "3";
+                this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == '4') {
-                this.tile_click = 4;
+                this.tile_click_any += "4";
+                this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == '5') {
-                this.tile_click = 5;
+                this.tile_click_any += "5";
+                this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == '6') {
-                this.tile_click = 6;
+                this.tile_click_any += "6";
+                this.tile_click = Integer.parseInt(tile_click_any);
+            } else if (e.getKeyChar() == '7') {
+                this.tile_click_any += "7";
+                this.tile_click = Integer.parseInt(tile_click_any);
+            } else if (e.getKeyChar() == '8') {
+                this.tile_click_any += "8";
+                this.tile_click = Integer.parseInt(tile_click_any);
+            } else if (e.getKeyChar() == '9') {
+                this.tile_click_any += "9";
+                this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == 'e' && this.player.x > 0) {
                 System.out.println(this.world.tiles[this.player.y][this.player.x]);
                 this.world.tiles[this.player.y][this.player.x] = tile_click;

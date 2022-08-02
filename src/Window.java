@@ -16,6 +16,10 @@ public class Window extends JPanel implements KeyListener {
     BufferedImage img4 = null;
     BufferedImage img5 = null;
     BufferedImage img6 = null;
+    BufferedImage img7 = null;
+    BufferedImage img8 = null;
+    BufferedImage img9 = null;
+    BufferedImage img10 = null;
 
     private final JButton world_constructor_button;
     private final JButton new_world_button;
@@ -35,6 +39,10 @@ public class Window extends JPanel implements KeyListener {
         try {img4 = ImageIO.read(new File("src/Tiles/4.jpeg"));} catch (IOException ignored) {}
         try {img5 = ImageIO.read(new File("src/Tiles/5.jpeg"));} catch (IOException ignored) {}
         try {img6 = ImageIO.read(new File("src/Tiles/6.jpeg"));} catch (IOException ignored) {}
+        try {img7 = ImageIO.read(new File("src/Tiles/7.png"));} catch (IOException ignored) {}
+        try {img8 = ImageIO.read(new File("src/Tiles/8.png"));} catch (IOException ignored) {}
+        try {img9 = ImageIO.read(new File("src/Tiles/9.png"));} catch (IOException ignored) {}
+        try {img10 = ImageIO.read(new File("src/Tiles/10.png"));} catch (IOException ignored) {}
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);
@@ -116,6 +124,14 @@ public class Window extends JPanel implements KeyListener {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x] == 7) {
+                    g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x] == 8) {
+                    g2d.drawImage(this.img8, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x] == 9) {
+                    g2d.drawImage(this.img9, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x] == 10) {
+                    g2d.drawImage(this.img10, (i * sprite_size), (j * sprite_size), null);
                 }
             }
         }
@@ -131,6 +147,10 @@ public class Window extends JPanel implements KeyListener {
             g2d.drawImage(this.img4, 1250, 96, null);
             g2d.drawImage(this.img5, 1250, 128, null);
             g2d.drawImage(this.img6, 1250, 160, null);
+            g2d.drawImage(this.img7, 1250, 192, null);
+            g2d.drawImage(this.img8, 1250, 224, null);
+            g2d.drawImage(this.img9, 1250, 256, null);
+            g2d.drawImage(this.img10, 1250, 288, null);
         }
 
         if (this.world.mode == 1) {
