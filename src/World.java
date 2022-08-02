@@ -16,8 +16,33 @@ public class World extends JPanel {
     public DataPlayer player;
     public int screen_x = 0;
     public int screen_y = 0;
-    public String tile_click_any;
+    public String tile_click_any = "";
     public int tile_click = 0;
+
+    private int[][] house_1 = {
+            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+            {7,  10, 1,  1,  1,  1,  1,  1,  1,  1},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  10, 1,  1,  1,  1,  1,  1,  10, 7},
+            {7,  7,  7,  7,  7,  7,  1,  7,  7,  7},
+            {7,  9,  10, 1,  9,  10, 1,  1,  10, 7},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+    };
+    private int[][] house_2 = {
+            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  9,  1,  1,  10, 9,  1,  10, 9,  7},
+            {7,  7,  7,  1,  7,  7,  7,  7,  7,  7},
+            {7,  10, 1,  1,  1,  1,  1,  1,  10, 7},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {1,  1,  1,  1,  1,  1,  1,  1,  1,  7},
+            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+    };
 
     public World() {
         JPanel panel = new JPanel();
@@ -45,6 +70,20 @@ public class World extends JPanel {
                     this.world.tiles[i][j] = 5;
                 } else {
                     this.world.tiles[i][j] = 6;
+                }
+            }
+        }
+
+        int house = rn.nextInt((1 + 1) + 2);
+        int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
+        int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (house == 1) {
+                    this.world.tiles[house_y + i][house_x + j] = this.house_1[i][j];
+                } else if (house == 2) {
+                    this.world.tiles[house_y + i][house_x + j] = this.house_2[i][j];
                 }
             }
         }
@@ -132,9 +171,12 @@ public class World extends JPanel {
             } else if (e.getKeyChar() == 'z') {
                 this.json.load_world("Calibration");
 //            this.world_constructor();
-            } else if (e.getKeyChar() == '0') {
+            } else if (e.getKeyChar() == '-') {
                 this.tile_click_any = "";
                 this.tile_click = 0;
+            } else if (e.getKeyChar() == '0') {
+                this.tile_click_any += "0";
+                this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == '1') {
                 this.tile_click_any += "1";
                 this.tile_click = Integer.parseInt(tile_click_any);
