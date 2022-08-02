@@ -32,15 +32,15 @@ public class World extends JPanel {
                 int rand = rn.nextInt() % 101;
                 if (rand < 50) {
                     this.json.world_tiles[i][j] = 1;
-                } else if (rand >= 50 & rand < 60) {
+                } else if (rand < 60) {
                     this.json.world_tiles[i][j] = 2;
-                } else if (rand >= 60 & rand < 70) {
+                } else if (rand < 70) {
                     this.json.world_tiles[i][j] = 3;
-                } else if (rand >= 70 & rand < 80) {
+                } else if (rand < 80) {
                     this.json.world_tiles[i][j] = 4;
-                } else if (rand >= 80 & rand < 90) {
+                } else if (rand < 90) {
                     this.json.world_tiles[i][j] = 5;
-                } else if (rand >= 90) {
+                } else {
                     this.json.world_tiles[i][j] = 6;
                 }
             }

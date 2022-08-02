@@ -19,7 +19,7 @@ public class Window extends JPanel implements KeyListener {
 
     private final JButton world_constructor_button;
     private final JButton world_redactor_button;
-    private JButton game_button;
+    private final JButton game_button;
     private final JButton exit_button;
     private final JButton save_button;
 
@@ -113,29 +113,37 @@ public class Window extends JPanel implements KeyListener {
             g2d.fillRect(0, 0, 1280, 720);
 
             if (this.world.json.mode == 1) {
+                // world redactor mode
                 this.world_constructor_button.setVisible(true);
-            }
-            if (this.world.json.mode == 0) {
-                this.world_redactor_button.setVisible(true);
-            } else {
+                this.world_redactor_button.setVisible(false);
                 this.game_button.setVisible(true);
+            } else if (this.world.json.mode == 0) {
+                // game mode
+                this.world_redactor_button.setVisible(true);
+                this.game_button.setVisible(false);
+                this.world_constructor_button.setVisible(false);
             }
+
             this.exit_button.setVisible(true);
             this.save_button.setVisible(true);
 
-            if (this.world.json.mode == 1) {
-                this.world_constructor_button.addActionListener(e -> world.world_constructor());
-            }
             this.exit_button.addActionListener(e -> world.pause = false);
-            this.save_button.addActionListener(e -> System.out.println("Save in developing("));
+            this.save_button.addActionListener(e -> {
+                if (this.world.json.mode == 1) {
+                    // world redactor mode
+                    // TODO json world save
+                } else if (this.world.json.mode == 0) {
+                    // game mode
+                    // TODO json player save
+                }
+            });
+            this.world_constructor_button.addActionListener(e -> world.world_constructor());
             this.world_redactor_button.addActionListener(e -> world.json.mode = 1);
             this.game_button.addActionListener(e -> world.json.mode = 0);
         } else {
             this.world_redactor_button.setVisible(false);
             this.game_button.setVisible(false);
-            if (this.world_constructor_button != null) {
-                this.world_constructor_button.setVisible(false);
-            }
+            this.world_constructor_button.setVisible(false);
             this.exit_button.setVisible(false);
             this.save_button.setVisible(false);
         }
