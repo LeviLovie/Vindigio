@@ -16,10 +16,6 @@ public class Window extends JPanel implements KeyListener {
     BufferedImage img4 = null;
     BufferedImage img5 = null;
     BufferedImage img6 = null;
-    BufferedImage img7 = null;
-    BufferedImage img8 = null;
-    BufferedImage img9 = null;
-    BufferedImage img10 = null;
 
     private final JButton world_constructor_button;
     private final JButton new_world_button;
@@ -32,17 +28,13 @@ public class Window extends JPanel implements KeyListener {
     public Window() {
         world = new World();
 
-        try {img0 = ImageIO.read(new File("src/Tiles/0.png"));}  catch (IOException ignored) {}
-        try {img1 = ImageIO.read(new File("src/Tiles/1.jpeg"));} catch (IOException ignored) {}
-        try {img2 = ImageIO.read(new File("src/Tiles/2.jpeg"));} catch (IOException ignored) {}
-        try {img3 = ImageIO.read(new File("src/Tiles/3.jpeg"));} catch (IOException ignored) {}
-        try {img4 = ImageIO.read(new File("src/Tiles/4.jpeg"));} catch (IOException ignored) {}
-        try {img5 = ImageIO.read(new File("src/Tiles/5.jpeg"));} catch (IOException ignored) {}
-        try {img6 = ImageIO.read(new File("src/Tiles/6.jpeg"));} catch (IOException ignored) {}
-        try {img7 = ImageIO.read(new File("src/Tiles/7.png"));} catch (IOException ignored) {}
-        try {img8 = ImageIO.read(new File("src/Tiles/8.png"));} catch (IOException ignored) {}
-        try {img9 = ImageIO.read(new File("src/Tiles/9.png"));} catch (IOException ignored) {}
-        try {img10 = ImageIO.read(new File("src/Tiles/10.png"));} catch (IOException ignored) {}
+        try {img0 = ImageIO.read(new File("src/Tiles/0.png"));} catch (IOException ignored) {}
+        try {img1 = ImageIO.read(new File("src/Tiles/1.png"));} catch (IOException ignored) {}
+        try {img2 = ImageIO.read(new File("src/Tiles/2.png"));} catch (IOException ignored) {}
+        try {img3 = ImageIO.read(new File("src/Tiles/3.png"));} catch (IOException ignored) {}
+        try {img4 = ImageIO.read(new File("src/Tiles/4.png"));} catch (IOException ignored) {}
+        try {img5 = ImageIO.read(new File("src/Tiles/5.png"));} catch (IOException ignored) {}
+        try {img6 = ImageIO.read(new File("src/Tiles/6.png"));} catch (IOException ignored) {}
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);
@@ -112,26 +104,36 @@ public class Window extends JPanel implements KeyListener {
             for (int j = 0; j < this.world.screen_height; j++) {
                 x = i + this.world.screen_x;
                 y = j + this.world.screen_y;
-                if (this.world.world.tiles[y][x] == 1) {
+                if (this.world.world.tiles[y][x][1] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 2) {
+                } else if (this.world.world.tiles[y][x][1] == 2) {
                     g2d.drawImage(this.img2, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 3) {
+                } else if (this.world.world.tiles[y][x][1] == 3) {
                     g2d.drawImage(this.img3, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 4) {
+                } else if (this.world.world.tiles[y][x][1] == 4) {
                     g2d.drawImage(this.img4, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 5) {
+                } else if (this.world.world.tiles[y][x][1] == 5) {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 6) {
+                } else if (this.world.world.tiles[y][x][1] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 7) {
-                    g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 8) {
-                    g2d.drawImage(this.img8, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 9) {
-                    g2d.drawImage(this.img9, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x] == 10) {
-                    g2d.drawImage(this.img10, (i * sprite_size), (j * sprite_size), null);
+                }
+                else if (this.world.world.tiles[y][x][2] == 1) {
+                    g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][2] == 2) {
+                    g2d.drawImage(this.img2, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][2] == 3) {
+                    g2d.drawImage(this.img3, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][2] == 4) {
+                    g2d.drawImage(this.img4, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][2] == 5) {
+                    g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][2] == 6) {
+                    g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
+                }
+                else if (this.world.world.tiles[y][x][1] > 6) {
+                    g2d.drawRect((i * sprite_size), (j * sprite_size), 32, 32);
+                } else if (this.world.world.tiles[y][x][2] > 6) {
+                    g2d.drawRect((i * sprite_size), (j * sprite_size), 32, 32);
                 }
             }
         }
@@ -147,10 +149,6 @@ public class Window extends JPanel implements KeyListener {
             g2d.drawImage(this.img4, 1250, 96, null);
             g2d.drawImage(this.img5, 1250, 128, null);
             g2d.drawImage(this.img6, 1250, 160, null);
-            g2d.drawImage(this.img7, 1250, 192, null);
-            g2d.drawImage(this.img8, 1250, 224, null);
-            g2d.drawImage(this.img9, 1250, 256, null);
-            g2d.drawImage(this.img10, 1250, 288, null);
         }
 
         if (this.world.mode == 1) {

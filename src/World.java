@@ -19,29 +19,29 @@ public class World extends JPanel {
     public String tile_click_any = "";
     public int tile_click = 0;
 
-    private int[][] house_1 = {
-            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
-            {7,  10, 1,  1,  1,  1,  1,  1,  1,  1},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  10, 1,  1,  1,  1,  1,  1,  10, 7},
-            {7,  7,  7,  7,  7,  7,  1,  7,  7,  7},
-            {7,  9,  10, 1,  9,  10, 1,  1,  10, 7},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+    private final int[][][] house_1 = {
+            {{0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 6, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 6, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 6, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 4, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 5, 0}, {0, 6, 0}, {0, 4, 0}, {0, 5, 0}, {0, 6, 0}, {0, 4, 0}, {0, 4, 0}, {0, 6, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}}
     };
-    private int[][] house_2 = {
-            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  9,  1,  1,  10, 9,  1,  10, 9,  7},
-            {7,  7,  7,  1,  7,  7,  7,  7,  7,  7},
-            {7,  10, 1,  1,  1,  1,  1,  1,  10, 7},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {1,  1,  1,  1,  1,  1,  1,  1,  1,  7},
-            {7,  7,  7,  7,  7,  7,  7,  7,  7,  7},
+    private final int[][][] house_2 = {
+            {{0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 5, 0}, {0, 4, 0}, {0, 4, 0}, {0, 6, 0}, {0, 5, 0}, {0, 4, 0}, {0, 6, 0}, {0, 5, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 4, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 6, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 6, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 4, 0}, {0, 3, 0}},
+            {{0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}, {0, 3, 0}}
     };
 
     public World() {
@@ -59,17 +59,17 @@ public class World extends JPanel {
             for (int j = 0; j < this.world.width; j++) {
                 int rand = rn.nextInt() % 101;
                 if (rand < 50) {
-                    this.world.tiles[i][j] = 1;
+                    this.world.tiles[i][j][1] = 1;
                 } else if (rand < 60) {
-                    this.world.tiles[i][j] = 2;
+                    this.world.tiles[i][j][1] = 2;
                 } else if (rand < 70) {
-                    this.world.tiles[i][j] = 3;
+                    this.world.tiles[i][j][1] = 3;
                 } else if (rand < 80) {
-                    this.world.tiles[i][j] = 4;
+                    this.world.tiles[i][j][1] = 4;
                 } else if (rand < 90) {
-                    this.world.tiles[i][j] = 5;
+                    this.world.tiles[i][j][1] = 5;
                 } else {
-                    this.world.tiles[i][j] = 6;
+                    this.world.tiles[i][j][1] = 6;
                 }
             }
         }
@@ -81,9 +81,13 @@ public class World extends JPanel {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (house == 1) {
-                    this.world.tiles[house_y + i][house_x + j] = this.house_1[i][j];
+                    this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
+                    this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
+                    this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
                 } else if (house == 2) {
-                    this.world.tiles[house_y + i][house_x + j] = this.house_2[i][j];
+                    this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
+                    this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
+                    this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
                 }
             }
         }
@@ -101,11 +105,11 @@ public class World extends JPanel {
         // генерируем новый мир
         int world_width = Integer.parseInt(size_split[0]);
         int world_height = Integer.parseInt(size_split[1]);
-        int[][] tiles = new int[world_height][world_width];
+        int[][][] tiles = new int[world_height][world_width][3];
 
         for (int i = 0; i < world_height; i++) {
             for (int j = 0; j < world_width; j++) {
-                tiles[i][j] = 1;
+                tiles[i][j][1] = 1;
             }
         }
 
@@ -145,43 +149,28 @@ public class World extends JPanel {
     }
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == 's' && this.player.y < this.world.height) {
-            if (!this.pause) {
-                if (
-                        this.world.tiles[this.player.y + 1][this.player.x] != 7 &&
-                                this.world.tiles[this.player.y + 1][this.player.x] != 9 &&
-                                this.world.tiles[this.player.y + 1][this.player.x] != 10
-                ) {
+        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
+         if (e.getKeyChar() == 's') {
+            if (!this.pause && this.player.y + 1 < this.world.height) {
+                if (world.can_go_to(this.player.y + 1, this.player.x)) {
                     this.player.y += 1;
                 }
             }
-        } else if (e.getKeyChar() == 'w' && this.player.y > 0) {
-            if (!this.pause) {
-                if (
-                        this.world.tiles[this.player.y - 1][this.player.x] != 7 &&
-                                this.world.tiles[this.player.y - 1][this.player.x] != 9 &&
-                                this.world.tiles[this.player.y - 1][this.player.x] != 10
-                ) {
+        } else if (e.getKeyChar() == 'w') {
+            if (!this.pause && this.player.y - 1 < this.world.height && this.player.y > 0) {
+                if (world.can_go_to(this.player.y - 1, this.player.x)) {
                     this.player.y -= 1;
                 }
             }
-        } else if (e.getKeyChar() == 'd' && this.player.x < this.world.width) {
-            if (!this.pause) {
-                if (
-                        this.world.tiles[this.player.y][this.player.x + 1] != 7 &&
-                                this.world.tiles[this.player.y][this.player.x + 1] != 9 &&
-                                this.world.tiles[this.player.y][this.player.x + 1] != 10
-                ) {
+        } else if (e.getKeyChar() == 'd') {
+            if (!this.pause && this.player.x + 1 < this.world.width) {
+                if (world.can_go_to(this.player.y, this.player.x + 1)) {
                     this.player.x += 1;
                 }
             }
-        } else if (e.getKeyChar() == 'a' && this.player.x > 0) {
-            if (!this.pause) {
-                if (
-                        this.world.tiles[this.player.y][this.player.x - 1] != 7 &&
-                                this.world.tiles[this.player.y][this.player.x - 1] != 9 &&
-                                this.world.tiles[this.player.y][this.player.x - 1] != 10
-                ) {
+        } else if (e.getKeyChar() == 'a') {
+            if (!this.pause && this.player.x - 1 < this.world.width && this.player.x > 0) {
+                if (world.can_go_to(this.player.y, this.player.x - 1)) {
                     this.player.x -= 1;
                 }
             }
@@ -229,9 +218,7 @@ public class World extends JPanel {
                 this.tile_click_any += "9";
                 this.tile_click = Integer.parseInt(tile_click_any);
             } else if (e.getKeyChar() == 'e' && this.player.x > 0) {
-                System.out.println(this.world.tiles[this.player.y][this.player.x]);
-                this.world.tiles[this.player.y][this.player.x] = tile_click;
-                System.out.println(this.world.tiles[this.player.y][this.player.x]);
+                this.world.tiles[this.player.y][this.player.x][1] = tile_click;
             }
         }
 

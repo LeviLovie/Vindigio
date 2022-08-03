@@ -82,7 +82,7 @@ public class Json {
 
         int world_width = ((Long) size.get("width")).intValue();
         int world_height = ((Long) size.get("height")).intValue();
-        int[][] world_tiles = new int[world_height][world_width];
+        int[][][] world_tiles = new int[world_height][world_width][3];
 
         JSONArray tiles = (JSONArray) world.get("tiles");
         Iterator columnI = tiles.iterator();
@@ -94,7 +94,19 @@ public class Json {
 
             int row = 0;
             while (rowI.hasNext()) {
-                world_tiles[column][row] = ((Long) rowI.next()).intValue();
+                int p = 0;
+                try {
+                    JSONArray tilesP = (JSONArray) rowI.next();
+                    Iterator columnP = tilesP.iterator();
+                    while (p < 2) {
+                        p++;
+                        world_tiles[column][row][p] = ((Long) columnP.next()).intValue();
+                    }
+                } catch (Exception e) {
+                    System.out.println(column + ", " + row);
+                    throw e;
+                }
+
                 row++;
             }
 
