@@ -28,13 +28,13 @@ public class Window extends JPanel implements KeyListener {
     public Window() {
         world = new World();
 
-        try {img0 = ImageIO.read(new File("src/Tiles/0.png"));} catch (IOException ignored) {}
-        try {img1 = ImageIO.read(new File("src/Tiles/1.png"));} catch (IOException ignored) {}
-        try {img2 = ImageIO.read(new File("src/Tiles/2.png"));} catch (IOException ignored) {}
-        try {img3 = ImageIO.read(new File("src/Tiles/3.png"));} catch (IOException ignored) {}
-        try {img4 = ImageIO.read(new File("src/Tiles/4.png"));} catch (IOException ignored) {}
-        try {img5 = ImageIO.read(new File("src/Tiles/5.png"));} catch (IOException ignored) {}
-        try {img6 = ImageIO.read(new File("src/Tiles/6.png"));} catch (IOException ignored) {}
+        try {img0 = ImageIO.read(new File("src/Tiles_tiles/0.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img1 = ImageIO.read(new File("src/Tiles_tiles/1.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img2 = ImageIO.read(new File("src/Tiles_tiles/2.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img3 = ImageIO.read(new File("src/Tiles_tiles/3.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img4 = ImageIO.read(new File("src/Tiles_tiles/4.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img5 = ImageIO.read(new File("src/Tiles_tiles/5.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img6 = ImageIO.read(new File("src/Tiles_tiles/6.png"));} catch (IOException ignored) {System.out.println("tile not found");}
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);

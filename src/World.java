@@ -16,6 +16,7 @@ public class World extends JPanel {
     public DataPlayer player;
     public int screen_x = 0;
     public int screen_y = 0;
+    public Text text;
     public String tile_click_any = "";
     public int tile_click = 0;
 
@@ -51,6 +52,7 @@ public class World extends JPanel {
         json = new Json();
         this.player = json.load_player();
         this.world = json.load_world("Calibration");
+//        System.out.println(world.tiles);
     }
 
     public void world_constructor() {
@@ -58,18 +60,10 @@ public class World extends JPanel {
         for (int i = 0; i < this.world.height; i++) {
             for (int j = 0; j < this.world.width; j++) {
                 int rand = rn.nextInt() % 101;
-                if (rand < 50) {
+                if (rand < 90) {
                     this.world.tiles[i][j][1] = 1;
-                } else if (rand < 60) {
-                    this.world.tiles[i][j][1] = 2;
-                } else if (rand < 70) {
-                    this.world.tiles[i][j][1] = 3;
-                } else if (rand < 80) {
-                    this.world.tiles[i][j][1] = 4;
-                } else if (rand < 90) {
-                    this.world.tiles[i][j][1] = 5;
                 } else {
-                    this.world.tiles[i][j][1] = 6;
+                    this.world.tiles[i][j][1] = 2;
                 }
             }
         }
@@ -91,6 +85,9 @@ public class World extends JPanel {
                 }
             }
         }
+
+//        this.text = new Text();
+//        text.text_parser("тест");
     }
 
     public void new_world() {
@@ -168,13 +165,10 @@ public class World extends JPanel {
                     this.player.x += 1;
                 }
             }
-        } else if (e.getKeyChar() == 'a') {
-            if (!this.pause && this.player.x - 1 < this.world.width && this.player.x > 0) {
-                if (world.can_go_to(this.player.y, this.player.x - 1)) {
-                    this.player.x -= 1;
-                }
-            }
-        } else if (e.getKeyCode() == 27) {
+        } else if (e.getKeyChar() == 't') {
+             this.text = new Text();
+             this.text.text_parser("тест");
+         } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
         }
 

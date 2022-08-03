@@ -5,59 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/!.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/,.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/?.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/num9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/tck.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/а.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/б.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/в.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/г.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/д.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/е.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ж.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/з.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/и.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/й.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/к.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/л.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/м.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/н.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/о.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/п.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/р.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/с.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/т.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/у.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ф.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/х.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ц.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ч.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ш.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/щ.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ъ.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ы.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ь.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/э.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/ю.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/я.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles_tiles/0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles_tiles/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles_tiles/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles_tiles/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles_tiles/4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles_tiles/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles_tiles/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Text.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/World.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,20 +37,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "18",
-    "last_opened_file_path": "/Users/lovielevii/Documents/GitHub/Vindigio/src",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;18&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lovielevii/Documents/GitHub/Vindigio/src&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
