@@ -125,7 +125,11 @@ public class Json {
         for (int i = 0; i < world.height; i++) {
             JSONArray tilesRow = new JSONArray();
             for (int j = 0; j < world.width; j++) {
-                tilesRow.add(world.tiles[i][j]);
+                JSONArray tiles3d = new JSONArray();
+                tiles3d.add(world.tiles[i][j][0]);
+                tiles3d.add(world.tiles[i][j][1]);
+                tiles3d.add(world.tiles[i][j][2]);
+                tilesRow.add(tiles3d);
             }
             tiles.add(tilesRow);
         }
