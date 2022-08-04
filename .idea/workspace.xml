@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tekst_tiles/prbb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tiles_tiles/00.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Json.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Text.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />

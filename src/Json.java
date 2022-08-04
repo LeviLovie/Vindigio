@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 public class Json {
     static final String json_filename = "src/Data.json";
+    public String[] texts = new String[64];
 
     public JSONObject json_parse() {
         JSONObject jsonO = new JSONObject();
@@ -30,6 +31,27 @@ public class Json {
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void dialog_load(String npc_name, String dialog_name) {
+        JSONObject jsonO = this.json_parse();
+
+        for (int i = 0; i < this.texts.length; i++) {
+            this.texts[i] = "";
+        }
+
+        JSONObject dialogs = (JSONObject) jsonO.get("dialogs");
+        JSONObject npc = (JSONObject) dialogs.get(npc_name);
+        JSONObject dialog = (JSONObject) npc.get(dialog_name);
+
+        JSONArray texts = (JSONArray) dialog.get("text");
+        Iterator iter = texts.iterator();
+
+        int text_num = 0;
+        while (iter.hasNext()) {
+            this.texts[text_num] = ((String) iter.next());
+            text_num++;
         }
     }
 

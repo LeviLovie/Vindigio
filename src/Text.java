@@ -6,6 +6,10 @@ import java.io.IOException;
 public class Text {
     public BufferedImage[] result_images = new BufferedImage[64];
     public void text_parser(String text_in) {
+        for (int i = 0; i < this.result_images.length; i++) {
+            this.result_images[i] = null;
+        }
+
         char[] result = text_in.toCharArray();
 
         for (int i = 0; i < result.length; i++) {
@@ -47,8 +51,8 @@ public class Text {
                 try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/с.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == 'Т' || result[i] == 'т') {
                 try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
-            } else if (result[i] == 'О' || result[i] == 'о') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/о.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+            } else if (result[i] == 'У' || result[i] == 'у') {
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/у.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == 'Ф' || result[i] == 'ф') {
                 try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/ф.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == 'Х' || result[i] == 'х') {
@@ -73,37 +77,37 @@ public class Text {
                 try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/ю.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == 'Я' || result[i] == 'я') {
                 try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/я.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+            } else if (result[i] == ' ') {
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/prbb.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == ',') {
                 try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '!') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/!.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '?') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/?.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '0') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/0.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '1') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/1.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '2') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/2.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '3') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/3.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '4') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/4.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '5') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/5.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '6') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/6.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '7') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/7.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '8') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/8.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             } else if (result[i] == '9') {
-                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/т.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+                try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/9.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             }  else if (result[i] == '.') {
                 try {this.result_images[i] = ImageIO.read(new File("src/Tekst_tiles/tck.png"));} catch (IOException ignored) {System.out.println("tile not found");}
             }
         }
-
-        System.out.println(result[0]);
     }
 }

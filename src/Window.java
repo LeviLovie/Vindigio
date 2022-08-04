@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Window extends JPanel implements KeyListener {
     World world;
     BufferedImage img0 = null;
+    BufferedImage img00 = null;
     BufferedImage img1 = null;
     BufferedImage img2 = null;
     BufferedImage img3 = null;
@@ -29,6 +30,7 @@ public class Window extends JPanel implements KeyListener {
         world = new World();
 
         try {img0 = ImageIO.read(new File("src/Tiles_tiles/0.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img00 = ImageIO.read(new File("src/Tiles_tiles/00.png"));} catch (IOException ignored) {System.out.println("tile not found");}
         try {img1 = ImageIO.read(new File("src/Tiles_tiles/1.png"));} catch (IOException ignored) {System.out.println("tile not found");}
         try {img2 = ImageIO.read(new File("src/Tiles_tiles/2.png"));} catch (IOException ignored) {System.out.println("tile not found");}
         try {img3 = ImageIO.read(new File("src/Tiles_tiles/3.png"));} catch (IOException ignored) {System.out.println("tile not found");}
@@ -105,6 +107,10 @@ public class Window extends JPanel implements KeyListener {
             for (int j = 0; j < this.world.screen_height; j++) {
                 x = i + this.world.screen_x;
                 y = j + this.world.screen_y;
+                if (this.world.world.tiles[y][x][1] == 7) {
+                    this.world.player.npc_y = y;
+                    this.world.player.npc_x = x;
+                }
                 if (this.world.world.tiles[y][x][0] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][0] == 2) {
@@ -118,7 +124,9 @@ public class Window extends JPanel implements KeyListener {
                 } else if (this.world.world.tiles[y][x][0] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
                 }
-                if (this.world.world.tiles[y][x][1] == 1) {
+                if (this.world.world.tiles[y][x][1] == 7) {
+                    g2d.drawImage(this.img00, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][1] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][1] == 2) {
                     g2d.drawImage(this.img2, (i * sprite_size), (j * sprite_size), null);
@@ -161,32 +169,51 @@ public class Window extends JPanel implements KeyListener {
         }
 
         if (this.world.pause) {
-            g2d.setColor(new Color(255, 255, 255, 155));
-            g2d.fillRect(0, 0, 1280, 720);
+            if (!this.world.pause_dialog) {
+                g2d.setColor(new Color(255, 255, 255, 155));
+                g2d.fillRect(0, 0, 1280, 720);
 
-            if (this.world.mode == 1) {
-                // world redactor mode
-                this.world_constructor_button.setVisible(true);
-                this.new_world_button.setVisible(true);
-                this.change_world_button.setVisible(true);
-                this.world_redactor_button.setVisible(false);
-                this.game_button.setVisible(true);
-            } else if (this.world.mode == 0) {
-                // game mode
-                this.world_redactor_button.setVisible(true);
-                this.game_button.setVisible(false);
-                this.world_constructor_button.setVisible(false);
-                this.new_world_button.setVisible(false);
-                this.change_world_button.setVisible(false);
-            }
+                if (this.world.mode == 1) {
+                    // world redactor mode
+                    this.world_constructor_button.setVisible(true);
+                    this.new_world_button.setVisible(true);
+                    this.change_world_button.setVisible(true);
+                    this.world_redactor_button.setVisible(false);
+                    this.game_button.setVisible(true);
+                } else if (this.world.mode == 0) {
+                    // game mode
+                    this.world_redactor_button.setVisible(true);
+                    this.game_button.setVisible(false);
+                    this.world_constructor_button.setVisible(false);
+                    this.new_world_button.setVisible(false);
+                    this.change_world_button.setVisible(false);
+                }
 
-            this.exit_button.setVisible(true);
-            this.save_button.setVisible(true);
+                this.exit_button.setVisible(true);
+                this.save_button.setVisible(true);
 //            this.save_button.setBounds(200,100, 100, 100);
 
-            for (int i = 0; i < this.world.text.result_images.length; i++) {
-                if (this.world.text.result_images[i] != null) {
-                    g2d.drawImage(this.world.text.result_images[i], 11 * i, 15, null);
+                for (int i = 0; i < this.world.text.result_images.length; i++) {
+                    if (this.world.text.result_images[i] != null) {
+                        g2d.drawImage(this.world.text.result_images[i], 11 * i, 15, null);
+                    }
+                }
+            } else {
+                g2d.setColor(new Color(255, 255, 0, 155));
+                g2d.fillRect(390, 350, 500, 300);
+                for (int i = 0; i < this.world.json.texts.length; i++) {
+                    if (this.world.json.texts[i] != null) {
+                        this.world.text.text_parser(this.world.json.texts[i]);
+                        for (int j = 0; j < this.world.text.result_images.length; j++) {
+                            if (this.world.text.result_images[j] != null) {
+                                g2d.drawImage(
+                                    this.world.text.result_images[j],
+                                    ((10 + 2) * j + 390),
+                                    ((15 + 5) * i + 350), null
+                                );
+                            }
+                        }
+                    }
                 }
             }
         } else {
