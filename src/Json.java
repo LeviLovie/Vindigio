@@ -94,14 +94,13 @@ public class Json {
 
             int row = 0;
             while (rowI.hasNext()) {
-                int p = 0;
                 try {
                     JSONArray tilesP = (JSONArray) rowI.next();
                     Iterator columnP = tilesP.iterator();
-                    while (p < 2) {
-                        p++;
-                        world_tiles[column][row][p] = ((Long) columnP.next()).intValue();
-                    }
+
+                    world_tiles[column][row][0] = ((Long) columnP.next()).intValue();
+                    world_tiles[column][row][1] = ((Long) columnP.next()).intValue();
+                    world_tiles[column][row][2] = ((Long) columnP.next()).intValue();
                 } catch (Exception e) {
                     System.out.println(column + ", " + row);
                     throw e;

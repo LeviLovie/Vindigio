@@ -18,7 +18,7 @@ public class DataWorld {
     public boolean can_go_to(int x, int y) {
         boolean result = true;
         for (int i = 0; i < 3; i++) {
-            if (tiles[x][y][2] == collision_numbs[i]) {
+            if (tiles[x][y][1] == collision_numbs[i]) {
 //                System.out.println(x + ", " + y + ":  + false");
                 result =  false;
             }

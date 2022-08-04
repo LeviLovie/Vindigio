@@ -41,6 +41,7 @@ public class Window extends JPanel implements KeyListener {
         panel.requestFocusInWindow();
         panel.addKeyListener(this);
         panel.setVisible(true);
+        panel.setLayout(null);
 
         this.world_redactor_button = new JButton("World redactor mode");
         this.world_redactor_button.setVisible(false);
@@ -104,6 +105,19 @@ public class Window extends JPanel implements KeyListener {
             for (int j = 0; j < this.world.screen_height; j++) {
                 x = i + this.world.screen_x;
                 y = j + this.world.screen_y;
+                if (this.world.world.tiles[y][x][0] == 1) {
+                    g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][0] == 2) {
+                    g2d.drawImage(this.img2, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][0] == 3) {
+                    g2d.drawImage(this.img3, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][0] == 4) {
+                    g2d.drawImage(this.img4, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][0] == 5) {
+                    g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][0] == 6) {
+                    g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
+                }
                 if (this.world.world.tiles[y][x][1] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][1] == 2) {
@@ -115,19 +129,6 @@ public class Window extends JPanel implements KeyListener {
                 } else if (this.world.world.tiles[y][x][1] == 5) {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][1] == 6) {
-                    g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
-                }
-                else if (this.world.world.tiles[y][x][2] == 1) {
-                    g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][2] == 2) {
-                    g2d.drawImage(this.img2, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][2] == 3) {
-                    g2d.drawImage(this.img3, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][2] == 4) {
-                    g2d.drawImage(this.img4, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][2] == 5) {
-                    g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][2] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
                 }
                 else if (this.world.world.tiles[y][x][1] > 6) {
@@ -181,6 +182,13 @@ public class Window extends JPanel implements KeyListener {
 
             this.exit_button.setVisible(true);
             this.save_button.setVisible(true);
+//            this.save_button.setBounds(200,100, 100, 100);
+
+            for (int i = 0; i < this.world.text.result_images.length; i++) {
+                if (this.world.text.result_images[i] != null) {
+                    g2d.drawImage(this.world.text.result_images[i], 11 * i, 15, null);
+                }
+            }
         } else {
             this.world_redactor_button.setVisible(false);
             this.game_button.setVisible(false);
