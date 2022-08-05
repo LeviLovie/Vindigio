@@ -24,7 +24,9 @@ public class Window extends JPanel implements KeyListener {
     private final JButton world_redactor_button;
     private final JButton game_button;
     private final JButton exit_button;
+    private final JButton hext_button;
     private final JButton save_button;
+    private int strings = 1;
 
     public Window() {
         world = new World();
@@ -63,6 +65,9 @@ public class Window extends JPanel implements KeyListener {
         this.exit_button = new JButton("Exit");
         this.exit_button.setVisible(false);
 
+        this.hext_button = new JButton("Next");
+        this.hext_button.setVisible(false);
+
         this.save_button = new JButton("Save");
         this.save_button.setVisible(false);
 
@@ -72,12 +77,15 @@ public class Window extends JPanel implements KeyListener {
         add(this.new_world_button);
         add(this.change_world_button);
         add(this.exit_button);
+        add(this.hext_button);
         add(this.save_button);
 
         add(world);
         add(panel);
 
         this.exit_button.addActionListener(e -> world.pause = false);
+        this.hext_button.addActionListener(e -> this.strings++);
+
         this.save_button.addActionListener(e -> {
             if (this.world.mode == 1) {
                 // world redactor mode
@@ -168,6 +176,8 @@ public class Window extends JPanel implements KeyListener {
             this.world.screen_width = (1280 / this.world.sprite_size) - 2;
         }
 
+        this.hext_button.setVisible(false);
+
         if (this.world.pause) {
             if (!this.world.pause_dialog) {
                 g2d.setColor(new Color(255, 255, 255, 155));
@@ -189,8 +199,9 @@ public class Window extends JPanel implements KeyListener {
                     this.change_world_button.setVisible(false);
                 }
 
-                this.exit_button.setVisible(true);
+                this.hext_button.setVisible(false);
                 this.save_button.setVisible(true);
+                this.exit_button.setVisible(true);
 //            this.save_button.setBounds(200,100, 100, 100);
 
                 for (int i = 0; i < this.world.text.result_images.length; i++) {
@@ -201,16 +212,22 @@ public class Window extends JPanel implements KeyListener {
             } else {
                 g2d.setColor(new Color(255, 255, 0, 155));
                 g2d.fillRect(390, 350, 500, 300);
+
+                this.hext_button.setVisible(true);
+                hext_button.setLocation(815, 620);
+
                 for (int i = 0; i < this.world.json.texts.length; i++) {
                     if (this.world.json.texts[i] != null) {
                         this.world.text.text_parser(this.world.json.texts[i]);
-                        for (int j = 0; j < this.world.text.result_images.length; j++) {
-                            if (this.world.text.result_images[j] != null) {
-                                g2d.drawImage(
-                                    this.world.text.result_images[j],
-                                    ((10 + 2) * j + 390),
-                                    ((15 + 5) * i + 350), null
-                                );
+                        if (i < this.strings) {
+                            for (int j = 0; j < this.world.text.result_images.length; j++) {
+                                if (this.world.text.result_images[j] != null) {
+                                    g2d.drawImage(
+                                            this.world.text.result_images[j],
+                                            ((10 + 2) * j + 390),
+                                            ((15 + 5) * i + 350), null
+                                    );
+                                }
                             }
                         }
                     }
