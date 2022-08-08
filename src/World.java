@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class World extends JPanel {
     public Json json;
+    DataNPC npc;
     public boolean pause = false;
     public boolean pause_dialog = false;
     public int mode = 0;
@@ -50,7 +51,8 @@ public class World extends JPanel {
         JPanel panel = new JPanel();
         add(panel);
 
-        this.text = new Text();
+        text = new Text();
+        npc = new DataNPC();
 
         json = new Json();
         this.player = json.load_player();
@@ -88,6 +90,9 @@ public class World extends JPanel {
                 }
             }
         }
+
+        this.npc.npc[0][0] = house_x + 1;
+        this.npc.npc[0][1] = house_y + 1;
     }
 
     public void new_world() {
@@ -174,8 +179,7 @@ public class World extends JPanel {
          } else if (e.getKeyChar() == 't') {
              this.text = new Text();
              this.text.text_parser("тест");
-         } else if (e.getKeyChar() == 'e' && this.mode == 0 &&
-                 this.player.x == this.player.npc_x && this.player.y == this.player.npc_y) {
+         } else if (e.getKeyChar() == 'e' && this.mode == 0) {
              this.pause = true;
              this.pause_dialog = true;
              this.json.dialog_load("gid", "start");

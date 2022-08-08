@@ -115,10 +115,6 @@ public class Window extends JPanel implements KeyListener {
             for (int j = 0; j < this.world.screen_height; j++) {
                 x = i + this.world.screen_x;
                 y = j + this.world.screen_y;
-                if (this.world.world.tiles[y][x][1] == 7) {
-                    this.world.player.npc_y = y;
-                    this.world.player.npc_x = x;
-                }
                 if (this.world.world.tiles[y][x][0] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][0] == 2) {
@@ -132,9 +128,7 @@ public class Window extends JPanel implements KeyListener {
                 } else if (this.world.world.tiles[y][x][0] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
                 }
-                if (this.world.world.tiles[y][x][1] == 7) {
-                    g2d.drawImage(this.img00, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][1] == 1) {
+                if (this.world.world.tiles[y][x][1] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][1] == 2) {
                     g2d.drawImage(this.img2, (i * sprite_size), (j * sprite_size), null);
@@ -148,11 +142,16 @@ public class Window extends JPanel implements KeyListener {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
                 }
                 else if (this.world.world.tiles[y][x][1] > 6) {
-                    g2d.drawRect((i * sprite_size), (j * sprite_size), 32, 32);
+                    g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
                 } else if (this.world.world.tiles[y][x][2] > 6) {
-                    g2d.drawRect((i * sprite_size), (j * sprite_size), 32, 32);
+                    g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
                 }
             }
+        }
+
+        for (int i = 0; i < this.world.npc.npc.length; i++) {
+            g2d.drawImage(img00, (this.world.npc.npc[i][0] * 32) - (this.world.screen_x * 32),
+                    (this.world.npc.npc[i][1] * 32) - (this.world.screen_y * 32), null);
         }
 
         int player_screen_x = this.world.get_player_screen_x();
@@ -178,6 +177,10 @@ public class Window extends JPanel implements KeyListener {
 
         this.hext_button.setVisible(false);
 
+        this.pause(g2d);
+    }
+
+    public void pause(Graphics2D g2d) {
         if (this.world.pause) {
             if (!this.world.pause_dialog) {
                 g2d.setColor(new Color(255, 255, 255, 155));
