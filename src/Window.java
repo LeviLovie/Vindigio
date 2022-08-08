@@ -28,6 +28,8 @@ public class Window extends JPanel implements KeyListener {
     private final JButton hext_button;
     private final JButton save_button;
     private final JLabel gid_name;
+    private JLabel coins;
+    Font coins_font;
     private int strings = 1;
 
     public Window() {
@@ -74,6 +76,8 @@ public class Window extends JPanel implements KeyListener {
         this.save_button.setVisible(false);
 
         this.gid_name = new JLabel(this.world.npc.nps_names[0]);
+        this.coins = new JLabel("C: " + this.world.json.coins);
+        this.coins_font = new Font("SansSerif", Font.BOLD, 15);
 
         add(this.world_redactor_button); // TODO comment this and next line for finis compilation
         add(this.game_button);
@@ -83,6 +87,7 @@ public class Window extends JPanel implements KeyListener {
         add(this.exit_button);
         add(this.hext_button);
         add(this.save_button);
+        add(this.coins);
 
         add(world);
         add(panel);
@@ -209,6 +214,9 @@ public class Window extends JPanel implements KeyListener {
         int player_screen_x = this.world.get_player_screen_x();
         int player_screen_y = this.world.get_player_screen_y();
         g2d.drawImage(this.img0, player_screen_x * sprite_size, player_screen_y * sprite_size,null);
+
+        this.coins.setLocation(1219, -1);
+        this.coins.setFont(this.coins_font);
 
         if (this.world.mode == 1) {
             g2d.drawImage(this.img1, 1250, 0, null);

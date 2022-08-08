@@ -17402,6 +17402,7 @@
     }
   },
   "player": {
+    "coins": 0,
     "coordinate": {
       "x": 17,
       "y": 20

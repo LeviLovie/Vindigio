@@ -11,6 +11,7 @@ import java.util.Iterator;
 public class Json {
     public int villager_x;
     public int villager_y;
+    public int coins;
     static final String json_filename = "src/Data.json";
     public String[] texts = new String[64];
 
@@ -78,6 +79,7 @@ public class Json {
 
         int player_x = ((Long) coordinate.get("x")).intValue();
         int player_y = ((Long) coordinate.get("y")).intValue();
+        this.coins = ((Long) player.get("coins")).intValue();
 
         return new DataPlayer(player_x, player_y);
     }
@@ -116,6 +118,7 @@ public class Json {
 
         JSONObject json_player = new JSONObject();
         json_player.put("coordinate", coordinate);
+        json_player.put("coins", this.coins);
 
         jsonO.put("player", json_player);
 
