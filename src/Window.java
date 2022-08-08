@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class Window extends JPanel implements KeyListener {
     World world;
+    private boolean map = true;
     BufferedImage img0 = null;
     BufferedImage img00 = null;
     BufferedImage img1 = null;
@@ -26,7 +27,7 @@ public class Window extends JPanel implements KeyListener {
     private final JButton exit_button;
     private final JButton hext_button;
     private final JButton save_button;
-    private JLabel gid_name;
+    private final JLabel gid_name;
     private int strings = 1;
 
     public Window() {
@@ -94,6 +95,11 @@ public class Window extends JPanel implements KeyListener {
                 // world redactor mode
                 this.world.json.save_player(this.world.player);
                 this.world.json.save_world(this.world.world);
+                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " + this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
+                this.world.json.villager_y = this.world.npc.npc[0][0];
+                this.world.json.villager_x = this.world.npc.npc[0][1];
+                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " + this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
+                this.world.json.save_npc("villager");
             } else if (this.world.mode == 0) {
                 // game mode
                 this.world.json.save_player(this.world.player);
@@ -148,6 +154,46 @@ public class Window extends JPanel implements KeyListener {
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
                 } else if (this.world.world.tiles[y][x][2] > 6) {
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
+                }
+            }
+        }
+
+        for (int i = 0; i < this.world.world.height; i++) {
+            for (int j = 0; j < this.world.world.width; j++) {
+                if (this.world.world.tiles[i][j][1] == 1) {
+                    if (this.map) {
+                        g2d.setColor(new Color(24, 231, 85, 200));
+                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                    }
+                } else if (this.world.world.tiles[i][j][1] == 2) {
+                    if (this.map) {
+                        g2d.setColor(new Color(19, 139, 54, 200));
+                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                    }
+                } else if (this.world.world.tiles[i][j][1] == 3) {
+                    if (this.map) {
+                        g2d.setColor(new Color(149, 95, 65, 200));
+                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                    }
+                } else if (this.world.world.tiles[i][j][1] == 4) {
+                    if (this.map) {
+                        g2d.setColor(new Color(186, 123, 86, 200));
+                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                    }
+                } else if (this.world.world.tiles[i][j][1] == 5) {
+                    if (this.map) {
+                        g2d.setColor(new Color(224, 223, 224, 200));
+                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                    }
+                } else if (this.world.world.tiles[i][j][1] == 6) {
+                    if (this.map) {
+                        g2d.setColor(new Color(146, 74, 6, 200));
+                        g2d.fillRect(i * 4, j * 4, 4, 4);
+                    }
+                }
+                if (this.map) {
+                    g2d.setColor(new Color(255, 0, 0, 200));
+                    g2d.fillRect(this.world.player.x * 4, this.world.player.y * 4, 4, 4);
                 }
             }
         }
@@ -219,7 +265,7 @@ public class Window extends JPanel implements KeyListener {
                     }
                 }
             } else {
-                g2d.setColor(new Color(255, 255, 0, 155));
+                g2d.setColor(new Color(215, 215, 142, 155));
                 g2d.fillRect(390, 350, 500, 300);
 
                 this.hext_button.setVisible(true);

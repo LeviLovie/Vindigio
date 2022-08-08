@@ -57,6 +57,9 @@ public class World extends JPanel {
         json = new Json();
         this.player = json.load_player();
         this.world = json.load_world("Calibration");
+        json.load_npc("villager");
+        npc.npc[0][0] = json.villager_y;
+        npc.npc[0][1] = json.villager_x;
 //        System.out.println(world.tiles);
     }
 
@@ -151,15 +154,16 @@ public class World extends JPanel {
     }
 
     public void keyPressed(KeyEvent e) {
-        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
+//        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
          if (e.getKeyChar() == 's') {
             if (!this.pause && this.player.y + 1 < this.world.height) {
                 if (world.can_go_to(this.player.y + 1, this.player.x)) {
+//                    System.out.println("+");
                     this.player.y += 1;
                 }
             }
         } else if (e.getKeyChar() == 'w') {
-            if (!this.pause && this.player.y - 1 < this.world.height && this.player.y > 0) {
+            if (!this.pause && this.player.y - 1 > -1) {
                 if (world.can_go_to(this.player.y - 1, this.player.x)) {
                     this.player.y -= 1;
                 }
@@ -171,7 +175,7 @@ public class World extends JPanel {
                  }
              }
          } else if (e.getKeyChar() == 'a') {
-             if (!this.pause && this.player.x - 1 < this.world.width) {
+             if (!this.pause && this.player.x - 1 > -1) {
                  if (world.can_go_to(this.player.y, this.player.x - 1)) {
                      this.player.x -= 1;
                  }
@@ -182,7 +186,7 @@ public class World extends JPanel {
          } else if (e.getKeyChar() == 'e' && this.mode == 0) {
              this.pause = true;
              this.pause_dialog = true;
-             this.json.dialog_load("gid", "start");
+             this.json.dialog_load("villager", "start");
          } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
              this.pause_dialog = false;

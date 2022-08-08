@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class Json {
+    public int villager_x;
+    public int villager_y;
     static final String json_filename = "src/Data.json";
     public String[] texts = new String[64];
 
@@ -78,6 +80,31 @@ public class Json {
         int player_y = ((Long) coordinate.get("y")).intValue();
 
         return new DataPlayer(player_x, player_y);
+    }
+
+    public void load_npc(String nps_name) {
+        JSONObject jsonO = this.json_parse();
+
+        JSONObject npc = (JSONObject) jsonO.get("npc");
+        JSONObject npc_c = (JSONObject) npc.get(nps_name);
+
+        this.villager_x = ((Long) npc_c.get("x")).intValue();
+        this.villager_y = ((Long) npc_c.get("y")).intValue();
+    }
+
+    public void save_npc(String nps_name) {
+        JSONObject jsonO = this.json_parse();
+
+        JSONObject npc_c = new JSONObject();
+        npc_c.put("y", this.villager_y);
+        npc_c.put("x", this.villager_x);
+
+        JSONObject json_player = new JSONObject();
+        json_player.put("villager", npc_c);
+
+        jsonO.put("npc", json_player);
+
+        this.json_save(jsonO);
     }
 
     public void save_player(DataPlayer player) {
