@@ -26,6 +26,7 @@ public class Window extends JPanel implements KeyListener {
     private final JButton exit_button;
     private final JButton hext_button;
     private final JButton save_button;
+    private JLabel gid_name;
     private int strings = 1;
 
     public Window() {
@@ -70,6 +71,8 @@ public class Window extends JPanel implements KeyListener {
 
         this.save_button = new JButton("Save");
         this.save_button.setVisible(false);
+
+        this.gid_name = new JLabel(this.world.npc.nps_names[0]);
 
         add(this.world_redactor_button); // TODO comment this and next line for finis compilation
         add(this.game_button);
@@ -153,6 +156,9 @@ public class Window extends JPanel implements KeyListener {
             g2d.drawImage(img00, (this.world.npc.npc[i][0] * 32) - (this.world.screen_x * 32),
                     (this.world.npc.npc[i][1] * 32) - (this.world.screen_y * 32), null);
         }
+        this.gid_name.setText(this.world.npc.nps_names[0]);
+        this.gid_name.setLocation((this.world.npc.npc[0][0] - this.world.screen_x) * 32 - 5,
+                (this.world.npc.npc[0][1] - this.world.screen_y) * 32 + 40);
 
         int player_screen_x = this.world.get_player_screen_x();
         int player_screen_y = this.world.get_player_screen_y();
