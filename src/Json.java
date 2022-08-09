@@ -6,23 +6,25 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Json {
     public int villager_x;
     public int villager_y;
     public int coins;
-    static final String json_filename = "src/Data.json";
+    private static final String json_filename = "src/Data.json";
     public String[] texts = new String[64];
     public int[] inventory = new int[5];
     public int inventory_in;
 
     public JSONObject json_parse() {
         JSONObject jsonO = new JSONObject();
-
         JSONParser parser = new JSONParser();
+
         try {
-            jsonO = (JSONObject) parser.parse(new FileReader(this.json_filename));
+            jsonO = (JSONObject) parser.parse(new FileReader(json_filename));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -31,7 +33,7 @@ public class Json {
     }
 
     public void json_save(JSONObject jsonO) {
-        try (FileWriter file = new FileWriter(this.json_filename)) {
+        try (FileWriter file = new FileWriter(json_filename)) {
             file.write(jsonO.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -42,9 +44,7 @@ public class Json {
     public void dialog_load(String npc_name, String dialog_name) {
         JSONObject jsonO = this.json_parse();
 
-        for (int i = 0; i < this.texts.length; i++) {
-            this.texts[i] = "";
-        }
+        Arrays.fill(this.texts, "");
 
         JSONObject dialogs = (JSONObject) jsonO.get("dialogs");
         JSONObject npc = (JSONObject) dialogs.get(npc_name);
@@ -67,9 +67,7 @@ public class Json {
         JSONObject jnum = new JSONObject();
         JSONArray jtext = new JSONArray();
 
-        for (int i = 0; i < text.length; i++) {
-            jtext.add(text[i]);
-        }
+        Collections.addAll(jtext, text);
 
         jnum.put("text", jtext);
         npc.put(num, jnum);
@@ -98,17 +96,17 @@ public class Json {
 
         JSONObject player = (JSONObject) jsonO.get("player");
         JSONObject coordinate = (JSONObject) player.get("coordinate");
-        JSONObject inventoryj = (JSONObject) player.get("inventory");
+        JSONObject inventory = (JSONObject) player.get("inventory");
 
         int player_x = ((Long) coordinate.get("x")).intValue();
         int player_y = ((Long) coordinate.get("y")).intValue();
 
-        this.inventory[0] = ((Long) inventoryj.get("0")).intValue();
-        this.inventory[1] = ((Long) inventoryj.get("1")).intValue();
-        this.inventory[2] = ((Long) inventoryj.get("2")).intValue();
-        this.inventory[3] = ((Long) inventoryj.get("3")).intValue();
-        this.inventory[4] = ((Long) inventoryj.get("4")).intValue();
-        this.inventory_in = ((Long) inventoryj.get("in")).intValue();
+        this.inventory[0] = ((Long) inventory.get("0")).intValue();
+        this.inventory[1] = ((Long) inventory.get("1")).intValue();
+        this.inventory[2] = ((Long) inventory.get("2")).intValue();
+        this.inventory[3] = ((Long) inventory.get("3")).intValue();
+        this.inventory[4] = ((Long) inventory.get("4")).intValue();
+        this.inventory_in = ((Long) inventory.get("in")).intValue();
 
         this.coins = ((Long) player.get("coins")).intValue();
 

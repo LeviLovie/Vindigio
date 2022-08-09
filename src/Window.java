@@ -8,18 +8,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class Window extends JPanel implements KeyListener {
-    World world;
-    private boolean map = true;
-    BufferedImage img0 = null;
-    BufferedImage img00 = null;
-    BufferedImage img1 = null;
-    BufferedImage img2 = null;
-    BufferedImage img3 = null;
-    BufferedImage img4 = null;
-    BufferedImage img5 = null;
-    BufferedImage img6 = null;
-    BufferedImage img7 = null;
-
+    private final World world;
+    private BufferedImage img0 = null;
+    private BufferedImage img00 = null;
+    private BufferedImage img1 = null;
+    private BufferedImage img2 = null;
+    private BufferedImage img3 = null;
+    private BufferedImage img4 = null;
+    private BufferedImage img5 = null;
+    private BufferedImage img6 = null;
+    private BufferedImage img7 = null;
     private final JButton world_constructor_button;
     private final JButton new_world_button;
     private final JButton change_world_button;
@@ -30,8 +28,8 @@ public class Window extends JPanel implements KeyListener {
     private final JButton save_button;
     private final JButton dialog_change_butoon;
     private final JLabel gid_name;
-    private JLabel coins;
-    Font coins_font;
+    private final JLabel coins;
+    private final Font coins_font;
     private int strings = 1;
 
     public Window() {
@@ -54,67 +52,67 @@ public class Window extends JPanel implements KeyListener {
         panel.setVisible(true);
         panel.setLayout(null);
 
-        this.world_redactor_button = new JButton("World redactor mode");
-        this.world_redactor_button.setVisible(false);
+        world_redactor_button = new JButton("World redactor mode");
+        world_redactor_button.setVisible(false);
 
-        this.game_button = new JButton("Back to game");
-        this.game_button.setVisible(false);
+        game_button = new JButton("Back to game");
+        game_button.setVisible(false);
 
-        this.world_constructor_button = new JButton("Auto world generate");
-        this.world_constructor_button.setVisible(false);
+        world_constructor_button = new JButton("Auto world generate");
+        world_constructor_button.setVisible(false);
 
-        this.new_world_button = new JButton("Create new world");
-        this.new_world_button.setVisible(false);
+        new_world_button = new JButton("Create new world");
+        new_world_button.setVisible(false);
 
-        this.change_world_button = new JButton("Change world");
-        this.change_world_button.setVisible(false);
+        change_world_button = new JButton("Change world");
+        change_world_button.setVisible(false);
 
-        this.exit_button = new JButton("Exit");
-        this.exit_button.setVisible(false);
+        exit_button = new JButton("Exit");
+        exit_button.setVisible(false);
 
-        this.hext_button = new JButton("Next");
-        this.hext_button.setVisible(false);
+        hext_button = new JButton("Next");
+        hext_button.setVisible(false);
 
-        this.save_button = new JButton("Save");
-        this.save_button.setVisible(false);
+        save_button = new JButton("Save");
+        save_button.setVisible(false);
 
-        this.dialog_change_butoon = new JButton("Dialog change");
-        this.dialog_change_butoon.setVisible(false);
+        dialog_change_butoon = new JButton("Dialog change");
+        dialog_change_butoon.setVisible(false);
 
-        this.gid_name = new JLabel(this.world.npc.nps_names[0]);
-        this.coins = new JLabel("C: " + this.world.json.coins);
-        this.coins_font = new Font("SansSerif", Font.BOLD, 15);
+        gid_name = new JLabel(world.npc.nps_names[0]);
+        coins = new JLabel("C: " + world.json.coins);
+        coins_font = new Font("SansSerif", Font.BOLD, 15);
 
-        add(this.world_redactor_button); // TODO comment this and next line for finis compilation
-        add(this.game_button);
-        add(this.world_constructor_button);
-        add(this.new_world_button);
-        add(this.change_world_button);
-        add(this.exit_button);
-        add(this.hext_button);
-        add(this.save_button);
-        add(this.dialog_change_butoon);
-        add(this.coins);
+        add(world_redactor_button); // TODO comment this and next line for finis compilation
+        add(game_button);
+        add(world_constructor_button);
+        add(new_world_button);
+        add(change_world_button);
+        add(exit_button);
+        add(hext_button);
+        add(save_button);
+        add(dialog_change_butoon);
+        add(coins);
 
         add(world);
         add(panel);
 
-        this.exit_button.addActionListener(e -> {
+        exit_button.addActionListener(e -> {
             world.pause = false;
             world.pause_dialog = false;
         });
-        this.hext_button.addActionListener(e -> this.strings++);
+        hext_button.addActionListener(e -> strings++);
 
-        this.save_button.addActionListener(e -> {
-            this.world.json.save_player(this.world.player);
-            this.world.json.save_world(this.world.world);
+        save_button.addActionListener(e -> {
+            world.json.save_player(world.player);
+            world.json.save_world(world.world);
         });
-        this.world_constructor_button.addActionListener(e -> world.world_constructor());
-        this.dialog_change_butoon.addActionListener(e -> this.world.dialog_change());
-        this.new_world_button.addActionListener(e -> world.new_world());
-        this.change_world_button.addActionListener(e -> world.change_world());
-        this.world_redactor_button.addActionListener(e -> world.mode = 1);
-        this.game_button.addActionListener(e -> world.mode = 0);
+        world_constructor_button.addActionListener(e -> world.world_constructor());
+        dialog_change_butoon.addActionListener(e -> world.dialog_change());
+        new_world_button.addActionListener(e -> world.new_world());
+        change_world_button.addActionListener(e -> world.change_world());
+        world_redactor_button.addActionListener(e -> world.mode = 1);
+        game_button.addActionListener(e -> world.mode = 0);
     }
 
     public void paintComponent(Graphics g) {
@@ -141,8 +139,6 @@ public class Window extends JPanel implements KeyListener {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][0] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][0] == 7) {
-                    g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
                 }
                 if (this.world.world.tiles[y][x][1] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
@@ -182,40 +178,26 @@ public class Window extends JPanel implements KeyListener {
         for (int i = 0; i < this.world.world.height; i++) {
             for (int j = 0; j < this.world.world.width; j++) {
                 if (this.world.world.tiles[i][j][1] == 1) {
-                    if (this.map) {
-                        g2d.setColor(new Color(24, 231, 85, 200));
-                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
-                    }
+                    g2d.setColor(new Color(24, 231, 85, 200));
+                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 2) {
-                    if (this.map) {
-                        g2d.setColor(new Color(19, 139, 54, 200));
-                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
-                    }
+                    g2d.setColor(new Color(19, 139, 54, 200));
+                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 3) {
-                    if (this.map) {
-                        g2d.setColor(new Color(149, 95, 65, 200));
-                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
-                    }
+                    g2d.setColor(new Color(149, 95, 65, 200));
+                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 4) {
-                    if (this.map) {
-                        g2d.setColor(new Color(186, 123, 86, 200));
-                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
-                    }
+                    g2d.setColor(new Color(186, 123, 86, 200));
+                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 5) {
-                    if (this.map) {
-                        g2d.setColor(new Color(224, 223, 224, 200));
-                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
-                    }
+                    g2d.setColor(new Color(224, 223, 224, 200));
+                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 6) {
-                    if (this.map) {
-                        g2d.setColor(new Color(146, 74, 6, 200));
-                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
-                    }
+                    g2d.setColor(new Color(146, 74, 6, 200));
+                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
                 }
-                if (this.map) {
-                    g2d.setColor(new Color(255, 0, 0, 200));
-                    g2d.fillRect(this.world.player.x * 2 - 1, this.world.player.y  * 2 - 1, 4, 4);
-                }
+                g2d.setColor(new Color(255, 0, 0, 200));
+                g2d.fillRect(this.world.player.x * 2 - 1, this.world.player.y  * 2 - 1, 4, 4);
             }
             g2d.setColor(Color.GRAY);
             g2d.fillRect(this.world.world.width  * 2, 0, 2, this.world.world.height  * 2);
@@ -303,7 +285,7 @@ public class Window extends JPanel implements KeyListener {
                 g2d.fillRect(390, 350, 500, 300);
 
                 this.hext_button.setVisible(true);
-                hext_button.setLocation(815, 620);
+                this.hext_button.setLocation(815, 620);
 
                 for (int i = 0; i < this.world.json.texts.length; i++) {
                     if (this.world.json.texts[i] != null) {
@@ -321,15 +303,7 @@ public class Window extends JPanel implements KeyListener {
                         }
                     }
                 }
-                if (this.world.mode == 1) {
-                    this.dialog_change_butoon.setVisible(true);
-//                    g2d.setColor(Color.RED);
-
-//                    g2d.fillRect(375, 350 + (this.world.string_pr * 15), 10, 15);
-
-                } else {
-                    this.dialog_change_butoon.setVisible(false);
-                }
+                this.dialog_change_butoon.setVisible(this.world.mode == 1);
             }
         } else {
             this.world_redactor_button.setVisible(false);

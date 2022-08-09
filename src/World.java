@@ -4,22 +4,19 @@ import java.util.Random;
 
 public class World extends JPanel {
     public Json json;
+    public DataNPC npc;
+    public DataWorld world;
+    public DataPlayer player;
+    public Text text;
     public int string_pr = 0;
-    DataNPC npc;
     public boolean pause = false;
     public boolean pause_dialog = false;
     public int mode = 0;
-
     public final int sprite_size = 32;
-
-    public DataWorld world;
-
     public int screen_width = (1280 / sprite_size) - 3;
     public int screen_height = Math.round(720 / sprite_size);
-    public DataPlayer player;
     public int screen_x = 0;
     public int screen_y = 0;
-    public Text text;
     public String tile_click_any = "";
     public int tile_click = 0;
 
@@ -49,19 +46,16 @@ public class World extends JPanel {
     };
 
     public World() {
-        JPanel panel = new JPanel();
-        add(panel);
+        json = new Json();
 
         text = new Text();
         npc = new DataNPC();
-
-        json = new Json();
-        this.player = json.load_player();
-        this.world = json.load_world("Calibration");
+        player = json.load_player();
+        world = json.load_world("Calibration");
         json.load_npc("villager");
+
         npc.npc[0][0] = json.villager_y;
         npc.npc[0][1] = json.villager_x;
-//        System.out.println(world.tiles);
     }
 
     public void world_constructor() {
@@ -154,12 +148,11 @@ public class World extends JPanel {
         String message = "Worlds: " + String.join(", ", this.json.list_worlds());
         String name = JOptionPane.showInputDialog(change_world_dialog_world_panel, message);
 
-        // заменяем текущий мир на загруженный
         this.world = this.json.load_world(name);
-        // сбрасываем координаты игрока
+
         this.player.x = 0;
         this.player.y = 0;
-        // говорим, что нужно перерисовать мир
+
         this.revalidate();
     }
 
@@ -211,7 +204,6 @@ public class World extends JPanel {
                  }
              }
          } else if (e.getKeyChar() == 'f') {
-//             System.out.println(this.player.y + " = " + this.json.villager_x + ", " + this.player.x + " = " + this.json.villager_y);
              if (this.player.y == this.json.villager_x && this.player.x == this.json.villager_y) {
                  this.pause = true;
                  this.pause_dialog = true;
@@ -223,12 +215,7 @@ public class World extends JPanel {
         }
 
         if (this.mode == 1) {
-            if (e.getKeyChar() == 'x') {
-                this.json.load_world("Villages");
-            } else if (e.getKeyChar() == 'z') {
-                this.json.load_world("Calibration");
-//            this.world_constructor();
-            } else if (e.getKeyChar() == '-') {
+            if (e.getKeyChar() == '-') {
                 this.tile_click_any = "";
                 this.tile_click = 0;
             } else if (e.getKeyChar() == '0') {

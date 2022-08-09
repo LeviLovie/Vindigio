@@ -1,5 +1,3 @@
-import java.util.logging.Logger;
-
 public class DataWorld {
     public String name;
     public int width;
@@ -20,7 +18,8 @@ public class DataWorld {
         for (int i = 0; i < 3; i++) {
             if (tiles[x][y][1] == collision_numbs[i]) {
 //                System.out.println(x + ", " + y + ":  + false");
-                result =  false;
+                result = false;
+                break;
             }
         }
         return result;
