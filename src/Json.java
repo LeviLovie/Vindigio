@@ -15,6 +15,7 @@ public class Json {
     static final String json_filename = "src/Data.json";
     public String[] texts = new String[64];
     public int[] inventory = new int[5];
+    public int inventory_in;
 
     public JSONObject json_parse() {
         JSONObject jsonO = new JSONObject();
@@ -107,6 +108,7 @@ public class Json {
         this.inventory[2] = ((Long) inventoryj.get("2")).intValue();
         this.inventory[3] = ((Long) inventoryj.get("3")).intValue();
         this.inventory[4] = ((Long) inventoryj.get("4")).intValue();
+        this.inventory_in = ((Long) inventoryj.get("in")).intValue();
 
         this.coins = ((Long) player.get("coins")).intValue();
 
@@ -146,13 +148,17 @@ public class Json {
         coordinate.put("y", player.y);
 
         JSONObject inventory = new JSONObject();
-        for (int i = 0; i < this.texts.length; i++) {
-            inventory.put(i, this.inventory[i]);
-        }
+        inventory.put("0", this.inventory[0]);
+        inventory.put("1", this.inventory[1]);
+        inventory.put("2", this.inventory[2]);
+        inventory.put("3", this.inventory[3]);
+        inventory.put("4", this.inventory[4]);
+        inventory.put("in", this.inventory_in);
 
         JSONObject json_player = new JSONObject();
         json_player.put("coordinate", coordinate);
         json_player.put("coins", this.coins);
+        json_player.put("inventory", inventory);
 
         jsonO.put("player", json_player);
 

@@ -106,21 +106,8 @@ public class Window extends JPanel implements KeyListener {
         this.hext_button.addActionListener(e -> this.strings++);
 
         this.save_button.addActionListener(e -> {
-            if (this.world.mode == 1) {
-                // world redactor mode
-                this.world.json.save_player(this.world.player);
-                this.world.json.save_world(this.world.world);
-//                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " +
-//                        this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
-                this.world.json.villager_y = this.world.npc.npc[0][0];
-                this.world.json.villager_x = this.world.npc.npc[0][1];
-//                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " +
-//                        this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
-                this.world.json.save_npc("villager");
-            } else if (this.world.mode == 0) {
-                // game mode
-                this.world.json.save_player(this.world.player);
-            }
+            this.world.json.save_player(this.world.player);
+            this.world.json.save_world(this.world.world);
         });
         this.world_constructor_button.addActionListener(e -> world.world_constructor());
         this.dialog_change_butoon.addActionListener(e -> this.world.dialog_change());
@@ -169,7 +156,7 @@ public class Window extends JPanel implements KeyListener {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][1] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
-                } else if (this.world.world.tiles[y][x][0] == 7) {
+                } else if (this.world.world.tiles[y][x][1] == 7) {
                     g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
                 }
                 else if (this.world.world.tiles[y][x][1] > 7) {
@@ -180,44 +167,59 @@ public class Window extends JPanel implements KeyListener {
             }
         }
 
+        for (int i = 0; i < this.world.json.inventory.length; i++) {
+            if (i != this.world.json.inventory_in) {
+                g2d.setColor(new Color(228, 245, 143, 200));
+            } else {
+                g2d.setColor(new Color(141, 180, 25, 200));
+            }
+            g2d.fillRect(this.world.world.width * 2 + (i * 35) + 10, 0, 32, 32);
+            if (this.world.json.inventory[i] == 7) {
+                g2d.drawImage(img7, this.world.world.width * 2 + (i * 35) + 10, 0, null);
+            }
+        }
+
         for (int i = 0; i < this.world.world.height; i++) {
             for (int j = 0; j < this.world.world.width; j++) {
                 if (this.world.world.tiles[i][j][1] == 1) {
                     if (this.map) {
                         g2d.setColor(new Color(24, 231, 85, 200));
-                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
                     }
                 } else if (this.world.world.tiles[i][j][1] == 2) {
                     if (this.map) {
                         g2d.setColor(new Color(19, 139, 54, 200));
-                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
                     }
                 } else if (this.world.world.tiles[i][j][1] == 3) {
                     if (this.map) {
                         g2d.setColor(new Color(149, 95, 65, 200));
-                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
                     }
                 } else if (this.world.world.tiles[i][j][1] == 4) {
                     if (this.map) {
                         g2d.setColor(new Color(186, 123, 86, 200));
-                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
                     }
                 } else if (this.world.world.tiles[i][j][1] == 5) {
                     if (this.map) {
                         g2d.setColor(new Color(224, 223, 224, 200));
-                        g2d.fillRect(j * 4, i * 4, 4, 4);
+                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
                     }
                 } else if (this.world.world.tiles[i][j][1] == 6) {
                     if (this.map) {
                         g2d.setColor(new Color(146, 74, 6, 200));
-                        g2d.fillRect(i * 4, j * 4, 4, 4);
+                        g2d.fillRect(j  * 2, i  * 2, 2, 2);
                     }
                 }
                 if (this.map) {
                     g2d.setColor(new Color(255, 0, 0, 200));
-                    g2d.fillRect(this.world.player.x * 4, this.world.player.y * 4, 4, 4);
+                    g2d.fillRect(this.world.player.x * 2 - 1, this.world.player.y  * 2 - 1, 4, 4);
                 }
             }
+            g2d.setColor(Color.GRAY);
+            g2d.fillRect(this.world.world.width  * 2, 0, 2, this.world.world.height  * 2);
+            g2d.fillRect(0, this.world.world.height * 2, this.world.world.width * 2 + 2, 2);
         }
 
         for (int i = 0; i < this.world.npc.npc.length; i++) {
@@ -342,7 +344,7 @@ public class Window extends JPanel implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         this.world.keyPressed(e);
-        System.out.println("+");
+//        System.out.println("+");
         this.revalidate();
         if (e.getKeyCode() == 27) {
             this.strings = 1;

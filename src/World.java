@@ -69,8 +69,11 @@ public class World extends JPanel {
         for (int i = 0; i < this.world.height; i++) {
             for (int j = 0; j < this.world.width; j++) {
                 int rand = rn.nextInt() % 101;
-                if (rand < 90) {
+                if (rand < 85) {
                     this.world.tiles[i][j][0] = 1;
+                    this.world.tiles[i][j][1] = 0;
+                } else if (rand < 90) {
+                    this.world.tiles[i][j][0] = 2;
                     this.world.tiles[i][j][1] = 0;
                 } else {
                     this.world.tiles[i][j][0] = 1;
@@ -169,11 +172,11 @@ public class World extends JPanel {
     }
 
     public void keyPressed(KeyEvent e) {
-        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
+//        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
          if (e.getKeyChar() == 's') {
             if (!this.pause && this.player.y + 1 < this.world.height) {
                 if (world.can_go_to(this.player.y + 1, this.player.x)) {
-                    System.out.println("+");
+//                    System.out.println("+");
                     this.player.y += 1;
                 }
             }
@@ -195,12 +198,21 @@ public class World extends JPanel {
                      this.player.x -= 1;
                  }
              }
-         } else if (e.getKeyChar() == 't') {
-             this.text = new Text();
-             this.text.text_parser("тест");
          } else if (e.getKeyChar() == 'e') {
-//             System.out.println((this.player.y + 3) + " = " + this.npc.npc[0][0] + ", " + (this.player.x - 3) + " = " + this.npc.npc[0][1]);
-             if (this.player.y + 3 == this.npc.npc[0][0] && this.player.x - 3 == this.npc.npc[0][1]) {
+             if (this.world.tiles[this.player.y][this.player.x][1] == 7) {
+                 this.json.inventory[this.json.inventory_in] = 7;
+                 this.world.tiles[this.player.y][this.player.x][1] = 0;
+             } else {
+                 if (this.json.inventory[this.json.inventory_in] == 7) {
+                     this.json.inventory[this.json.inventory_in] = 0;
+                     this.world.tiles[this.player.y][this.player.x][1] = 7;
+                 } else {
+                     this.json.inventory[this.json.inventory_in] = 0;
+                 }
+             }
+         } else if (e.getKeyChar() == 'f') {
+//             System.out.println(this.player.y + " = " + this.json.villager_x + ", " + this.player.x + " = " + this.json.villager_y);
+             if (this.player.y == this.json.villager_x && this.player.x == this.json.villager_y) {
                  this.pause = true;
                  this.pause_dialog = true;
                  this.json.dialog_load("villager", "start");
@@ -257,6 +269,18 @@ public class World extends JPanel {
                 }
             } else if (e.getKeyCode() == 40) {
                 this.string_pr++;
+            }
+        } else {
+            if (e.getKeyChar() == '1') {
+                this.json.inventory_in = 0;
+            } else if (e.getKeyChar() == '2') {
+                this.json.inventory_in = 1;
+            } else if (e.getKeyChar() == '3') {
+                this.json.inventory_in = 2;
+            } else if (e.getKeyChar() == '4') {
+                this.json.inventory_in = 3;
+            } else if (e.getKeyChar() == '5') {
+                this.json.inventory_in = 4;
             }
         }
 
