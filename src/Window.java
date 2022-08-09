@@ -155,6 +155,11 @@ public class Window extends JPanel implements KeyListener {
                 } else if (this.world.world.tiles[y][x][1] == 7) {
                     g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
                 }
+                if (this.world.world.tiles[y][x][2] == 8) {
+                    g2d.setColor(Color.ORANGE);
+                    g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
+                    g2d.setColor(Color.MAGENTA);
+                }
                 else if (this.world.world.tiles[y][x][1] > 7) {
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
                 } else if (this.world.world.tiles[y][x][2] > 7) {
@@ -179,29 +184,37 @@ public class Window extends JPanel implements KeyListener {
             for (int j = 0; j < this.world.world.width; j++) {
                 if (this.world.world.tiles[i][j][1] == 1) {
                     g2d.setColor(new Color(24, 231, 85, 200));
-                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
+                    g2d.fillRect(j * 2, i * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 2) {
                     g2d.setColor(new Color(19, 139, 54, 200));
-                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
+                    g2d.fillRect(j * 2, i * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 3) {
                     g2d.setColor(new Color(149, 95, 65, 200));
-                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
+                    g2d.fillRect(j * 2, i * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 4) {
                     g2d.setColor(new Color(186, 123, 86, 200));
-                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
+                    g2d.fillRect(j * 2, i * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 5) {
                     g2d.setColor(new Color(224, 223, 224, 200));
-                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
+                    g2d.fillRect(j * 2, i * 2, 2, 2);
                 } else if (this.world.world.tiles[i][j][1] == 6) {
                     g2d.setColor(new Color(146, 74, 6, 200));
-                    g2d.fillRect(j  * 2, i  * 2, 2, 2);
+                    g2d.fillRect(j * 2, i * 2, 2, 2);
+                } else if (this.world.world.tiles[i][j][2] == 8) {
+                    g2d.setColor(Color.ORANGE);
+                    g2d.fillRect(j * 2 - 1, i * 2 - 1, 4, 4);
                 }
-                g2d.setColor(new Color(255, 0, 0, 200));
-                g2d.fillRect(this.world.player.x * 2 - 1, this.world.player.y  * 2 - 1, 4, 4);
             }
-            g2d.setColor(Color.GRAY);
-            g2d.fillRect(this.world.world.width  * 2, 0, 2, this.world.world.height  * 2);
-            g2d.fillRect(0, this.world.world.height * 2, this.world.world.width * 2 + 2, 2);
+        }
+        g2d.setColor(new Color(255, 0, 0, 200));
+        g2d.fillRect(this.world.player.x * 2 - 1, this.world.player.y  * 2 - 1, 4, 4);
+
+        g2d.setColor(Color.GRAY);
+        g2d.fillRect(this.world.world.width  * 2, 0, 2, this.world.world.height  * 2);
+        g2d.fillRect(0, this.world.world.height * 2, this.world.world.width * 2 + 2, 2);
+
+        for (int i = 0; i < this.world.flags.length; i++) {
+            this.world.world.tiles[this.world.flags[i][0]][this.world.flags[i][1]][2] = 8;
         }
 
         for (int i = 0; i < this.world.npc.npc.length; i++) {

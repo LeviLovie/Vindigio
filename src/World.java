@@ -19,6 +19,10 @@ public class World extends JPanel {
     public int screen_y = 0;
     public String tile_click_any = "";
     public int tile_click = 0;
+    public int[][] flags = {
+        {2, 2},
+        {25, 25}
+    };
 
     private final int[][][] house_1 = {
             {{4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}},
