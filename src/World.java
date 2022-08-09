@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class World extends JPanel {
     public Json json;
+    public int string_pr = 0;
     DataNPC npc;
     public boolean pause = false;
     public boolean pause_dialog = false;
@@ -131,6 +132,18 @@ public class World extends JPanel {
         this.revalidate();
     }
 
+    public void dialog_change() {
+        JPanel new_world_dialog_name_panel = new JPanel();
+        String intext = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Text (/n for nex line):");
+        String npc_name = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc name:");
+        String npc_text = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc text:");
+
+        String[] text = intext.split("/n ");
+
+        this.json.dialog_save(npc_name, npc_text, text);
+        this.revalidate();
+    }
+
     public void change_world() {
         JPanel change_world_dialog_world_panel = new JPanel();
         String message = "Worlds: " + String.join(", ", this.json.list_worlds());
@@ -154,11 +167,11 @@ public class World extends JPanel {
     }
 
     public void keyPressed(KeyEvent e) {
-//        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
+        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
          if (e.getKeyChar() == 's') {
             if (!this.pause && this.player.y + 1 < this.world.height) {
                 if (world.can_go_to(this.player.y + 1, this.player.x)) {
-//                    System.out.println("+");
+                    System.out.println("+");
                     this.player.y += 1;
                 }
             }
@@ -183,10 +196,13 @@ public class World extends JPanel {
          } else if (e.getKeyChar() == 't') {
              this.text = new Text();
              this.text.text_parser("тест");
-         } else if (e.getKeyChar() == 'e' && this.mode == 0) {
-             this.pause = true;
-             this.pause_dialog = true;
-             this.json.dialog_load("villager", "start");
+         } else if (e.getKeyChar() == 'e') {
+//             System.out.println((this.player.y + 3) + " = " + this.npc.npc[0][0] + ", " + (this.player.x - 3) + " = " + this.npc.npc[0][1]);
+             if (this.player.y + 3 == this.npc.npc[0][0] && this.player.x - 3 == this.npc.npc[0][1]) {
+                 this.pause = true;
+                 this.pause_dialog = true;
+                 this.json.dialog_load("villager", "start");
+             }
          } else if (e.getKeyCode() == 27) {
             this.pause = !this.pause;
              this.pause_dialog = false;
@@ -231,8 +247,14 @@ public class World extends JPanel {
             } else if (e.getKeyChar() == '9') {
                 this.tile_click_any += "9";
                 this.tile_click = Integer.parseInt(tile_click_any);
-            } else if (e.getKeyChar() == 'e' && this.player.x > 0) {
+            } else if (e.getKeyChar() == 'q') {
                 this.world.tiles[this.player.y][this.player.x][1] = tile_click;
+            } else if (e.getKeyCode() == 38) {
+                if (this.string_pr > 0) {
+                    this.string_pr--;
+                }
+            } else if (e.getKeyCode() == 40) {
+                this.string_pr++;
             }
         }
 

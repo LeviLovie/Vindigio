@@ -27,6 +27,7 @@ public class Window extends JPanel implements KeyListener {
     private final JButton exit_button;
     private final JButton hext_button;
     private final JButton save_button;
+    private final JButton dialog_change_butoon;
     private final JLabel gid_name;
     private JLabel coins;
     Font coins_font;
@@ -75,6 +76,9 @@ public class Window extends JPanel implements KeyListener {
         this.save_button = new JButton("Save");
         this.save_button.setVisible(false);
 
+        this.dialog_change_butoon = new JButton("Dialog change");
+        this.dialog_change_butoon.setVisible(false);
+
         this.gid_name = new JLabel(this.world.npc.nps_names[0]);
         this.coins = new JLabel("C: " + this.world.json.coins);
         this.coins_font = new Font("SansSerif", Font.BOLD, 15);
@@ -87,12 +91,16 @@ public class Window extends JPanel implements KeyListener {
         add(this.exit_button);
         add(this.hext_button);
         add(this.save_button);
+        add(this.dialog_change_butoon);
         add(this.coins);
 
         add(world);
         add(panel);
 
-        this.exit_button.addActionListener(e -> world.pause = false);
+        this.exit_button.addActionListener(e -> {
+            world.pause = false;
+            world.pause_dialog = false;
+        });
         this.hext_button.addActionListener(e -> this.strings++);
 
         this.save_button.addActionListener(e -> {
@@ -100,10 +108,12 @@ public class Window extends JPanel implements KeyListener {
                 // world redactor mode
                 this.world.json.save_player(this.world.player);
                 this.world.json.save_world(this.world.world);
-                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " + this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
+//                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " +
+//                        this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
                 this.world.json.villager_y = this.world.npc.npc[0][0];
                 this.world.json.villager_x = this.world.npc.npc[0][1];
-                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " + this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
+//                System.out.println(this.world.json.villager_y + ", " + this.world.json.villager_x + " = " +
+//                        this.world.npc.npc[0][0] + ", " + this.world.npc.npc[0][1]);
                 this.world.json.save_npc("villager");
             } else if (this.world.mode == 0) {
                 // game mode
@@ -111,6 +121,7 @@ public class Window extends JPanel implements KeyListener {
             }
         });
         this.world_constructor_button.addActionListener(e -> world.world_constructor());
+        this.dialog_change_butoon.addActionListener(e -> this.world.dialog_change());
         this.new_world_button.addActionListener(e -> world.new_world());
         this.change_world_button.addActionListener(e -> world.change_world());
         this.world_redactor_button.addActionListener(e -> world.mode = 1);
@@ -215,7 +226,11 @@ public class Window extends JPanel implements KeyListener {
         int player_screen_y = this.world.get_player_screen_y();
         g2d.drawImage(this.img0, player_screen_x * sprite_size, player_screen_y * sprite_size,null);
 
-        this.coins.setLocation(1219, -1);
+        if (this.world.mode == 0) {
+            this.coins.setLocation(1219, -1);
+        } else if (this.world.mode == 1) {
+            this.coins.setLocation(1187, -1);
+        }
         this.coins.setFont(this.coins_font);
 
         if (this.world.mode == 1) {
@@ -242,6 +257,9 @@ public class Window extends JPanel implements KeyListener {
 
     public void pause(Graphics2D g2d) {
         if (this.world.pause) {
+            if (this.world.mode == 1) {
+                this.exit_button.setVisible(true);
+            }
             if (!this.world.pause_dialog) {
                 g2d.setColor(new Color(255, 255, 255, 155));
                 g2d.fillRect(0, 0, 1280, 720);
@@ -263,8 +281,8 @@ public class Window extends JPanel implements KeyListener {
                 }
 
                 this.hext_button.setVisible(false);
-                this.save_button.setVisible(true);
                 this.exit_button.setVisible(true);
+                this.save_button.setVisible(true);
 //            this.save_button.setBounds(200,100, 100, 100);
 
                 for (int i = 0; i < this.world.text.result_images.length; i++) {
@@ -295,6 +313,15 @@ public class Window extends JPanel implements KeyListener {
                         }
                     }
                 }
+                if (this.world.mode == 1) {
+                    this.dialog_change_butoon.setVisible(true);
+//                    g2d.setColor(Color.RED);
+
+//                    g2d.fillRect(375, 350 + (this.world.string_pr * 15), 10, 15);
+
+                } else {
+                    this.dialog_change_butoon.setVisible(false);
+                }
             }
         } else {
             this.world_redactor_button.setVisible(false);
@@ -309,7 +336,11 @@ public class Window extends JPanel implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         this.world.keyPressed(e);
+        System.out.println("+");
         this.revalidate();
+        if (e.getKeyCode() == 27) {
+            this.strings = 1;
+        }
     }
     public void keyReleased (KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}

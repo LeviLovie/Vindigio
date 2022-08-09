@@ -58,6 +58,26 @@ public class Json {
         }
     }
 
+    public void dialog_save(String npc_name, String num, String[] text) {
+        JSONObject jsonO = this.json_parse();
+        JSONObject dialogs = new JSONObject();
+        JSONObject npc = new JSONObject();
+        JSONObject jnum = new JSONObject();
+        JSONArray jtext = new JSONArray();
+
+        for (int i = 0; i < text.length; i++) {
+            jtext.add(text[i]);
+        }
+
+        jnum.put("text", jtext);
+        npc.put(num, jnum);
+        dialogs.put(npc_name, npc);
+        jsonO.put("dialogs", dialogs);
+
+
+        this.json_save(jsonO);
+    }
+
     public String[] list_worlds() {
         JSONObject jsonO = this.json_parse();
         JSONObject worlds = (JSONObject) jsonO.get("worlds");
