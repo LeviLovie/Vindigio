@@ -18,6 +18,7 @@ public class Window extends JPanel implements KeyListener {
     BufferedImage img4 = null;
     BufferedImage img5 = null;
     BufferedImage img6 = null;
+    BufferedImage img7 = null;
 
     private final JButton world_constructor_button;
     private final JButton new_world_button;
@@ -44,6 +45,7 @@ public class Window extends JPanel implements KeyListener {
         try {img4 = ImageIO.read(new File("src/Tiles_tiles/4.png"));} catch (IOException ignored) {System.out.println("tile not found");}
         try {img5 = ImageIO.read(new File("src/Tiles_tiles/5.png"));} catch (IOException ignored) {System.out.println("tile not found");}
         try {img6 = ImageIO.read(new File("src/Tiles_tiles/6.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img7 = ImageIO.read(new File("src/Tiles_tiles/7.png"));} catch (IOException ignored) {System.out.println("tile not found");}
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);
@@ -152,6 +154,8 @@ public class Window extends JPanel implements KeyListener {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][0] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][0] == 7) {
+                    g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
                 }
                 if (this.world.world.tiles[y][x][1] == 1) {
                     g2d.drawImage(this.img1, (i * sprite_size), (j * sprite_size), null);
@@ -165,10 +169,12 @@ public class Window extends JPanel implements KeyListener {
                     g2d.drawImage(this.img5, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][1] == 6) {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][0] == 7) {
+                    g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
                 }
-                else if (this.world.world.tiles[y][x][1] > 6) {
+                else if (this.world.world.tiles[y][x][1] > 7) {
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
-                } else if (this.world.world.tiles[y][x][2] > 6) {
+                } else if (this.world.world.tiles[y][x][2] > 7) {
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
                 }
             }

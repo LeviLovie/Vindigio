@@ -70,9 +70,11 @@ public class World extends JPanel {
             for (int j = 0; j < this.world.width; j++) {
                 int rand = rn.nextInt() % 101;
                 if (rand < 90) {
-                    this.world.tiles[i][j][1] = 1;
+                    this.world.tiles[i][j][0] = 1;
+                    this.world.tiles[i][j][1] = 0;
                 } else {
-                    this.world.tiles[i][j][1] = 2;
+                    this.world.tiles[i][j][0] = 1;
+                    this.world.tiles[i][j][1] = 7;
                 }
             }
         }
