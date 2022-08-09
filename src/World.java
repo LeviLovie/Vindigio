@@ -156,6 +156,19 @@ public class World extends JPanel {
         this.revalidate();
     }
 
+    public void change_world2(String world_name, boolean one, boolean two, int one_one, int two_two) {
+        this.world = this.json.load_world(world_name);
+
+        if (one) {
+            this.player.y = one_one;
+        }
+        if (two) {
+            this.player.x = two_two;
+        }
+
+        this.revalidate();
+    }
+
     public int get_player_screen_x() {
         return this.player.x - this.screen_x;
     }
@@ -168,28 +181,51 @@ public class World extends JPanel {
 //        System.out.println(this.player.y + ", " + this.player.x + ", " + this.world.height + ", " + this.world.width);
          if (e.getKeyChar() == 's') {
             if (!this.pause && this.player.y + 1 < this.world.height) {
-                if (world.can_go_to(this.player.y + 1, this.player.x)) {
+                if (this.mode == 0) {
+                    if (world.can_go_to(this.player.y + 1, this.player.x)) {
 //                    System.out.println("+");
+                        this.player.y += 1;
+                    }
+                } else {
                     this.player.y += 1;
                 }
             }
         } else if (e.getKeyChar() == 'w') {
             if (!this.pause && this.player.y - 1 > -1) {
-                if (world.can_go_to(this.player.y - 1, this.player.x)) {
+                if (this.mode == 0) {
+                    if (world.can_go_to(this.player.y - 1, this.player.x)) {
+                        this.player.y -= 1;
+                    }
+                } else {
                     this.player.y -= 1;
                 }
             }
         } else if (e.getKeyChar() == 'd') {
              if (!this.pause && this.player.x + 1 < this.world.width) {
-                 if (world.can_go_to(this.player.y, this.player.x + 1)) {
+                 if (this.mode == 0) {
+                     if (world.can_go_to(this.player.y, this.player.x + 1)) {
+                         this.player.x += 1;
+                     }
+                 } else {
                      this.player.x += 1;
                  }
              }
+             if (this.player.x == this.world.width - 1) {
+                 System.out.println("door!");
+                this.change_world2("test", false, true, 0, 0);
+             }
          } else if (e.getKeyChar() == 'a') {
              if (!this.pause && this.player.x - 1 > -1) {
-                 if (world.can_go_to(this.player.y, this.player.x - 1)) {
+                 if (this.mode == 0) {
+                     if (world.can_go_to(this.player.y, this.player.x - 1)) {
+                         this.player.x -= 1;
+                     }
+                 } else {
                      this.player.x -= 1;
                  }
+             }
+             if (this.player.x == 0) {
+                 this.change_world2("Calibration", false, true, 0, this.world.width);
              }
          } else if (e.getKeyChar() == 'e') {
              if (this.world.tiles[this.player.y][this.player.x][1] == 7) {
