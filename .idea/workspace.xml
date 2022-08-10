@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/MenuWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tiles_tiles/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sound/music.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +66,7 @@
   </component>
   <component name="RunManager" selected="Application.Game">
     <configuration name="Game" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Game" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Vindigio" />
       <option name="PROGRAM_PARAMETERS" value="0" />
       <method v="2">
@@ -71,7 +74,7 @@
       </method>
     </configuration>
     <configuration name="World_Redactor" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Game" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Vindigio" />
       <option name="PROGRAM_PARAMETERS" value="1" />
       <method v="2">
