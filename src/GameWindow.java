@@ -19,6 +19,8 @@ public class GameWindow extends JPanel implements KeyListener {
     private BufferedImage img5 = null;
     private BufferedImage img6 = null;
     private BufferedImage img7 = null;
+    private BufferedImage img8_1 = null;
+    private BufferedImage img8_2 = null;
     private final JButton world_constructor_button;
     private final JButton new_world_button;
     private final JButton change_world_button;
@@ -46,6 +48,8 @@ public class GameWindow extends JPanel implements KeyListener {
         try {img5 = ImageIO.read(new File("src/Tiles_tiles/5.png"));} catch (IOException ignored) {System.out.println("tile not found");}
         try {img6 = ImageIO.read(new File("src/Tiles_tiles/6.png"));} catch (IOException ignored) {System.out.println("tile not found");}
         try {img7 = ImageIO.read(new File("src/Tiles_tiles/7.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img8_1 = ImageIO.read(new File("src/Tiles_tiles/8_1.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {img8_2 = ImageIO.read(new File("src/Tiles_tiles/8_2.png"));} catch (IOException ignored) {System.out.println("tile not found");}
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);
@@ -179,15 +183,21 @@ public class GameWindow extends JPanel implements KeyListener {
                     g2d.drawImage(this.img6, (i * sprite_size), (j * sprite_size), null);
                 } else if (this.world.world.tiles[y][x][1] == 7) {
                     g2d.drawImage(this.img7, (i * sprite_size), (j * sprite_size), null);
+                } else if (this.world.world.tiles[y][x][1] == 8) {
+                    if (y == this.world.player.y && x == this.world.player.x) {
+                        g2d.drawImage(this.img8_2, (i * sprite_size), (j * sprite_size), null);
+                    } else {
+                        g2d.drawImage(this.img8_1, (i * sprite_size), (j * sprite_size), null);
+                    }
                 }
-                if (this.world.world.tiles[y][x][2] == 8) {
+                if (this.world.world.tiles[y][x][2] == 9) {
                     g2d.setColor(Color.ORANGE);
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
                     g2d.setColor(Color.MAGENTA);
                 }
-                else if (this.world.world.tiles[y][x][1] > 7) {
+                else if (this.world.world.tiles[y][x][1] > 9) {
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
-                } else if (this.world.world.tiles[y][x][2] > 7) {
+                } else if (this.world.world.tiles[y][x][2] > 9) {
                     g2d.fillRect((i * sprite_size), (j * sprite_size), 32, 32);
                 }
             }
@@ -252,8 +262,9 @@ public class GameWindow extends JPanel implements KeyListener {
 
         int player_screen_x = this.world.get_player_screen_x();
         int player_screen_y = this.world.get_player_screen_y();
-        g2d.drawImage(this.img0, player_screen_x * sprite_size, player_screen_y * sprite_size,null);
-
+//        g2d.drawImage(this.img0, player_screen_x * sprite_size, player_screen_y * sprite_size, null);
+        g2d.setColor(Color.RED);
+        g2d.fillRect((player_screen_x * sprite_size) + 11, (player_screen_y * sprite_size) + 11, 10, 10);
         if (this.world.mode == 0) {
             this.coins.setLocation(1219, -1);
         } else if (this.world.mode == 1) {

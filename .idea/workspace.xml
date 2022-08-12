@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/MenuWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tiles_tiles/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sound/music.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tiles_tiles/8_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tiles_tiles/8_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataNPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataNPC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/World.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

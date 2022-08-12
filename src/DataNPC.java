@@ -5,4 +5,10 @@ public class DataNPC {
     public String[] nps_names = {
         "villager"
     };
+
+    public void npc_go_to(int npc, int to_y, int to_x, int[][] tiles) {
+        if (npc > this.npc.length) {throw new java.lang.Error("DataNPC: 10: " + "Npc num > npc.length");}
+
+
+    }
 }
