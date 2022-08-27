@@ -1,3 +1,8 @@
+package Game;
+
+import Java_data_classes.DataPlayer;
+import Java_data_classes.DataQwest;
+import Java_data_classes.DataWorld;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,17 +19,19 @@ public class Json {
     public int villager_x;
     public int villager_y;
     public int coins;
-    private static final String json_filename = "src/Data.json";
+    private static final String json_filename0 = "src/Json_data/Data.json";
+    private static final String json_filename1 = "src/Json_data/Qwests.json";
     public String[] texts = new String[64];
     public int[] inventory = new int[5];
     public int inventory_in;
 
     public JSONObject json_parse() {
         JSONObject jsonO = new JSONObject();
+//        JSONObject json1 = new JSONObject();
         JSONParser parser = new JSONParser();
 
         try {
-            jsonO = (JSONObject) parser.parse(new FileReader(json_filename));
+            jsonO = (JSONObject) parser.parse(new FileReader(json_filename0));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -33,7 +40,7 @@ public class Json {
     }
 
     public void json_save(JSONObject jsonO) {
-        try (FileWriter file = new FileWriter(json_filename)) {
+        try (FileWriter file = new FileWriter(json_filename0)) {
             file.write(jsonO.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -78,6 +85,55 @@ public class Json {
         this.json_save(jsonO);
     }
 
+    public DataQwest qwest_load(String qwest_name) {
+//        "shep": {
+//              "title": "Save a ship!",
+//              "start_if": "§if_start: game",
+//              "dialog": [
+//                  "Привет путник!",
+//                  "Помнишь какая сильная гроза была вчера?",
+//                  "Мои овцы испугались молнии,",
+//                  "выломали дверь загона и убежали в лес.",
+//                  "Поможешь мне пожалуйста привести их обратно в загон?"
+//              ],
+//              "after_start": "§in: forest, spawn: 10 ships",
+//              "finish_if": "§10 ships in a Villager fence",
+//              "reword": "§give: 15 coins to player"
+//        }
+
+        JSONObject json1 = new JSONObject();
+
+        try {
+            JSONParser parser = new JSONParser();
+            json1 = (JSONObject) parser.parse(new FileReader("src/Qwests.json"));
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject qwest = (JSONObject) json1.get("shep");
+//        System.out.println(qwest);
+        String title = qwest.get("title").toString();
+        String start_if = qwest.get("start_if").toString();
+        String after_start = qwest.get("after_start").toString();
+        String finish_if = qwest.get("finish_if").toString();
+        String reword = qwest.get("reword").toString();
+
+        JSONArray dialog = (JSONArray) qwest.get("dialog");
+        Iterator iterator = dialog.iterator();
+
+        String[] dialog_new = new String[128];
+
+        int i = 0;
+        while (iterator.hasNext()) {
+            dialog_new[i] = (String) iterator.next();
+            i++;
+        }
+
+        return new DataQwest(
+                title, start_if, after_start,
+                finish_if, dialog_new, reword);
+    }
+
     public String[] list_worlds() {
         JSONObject jsonO = this.json_parse();
         JSONObject worlds = (JSONObject) jsonO.get("worlds");
@@ -85,7 +141,7 @@ public class Json {
 
         int i = 0;
         for (Iterator iterator = worlds.keySet().iterator(); iterator.hasNext(); i++) {
-            world_names[i] = (String) iterator.next();
+            world_names[i] = ((String) iterator.next()).toString();
         }
 
         return world_names;

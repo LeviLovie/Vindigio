@@ -1,3 +1,6 @@
+import Game.GameWindow;
+import Menu.MenuWindow;
+
 import javax.swing.*;
 
 public class Main extends JFrame {
@@ -19,7 +22,7 @@ public class Main extends JFrame {
         frame.setResizable(false);
 //        frame.add(menu_window);
 //        TODO no comment back line and comment next line  for finish compilation
-        frame.add(game_window);
+        frame.add(menu_window);
         frame.setVisible(true);
 
         Timer timer;
@@ -29,12 +32,14 @@ public class Main extends JFrame {
                 if (this.menu_window.menu == false) {
                     frame.add(game_window);
                     frame.remove(menu_window);
+                    this.game_window.game_b = true;
                     is_menu = false;
                 }
             } else {
                 if (this.game_window.game_b == false) {
                     frame.add(menu_window);
                     frame.remove(game_window);
+                    this.menu_window.menu = true;
                     is_menu = true;
                 }
             }

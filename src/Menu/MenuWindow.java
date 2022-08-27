@@ -1,3 +1,5 @@
+package Menu;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +15,7 @@ public class MenuWindow extends JPanel {
     private final Font vindigio_font;
 
     public MenuWindow() {
-        try {image = ImageIO.read(new File("src/Tiles_tiles/back.png"));} catch (IOException ignored) {System.out.println("tile not found");}
+        try {image = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/back2.png"));} catch (IOException ignored) {System.out.println("MenuWindow.java: tile not found: Tiles_tiles/back.png");}
 
         vindigio = new JLabel("Vindigio");
         button_start = new JButton("Game");
@@ -37,9 +39,12 @@ public class MenuWindow extends JPanel {
         add(button_start);
     }
 
-//    @Override
-//    public void paintComponent(Graphics g) {
-//         super.paintComponent(g);
-//         g.drawImage(this.image, 0, 0, null);
-//    }
+    @Override
+    public void paintComponent(Graphics g) {
+         super.paintComponent(g);
+         g.drawImage(this.image, 0, 0, 1280, 720, null);
+
+//         this.button_start.setLocation((1280 / 2) - (100 / 2), 200);
+//         this.button_start.setSize(100, 25);
+    }
 }

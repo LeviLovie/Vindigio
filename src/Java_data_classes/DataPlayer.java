@@ -1,3 +1,5 @@
+package Java_data_classes;
+
 public class DataPlayer {
     public int x;
     public int y;

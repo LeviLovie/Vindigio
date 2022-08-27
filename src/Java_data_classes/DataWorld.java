@@ -1,3 +1,5 @@
+package Java_data_classes;
+
 public class DataWorld {
     public String name;
     public int width;
@@ -22,7 +24,8 @@ public class DataWorld {
                 break;
             }
         }
+
         return result;
-//        throw new java.lang.Error("DataWorld.can_go_to: what?");
+//        throw new java.lang.Error("Java_data_classes.DataWorld.can_go_to: what?");
     }
 }

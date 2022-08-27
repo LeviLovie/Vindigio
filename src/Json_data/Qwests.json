@@ -1,0 +1,16 @@
+{
+  "shep": {
+    "title": "Save a ship!",
+    "start_if": "§if_start: game",
+    "dialog": [
+      "Привет путник!",
+      "Помнишь какая сильная гроза была вчера?",
+      "Мои овцы испугались молнии,",
+      "выломали дверь загона и убежали в лес.",
+      "Поможешь мне пожалуйста привести их обратно в загон?"
+    ],
+    "after_start": "§in: forest, spawn: 10 ships",
+    "finish_if": "§10 ships in a Villager fence",
+    "reword": "§give: 15 coins to player"
+  }
+}

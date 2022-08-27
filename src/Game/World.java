@@ -1,3 +1,9 @@
+package Game;
+
+import Java_data_classes.DataNPC;
+import Java_data_classes.DataPlayer;
+import Java_data_classes.DataWorld;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -14,7 +20,8 @@ public class World extends JPanel {
     public int mode = 0;
     public final int sprite_size = 32;
     public int screen_width = (1280 / sprite_size) - 3;
-    public int screen_height = Math.round(720 / sprite_size);
+//    public int screen_width = (1280 / sprite_size);
+    public int screen_height = Math.round(720 / sprite_size) + 1;
     public int screen_x = 0;
     public int screen_y = 0;
     public String tile_click_any = "";
@@ -51,6 +58,18 @@ public class World extends JPanel {
 
     public World() {
         json = new Json();
+
+//        Java_data_classes.DataQwest qwest = this.json.qwest_load("shep");
+//        System.out.println("Title: " + qwest.title);
+//        System.out.println("Start if: " + qwest.start_if);
+//        System.out.println("After start:  " + qwest.after_start);
+//        System.out.println("Finish if: " + qwest.finish_if);
+//        System.out.println("Reword: " + qwest.reword);
+//        for (int i = 0; i < qwest.dialog.length; i++) {
+//            if (qwest.dialog[i] != null) {
+//                System.out.println("Dialog string " + i + " : " + qwest.dialog[i]);
+//            }
+//        }
 
         text = new Text();
         npc = new DataNPC();
@@ -137,7 +156,7 @@ public class World extends JPanel {
 
     public void dialog_change() {
         JPanel new_world_dialog_name_panel = new JPanel();
-        String intext = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Text (/n for nex line):");
+        String intext = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Game.Text (/n for nex line):");
         String npc_name = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc name:");
         String npc_text = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc text:");
 
@@ -249,8 +268,18 @@ public class World extends JPanel {
                  this.pause_dialog = true;
                  this.json.dialog_load("villager", "start");
              }
+
+//             Java_data_classes.DataQwest qwest = this.json.qwest_load("shep");
+//             System.out.println("Title: " + qwest.title);
+//             System.out.println("Start if: " + qwest.start_if);
+//             System.out.println("After start:  " + qwest.after_start);
+//             System.out.println("Finish if: " + qwest.finish_if);
+//             System.out.println("Reword: " + qwest.reword);
+//             for (int i = 0; i < qwest.dialog.length; i++) {
+//                 System.out.println("Dialog string " + i + " : " + qwest.dialog[i]);
+//             }
          } else if (e.getKeyCode() == 27) {
-            this.pause = !this.pause;
+            this.pause = true;
              this.pause_dialog = false;
         }
 
