@@ -1,7 +1,10 @@
 import Game.GameWindow;
 import Menu.MenuWindow;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Main extends JFrame {
     JFrame frame = new JFrame();
@@ -28,6 +31,7 @@ public class Main extends JFrame {
         Timer timer;
         timer = new Timer(0, e -> {
             frame.repaint();
+//            frame.revalidate();
             if (is_menu == true) {
                 if (this.menu_window.menu == false) {
                     frame.add(game_window);
@@ -48,6 +52,37 @@ public class Main extends JFrame {
         // Aprox. 60 FPS
         timer.setDelay(17);
         timer.start();
+
+//        for (;;) {
+//            File audioFile = new File("src/Images_and_sound/sound/back.wav");
+//            AudioInputStream audioStream = null;
+//            try {
+//                audioStream = AudioSystem.getAudioInputStream(audioFile);
+//            } catch (UnsupportedAudioFileException ex) {
+//                throw new RuntimeException(ex);
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//
+//            AudioFormat format = audioStream.getFormat();
+//            DataLine.Info info = new DataLine.Info(Clip.class, format);
+//
+//            Clip audioClip = null;
+//            try {
+//                audioClip = (Clip) AudioSystem.getLine(info);
+//            } catch (LineUnavailableException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//
+//            try {
+//                audioClip.open(audioStream);
+//            } catch (LineUnavailableException ex) {
+//                throw new RuntimeException(ex);
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            }
+////            audioClip.start();
+//        }
     }
 
     public static void main(String[] args) {

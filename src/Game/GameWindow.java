@@ -8,10 +8,14 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 public class GameWindow extends JPanel implements KeyListener {
+//    Date date = new Date();
+    public int[] processing = new int[3];
     private final World world;
     public boolean game_b = true;
+    private JLabel[] processing_lable = new JLabel[processing.length];
     private BufferedImage img0_0 = null;
     private BufferedImage img0_1 = null;
     private BufferedImage img0_2 = null;
@@ -112,6 +116,11 @@ public class GameWindow extends JPanel implements KeyListener {
         add(dialog_change_butoon);
         add(coins);
 
+        for (int i = 0; i < this.processing.length; i++) {
+            this.processing_lable[i] = new JLabel("");
+            add(this.processing_lable[i]);
+        }
+
         add(world);
         add(panel);
 
@@ -144,12 +153,22 @@ public class GameWindow extends JPanel implements KeyListener {
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D)g;
+//        for (int i = 0; i < this.processing.length; i++) {
+//            this.processing[i] = 0;
+//            this.processing_lable[i].setLocation(0, 25 + (i * 25));
+//            this.processing_lable[i].setSize(500, 25);
+//        }
 
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+//        long time1 = System.nanoTime();
         int player_screen_x = this.world.get_player_screen_x();
         int player_screen_y = this.world.get_player_screen_y();
+//        this.processing[0] = (int) ((int) System.nanoTime() - time1);
 
+//        long time2 = System.nanoTime();
+//        long time3 = System.currentTimeMillis();
         this.my_paint.world_paint(
                 g2d, this.world.screen_height, this.world.screen_width, this.world.screen_x, this.world.screen_y,
                 this.world.sprite_size, this.world.player.x, this.world.player.y, this.world.world.tiles,
@@ -172,10 +191,19 @@ public class GameWindow extends JPanel implements KeyListener {
                 this.world.mode, this.coins, this.coins_font);
         this.my_paint.redactor_mode_tiles_paint(g2d, this.world.mode, this.world.screen_width, this.world.sprite_size,
                 this.img1, this.img2, this.img3, this.img4, this.img5, this.img6);
+//        this.processing[1] = (int) ((int) System.nanoTime() - time2);
+//        this.processing[2] = (int) ((int) System.currentTimeMillis() - time3);
+//        System.out.println((int) ((int) System.nanoTime() / 1000 - time));
 
+//        time = System.nanoTime() / 1000;
         this.hext_button.setVisible(false);
-
         this.pause(g2d);
+//        this.processing[0] = (int) ((int) System.nanoTime() / 1000 - time);
+
+//        this.processing_lable[0].setText("Math:                 " + this.processing[0]);
+//        this.processing_lable[1].setText("Painting (nano sec):  " + this.processing[1]);
+//        this.processing_lable[2].setText("Painting (milly sec): " + this.processing[2]);
+//        this.processing_lable[2].setText("Pause:    " + this.processing[2]);
     }
 
     public void pause(Graphics2D g2d) {
@@ -203,6 +231,9 @@ public class GameWindow extends JPanel implements KeyListener {
                     this.change_world_button.setVisible(false);
                 }
 
+                for (int i = 0; i < this.processing.length; i++) {
+                    this.processing_lable[i].setVisible(true);
+                }
                 this.menu_button.setVisible(true);
                 this.hext_button.setVisible(false);
                 this.exit_button.setVisible(true);
@@ -240,6 +271,9 @@ public class GameWindow extends JPanel implements KeyListener {
                 this.dialog_change_butoon.setVisible(this.world.mode == 1);
             }
         } else {
+            for (int i = 0; i < this.processing.length; i++) {
+                this.processing_lable[i].setVisible(false);
+            }
             this.menu_button.setVisible(false);
             this.world_redactor_button.setVisible(false);
             this.game_button.setVisible(false);
