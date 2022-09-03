@@ -6,7 +6,7 @@ public class DataWorld {
     public int height;
     public int[][][] tiles;
 
-    public int[] collision_numbs = {3, 5, 6};
+    public int[] collision_numbs = {3, 5, 6, 9};
 
     public DataWorld(String name, int width, int height, int[][][] tiles) {
         this.name = name;

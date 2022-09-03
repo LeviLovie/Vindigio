@@ -98,45 +98,88 @@ public class World extends JPanel {
         npc.npc[0][1] = json.villager_x;
     }
 
-    public void world_constructor() {
+    public void world_constructor(String biom) {
         try {
+//            String biom = JOptionPane.showInputDialog(null);
+//            System.out.println(biom);
+
             Random rn = new Random();
-            for (int i = 0; i < this.world.height; i++) {
-                for (int j = 0; j < this.world.width; j++) {
-                    int rand = rn.nextInt() % 101;
-                    if (rand < 85) {
-                        this.world.tiles[i][j][0] = 1;
-                        this.world.tiles[i][j][1] = 0;
-                    } else if (rand < 90) {
-                        this.world.tiles[i][j][0] = 2;
-                        this.world.tiles[i][j][1] = 0;
-                    } else {
-                        this.world.tiles[i][j][0] = 1;
-                        this.world.tiles[i][j][1] = 7;
+            if (biom == "grout") {
+//                System.out.println("grout - generate");
+                log.logp(Level.INFO, "World", "World constructor", "Generate grout world");
+                for (int i = 0; i < this.world.height; i++) {
+                    for (int j = 0; j < this.world.width; j++) {
+                        int rand = rn.nextInt() % 101;
+                        this.world.tiles[i][j][0] = 10;
+                        if (rand < 75) {
+                            this.world.tiles[i][j][1] = 0;
+                        } else {
+                            this.world.tiles[i][j][1] = 9;
+                        }
                     }
                 }
-            }
+//                revalidate();
 
-            int house = rn.nextInt((1 + 1) + 2);
-            int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
-            int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
+                int house = rn.nextInt((1 + 1) + 2);
+                int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
+                int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
 
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    if (house == 1) {
-                        this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
-                        this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
-                        this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
-                    } else if (house == 2) {
-                        this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
-                        this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
-                        this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        if (house == 1) {
+                            this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
+                            this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
+                            this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
+                        } else if (house == 2) {
+                            this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
+                            this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
+                            this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
+                        }
                     }
                 }
-            }
 
-            this.npc.npc[0][0] = house_x + 1;
-            this.npc.npc[0][1] = house_y + 1;
+                this.npc.npc[0][0] = house_x + 1;
+                this.npc.npc[0][1] = house_y + 1;
+            } else {
+                log.logp(Level.INFO, "World", "World constructor", "Generate usually world");
+                for (int i = 0; i < this.world.height; i++) {
+                    for (int j = 0; j < this.world.width; j++) {
+                        int rand = rn.nextInt() % 101;
+                        if (rand < 85) {
+                            this.world.tiles[i][j][0] = 1;
+                            this.world.tiles[i][j][1] = 0;
+                        } else if (rand < 90) {
+                            this.world.tiles[i][j][0] = 2;
+                            this.world.tiles[i][j][1] = 0;
+                        } else {
+                            this.world.tiles[i][j][0] = 1;
+                            this.world.tiles[i][j][1] = 7;
+                        }
+                    }
+                }
+
+                int house = rn.nextInt((1 + 1) + 2);
+                int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
+                int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
+
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        if (house == 1) {
+                            this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
+                            this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
+                            this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
+                        } else if (house == 2) {
+                            this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
+                            this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
+                            this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
+                        }
+                    }
+                }
+
+                this.npc.npc[0][0] = house_x + 1;
+                this.npc.npc[0][1] = house_y + 1;
+            }
+            revalidate();
         } catch (Exception e) {
             log.logp(Level.WARNING, "World", "World constructor", "", e); System.exit(1);
         }

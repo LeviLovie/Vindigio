@@ -34,7 +34,10 @@ public class GameWindow extends JPanel implements KeyListener {
     private BufferedImage img7 = null;
     private BufferedImage img8_1 = null;
     private BufferedImage img8_2 = null;
-    private final JButton world_constructor_button;
+    private BufferedImage img9 = null;
+    private BufferedImage img10 = null;
+    private final JButton world_constructor_button_0;
+    private final JButton world_constructor_button_1;
     private final JButton new_world_button;
     private final JButton change_world_button;
     private final JButton world_redactor_button;
@@ -77,6 +80,8 @@ public class GameWindow extends JPanel implements KeyListener {
         try {img7 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/7.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/7.png - can not load"); System.exit(1);}
         try {img8_1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_1.png - can not load"); System.exit(1);}
         try {img8_2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_2.png - can not load"); System.exit(1);}
+        try {img9 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/9.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/9.png - can not load"); System.exit(1);}
+        try {img10 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/10.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/10.png - can not load"); System.exit(1);}
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);
@@ -94,8 +99,11 @@ public class GameWindow extends JPanel implements KeyListener {
         game_button = new JButton("Back to game");
         game_button.setVisible(false);
 
-        world_constructor_button = new JButton("Auto world generate");
-        world_constructor_button.setVisible(false);
+        world_constructor_button_0 = new JButton("Auto world generate");
+        world_constructor_button_0.setVisible(false);
+
+        world_constructor_button_1 = new JButton("Auto world generate (grout)");
+        world_constructor_button_1.setVisible(false);
 
         new_world_button = new JButton("Create new world");
         new_world_button.setVisible(false);
@@ -122,7 +130,8 @@ public class GameWindow extends JPanel implements KeyListener {
         add(world_redactor_button); // TODO comment this and next line for finis compilation
         add(menu_button);
         add(game_button);
-        add(world_constructor_button);
+        add(world_constructor_button_0);
+        add(world_constructor_button_1);
         add(new_world_button);
         add(change_world_button);
         add(exit_button);
@@ -145,7 +154,8 @@ public class GameWindow extends JPanel implements KeyListener {
             world.json.save_player(world.player);
             world.json.save_world(world.world);
         });
-        world_constructor_button.addActionListener(e -> world.world_constructor());
+        world_constructor_button_0.addActionListener(e -> world.world_constructor(""));
+        world_constructor_button_1.addActionListener(e -> world.world_constructor("grout"));
         dialog_change_butoon.addActionListener(e -> world.dialog_change());
         new_world_button.addActionListener(e -> world.new_world());
         change_world_button.addActionListener(e -> world.change_world());
@@ -176,7 +186,8 @@ public class GameWindow extends JPanel implements KeyListener {
             this.my_paint.world_paint(
                     g2d, this.world.screen_height, this.world.screen_width, this.world.screen_x, this.world.screen_y,
                     this.world.sprite_size, this.world.player.x, this.world.player.y, this.world.world.tiles,
-                    this.img1, this.img2, this.img3, this.img4, this.img5, this.img6, this.img7, this.img8_1, this.img8_2);
+                    this.img1, this.img2, this.img3, this.img4, this.img5, this.img6, this.img7, this.img8_1,
+                    this.img8_2, this.img9, this.img10);
         } catch (Exception e) {
             log.logp(Level.WARNING, "GameWindow", "PaintComponent", "World paint:", e);
             System.exit(1);
@@ -284,7 +295,8 @@ public class GameWindow extends JPanel implements KeyListener {
 
                     if (this.world.mode == 1) {
                         // world redactor mode
-                        this.world_constructor_button.setVisible(true);
+                        this.world_constructor_button_0.setVisible(true);
+                        this.world_constructor_button_1.setVisible(true);
                         this.new_world_button.setVisible(true);
                         this.change_world_button.setVisible(true);
                         this.world_redactor_button.setVisible(false);
@@ -293,7 +305,8 @@ public class GameWindow extends JPanel implements KeyListener {
                         // game mode
                         this.world_redactor_button.setVisible(true);
                         this.game_button.setVisible(false);
-                        this.world_constructor_button.setVisible(false);
+                        this.world_constructor_button_0.setVisible(false);
+                        this.world_constructor_button_1.setVisible(false);
                         this.new_world_button.setVisible(false);
                         this.change_world_button.setVisible(false);
                     }
@@ -316,7 +329,8 @@ public class GameWindow extends JPanel implements KeyListener {
                 this.menu_button.setVisible(false);
                 this.world_redactor_button.setVisible(false);
                 this.game_button.setVisible(false);
-                this.world_constructor_button.setVisible(false);
+                this.world_constructor_button_0.setVisible(false);
+                this.world_constructor_button_1.setVisible(false);
                 this.new_world_button.setVisible(false);
                 this.change_world_button.setVisible(false);
                 this.exit_button.setVisible(false);
@@ -348,7 +362,8 @@ class Paint_2 {
             Graphics2D g2d, int screen_height, int screen_width, int screen_x, int screen_y, int sprite_size,
             int player_y, int player_x, int[][][] tiles,
             BufferedImage img1, BufferedImage img2, BufferedImage img3, BufferedImage img4, BufferedImage img5,
-            BufferedImage img6, BufferedImage img7, BufferedImage img8_1, BufferedImage img8_2) {
+            BufferedImage img6, BufferedImage img7, BufferedImage img8_1, BufferedImage img8_2, BufferedImage img9,
+            BufferedImage img10) {
 
         int x, y;
         g2d.setColor(Color.MAGENTA);
@@ -368,6 +383,8 @@ class Paint_2 {
                     g2d.drawImage(img5, (i * sprite_size), (j * sprite_size), null);
                 } else if (tiles[y][x][0] == 6) {
                     g2d.drawImage(img6, (i * sprite_size), (j * sprite_size), null);
+                } else if (tiles[y][x][0] == 10) {
+                    g2d.drawImage(img10, (i * sprite_size), (j * sprite_size), null);
                 }
                 if (tiles[y][x][1] == 1) {
                     g2d.drawImage(img1, (i * sprite_size), (j * sprite_size), null);
@@ -389,6 +406,8 @@ class Paint_2 {
                     } else {
                         g2d.drawImage(img8_1, (i * sprite_size), (j * sprite_size), null);
                     }
+                } else if (tiles[y][x][1] == 9) {
+                    g2d.drawImage(img9, (i * sprite_size), (j * sprite_size), null);
                 }
                 if (tiles[y][x][2] == 9) {
                     g2d.setColor(Color.ORANGE);
@@ -526,7 +545,7 @@ class Paint_2 {
 
 //    public void pause(
 //            Graphics2D g2d, boolean pause, int mode, boolean pause_dialog, BufferedImage[] result_images,
-//            JButton exit_button, JButton world_constructor_button, JButton new_world_button,
+//            JButton exit_button, JButton world_constructor_button_0, JButton new_world_button,
 //            JButton change_world_button, JButton world_redactor_button, JButton game_button,
 //            JButton menu_button, JButton hext_button, JButton save_button, JButton dialog_change_butoon) {
 //        if (pause) {
@@ -539,7 +558,7 @@ class Paint_2 {
 //
 //                if (mode == 1) {
 //                    // world redactor mode
-//                    world_constructor_button.setVisible(true);
+//                    world_constructor_button_0.setVisible(true);
 //                    new_world_button.setVisible(true);
 //                    change_world_button.setVisible(true);
 //                    world_redactor_button.setVisible(false);
@@ -548,7 +567,7 @@ class Paint_2 {
 //                    // game mode
 //                    world_redactor_button.setVisible(true);
 //                    game_button.setVisible(false);
-//                    world_constructor_button.setVisible(false);
+//                    world_constructor_button_0.setVisible(false);
 //                    new_world_button.setVisible(false);
 //                    change_world_button.setVisible(false);
 //                }
@@ -593,7 +612,7 @@ class Paint_2 {
 //            menu_button.setVisible(false);
 //            world_redactor_button.setVisible(false);
 //            game_button.setVisible(false);
-//            world_constructor_button.setVisible(false);
+//            world_constructor_button_0.setVisible(false);
 //            new_world_button.setVisible(false);
 //            change_world_button.setVisible(false);
 //            exit_button.setVisible(false);

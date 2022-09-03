@@ -72,7 +72,7 @@ public class Main extends JFrame {
             if (random_num == 1) {
                 music("musc1");
                 log.info("Musc1 play");
-            } else if (random_num == 2){
+            } else if (random_num == 2) {
                 music("musc2");
                 log.info("Musc2 play");
             }
