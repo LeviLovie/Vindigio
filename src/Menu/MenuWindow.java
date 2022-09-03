@@ -11,7 +11,7 @@ public class MenuWindow extends JPanel {
     JLabel vindigio;
     JButton button_start;
     private BufferedImage image = null;
-    public boolean menu = true;
+    public boolean is_menu = false;
     private final Font vindigio_font;
 
     public MenuWindow() {
@@ -23,7 +23,7 @@ public class MenuWindow extends JPanel {
         vindigio_font = new Font("SansSerif", Font.BOLD, 30);
 
         button_start.addActionListener(e -> {
-            menu = false;
+            is_menu = false;
         });
 
         vindigio.setFont(vindigio_font);

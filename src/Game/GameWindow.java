@@ -1,5 +1,7 @@
 package Game;
 
+import Java_data_classes.DataQwest;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -8,14 +10,17 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class GameWindow extends JPanel implements KeyListener {
 //    Date date = new Date();
-    public int[] processing = new int[3];
+//    public int[] processing = new int[3];
     private final World world;
-    public boolean game_b = true;
-    private JLabel[] processing_lable = new JLabel[processing.length];
+    public boolean is_game = true;
+//    private JLabel[] processing_lable = new JLabel[processing.length];
     private BufferedImage img0_0 = null;
     private BufferedImage img0_1 = null;
     private BufferedImage img0_2 = null;
@@ -44,24 +49,34 @@ public class GameWindow extends JPanel implements KeyListener {
     private final Font coins_font;
     private int strings = 1;
     Paint_2 my_paint;
+    Logger log = Logger.getLogger(GameWindow.class.getName());
 
     public GameWindow() {
+        try {
+            FileHandler fileHandler = new FileHandler("src/Logs/Log_Game_Window.log", true);
+            SimpleFormatter simple = new SimpleFormatter();
+            fileHandler.setFormatter(simple);
+            log.addHandler(fileHandler);
+        } catch (IOException e) {
+            System.out.println();
+        }
+
         my_paint = new Paint_2();
         world = new World();
 
-        try {img0_0 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/0.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Animation_tiles/0.png");}
-        try {img0_1 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/1.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Animation_tiles/1.png");}
-        try {img0_2 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/2.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Animation_tiles/2.png");}
-        try {img0 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/00.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/00.png");}
-        try {img1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/1.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/1.png");}
-        try {img2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/2.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/2.png");}
-        try {img3 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/3.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/3.png");}
-        try {img4 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/4.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/4.png");}
-        try {img5 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/5.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/5.png");}
-        try {img6 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/6.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/6.png");}
-        try {img7 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/7.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/7.png");}
-        try {img8_1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_1.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/8_1.png");}
-        try {img8_2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_2.png"));} catch (IOException ignored) {System.out.println("GameWindow.java: tile not found: Tiles_tiles/8_2.png");}
+        try {img0_0 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/0.png - can not load"); System.exit(1);}
+        try {img0_1 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/1.png - can not load"); System.exit(1);}
+        try {img0_2 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/2.png - can not load"); System.exit(1);}
+        try {img0 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/00.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/00.png - can not load"); System.exit(1);}
+        try {img1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/1.png - can not load"); System.exit(1);}
+        try {img2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/2.png - can not load"); System.exit(1);}
+        try {img3 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/3.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/3.png - can not load"); System.exit(1);}
+        try {img4 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/4.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/4.png - can not load"); System.exit(1);}
+        try {img5 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/5.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/5.png - can not load"); System.exit(1);}
+        try {img6 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/6.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/6.png - can not load"); System.exit(1);}
+        try {img7 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/7.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/7.png - can not load"); System.exit(1);}
+        try {img8_1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_1.png - can not load"); System.exit(1);}
+        try {img8_2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_2.png - can not load"); System.exit(1);}
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);
@@ -116,17 +131,13 @@ public class GameWindow extends JPanel implements KeyListener {
         add(dialog_change_butoon);
         add(coins);
 
-        for (int i = 0; i < this.processing.length; i++) {
-            this.processing_lable[i] = new JLabel("");
-            add(this.processing_lable[i]);
-        }
-
         add(world);
         add(panel);
 
         exit_button.addActionListener(e -> {
             world.pause = false;
             world.pause_dialog = false;
+            world.pause_qwest = false;
         });
         hext_button.addActionListener(e -> strings++);
 
@@ -139,7 +150,7 @@ public class GameWindow extends JPanel implements KeyListener {
         new_world_button.addActionListener(e -> world.new_world());
         change_world_button.addActionListener(e -> world.change_world());
         world_redactor_button.addActionListener(e -> world.mode = 1);
-        menu_button.addActionListener(e -> game_b = false);
+        menu_button.addActionListener(e -> is_game = false);
         game_button.addActionListener(e -> world.mode = 0);
 
         Timer timer;
@@ -150,138 +161,170 @@ public class GameWindow extends JPanel implements KeyListener {
         // Aprox. 60 FPS
         timer.setDelay(17);
         timer.start();
+
+        this.title = new JLabel(String.valueOf(this.world.json.qwest_load("shep")));
     }
 
     public void paintComponent(Graphics g) {
-//        for (int i = 0; i < this.processing.length; i++) {
-//            this.processing[i] = 0;
-//            this.processing_lable[i].setLocation(0, 25 + (i * 25));
-//            this.processing_lable[i].setSize(500, 25);
-//        }
-
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-//        long time1 = System.nanoTime();
         int player_screen_x = this.world.get_player_screen_x();
         int player_screen_y = this.world.get_player_screen_y();
-//        this.processing[0] = (int) ((int) System.nanoTime() - time1);
 
-//        long time2 = System.nanoTime();
-//        long time3 = System.currentTimeMillis();
-        this.my_paint.world_paint(
-                g2d, this.world.screen_height, this.world.screen_width, this.world.screen_x, this.world.screen_y,
-                this.world.sprite_size, this.world.player.x, this.world.player.y, this.world.world.tiles,
-                this.img1, this.img2, this.img3, this.img4, this.img5, this.img6, this.img7, this.img8_1, this.img8_2);
-        this.my_paint.inventory_paint(
-                g2d, this.world.json.inventory, this.world.json.inventory_in, this.world.world.width,
-                this.img7);
-        this.my_paint.map_paint(
-                g2d, this.world.world.height, this.world.world.width, this.world.world.tiles,
-                this.world.player.y, this.world.player.x);
-        this.my_paint.flags_paint(
-                this.world.flags, this.world.world.tiles);
-        this.my_paint.npc_paint(
-                g2d, this.world.npc.npc, this.world.screen_y, this.world.screen_x,
-                this.img0);
-        this.my_paint.player_paint(
-                g2d, player_screen_y, player_screen_x, this.world.sprite_size,
-                this.img0_0, this.img0_1, this.img0_2);
-        this.my_paint.coins_paint(
-                this.world.mode, this.coins, this.coins_font);
-        this.my_paint.redactor_mode_tiles_paint(g2d, this.world.mode, this.world.screen_width, this.world.sprite_size,
-                this.img1, this.img2, this.img3, this.img4, this.img5, this.img6);
-//        this.processing[1] = (int) ((int) System.nanoTime() - time2);
-//        this.processing[2] = (int) ((int) System.currentTimeMillis() - time3);
-//        System.out.println((int) ((int) System.nanoTime() / 1000 - time));
+        try {
+            this.my_paint.world_paint(
+                    g2d, this.world.screen_height, this.world.screen_width, this.world.screen_x, this.world.screen_y,
+                    this.world.sprite_size, this.world.player.x, this.world.player.y, this.world.world.tiles,
+                    this.img1, this.img2, this.img3, this.img4, this.img5, this.img6, this.img7, this.img8_1, this.img8_2);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "World paint:", e);
+            System.exit(1);
+        }
+        try {
+            this.my_paint.inventory_paint(
+                    g2d, this.world.json.inventory, this.world.json.inventory_in, this.world.world.width,
+                    this.img7);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "Inventory paint:");
+            System.exit(1);
+        }
+        try {
+            this.my_paint.map_paint(
+                    g2d, this.world.world.height, this.world.world.width, this.world.world.tiles,
+                    this.world.player.y, this.world.player.x);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "Map paint:", e);
+            System.exit(1);
+        }
+        try {
+            this.my_paint.flags_paint(
+                    this.world.flags, this.world.world.tiles);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "Flags paint:", e);
+            System.exit(1);
+        }
+        try {
+            this.my_paint.npc_paint(
+                    g2d, this.world.npc.npc, this.world.screen_y, this.world.screen_x,
+                    this.img0);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "NPC paint:", e);
+            System.exit(1);
+        }
+        try {
+            this.my_paint.player_paint(
+                    g2d, player_screen_y, player_screen_x, this.world.sprite_size,
+                    this.img0_0, this.img0_1, this.img0_2);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "Player paint:", e);
+            System.exit(1);
+        }
+        try {
+            this.my_paint.coins_paint(
+                    this.world.mode, this.coins, this.coins_font);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "Coins paint:", e);
+            System.exit(1);
+        }
+        try {
+            this.my_paint.redactor_mode_tiles_paint(g2d, this.world.mode, this.world.screen_width, this.world.sprite_size,
+                    this.img1, this.img2, this.img3, this.img4, this.img5, this.img6);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "PaintComponent", "Redactor mode tiles paint:");
+            System.exit(1);
+        }
 
-//        time = System.nanoTime() / 1000;
         this.hext_button.setVisible(false);
         this.pause(g2d);
-//        this.processing[0] = (int) ((int) System.nanoTime() / 1000 - time);
-
-//        this.processing_lable[0].setText("Math:                 " + this.processing[0]);
-//        this.processing_lable[1].setText("Painting (nano sec):  " + this.processing[1]);
-//        this.processing_lable[2].setText("Painting (milly sec): " + this.processing[2]);
-//        this.processing_lable[2].setText("Pause:    " + this.processing[2]);
     }
 
+    DataQwest qwest;
+//    JLabel title = new JLabel(qwest.title);
+    JLabel title;
+
     public void pause(Graphics2D g2d) {
-        if (this.world.pause) {
-            if (this.world.mode == 1) {
-                this.exit_button.setVisible(true);
-            }
-            if (!this.world.pause_dialog) {
-                g2d.setColor(new Color(255, 255, 255, 155));
-                g2d.fillRect(0, 0, 1280, 720);
-
+        try {
+            if (this.world.pause) {
                 if (this.world.mode == 1) {
-                    // world redactor mode
-                    this.world_constructor_button.setVisible(true);
-                    this.new_world_button.setVisible(true);
-                    this.change_world_button.setVisible(true);
-                    this.world_redactor_button.setVisible(false);
-                    this.game_button.setVisible(true);
-                } else if (this.world.mode == 0) {
-                    // game mode
-                    this.world_redactor_button.setVisible(true);
-                    this.game_button.setVisible(false);
-                    this.world_constructor_button.setVisible(false);
-                    this.new_world_button.setVisible(false);
-                    this.change_world_button.setVisible(false);
+                    this.exit_button.setVisible(true);
                 }
+                if (this.world.pause_qwest) {
+                    g2d.setColor(new Color(0, 0, 0, 155));
+                    g2d.fillRect(0, 0, 1280, 720);
 
-                for (int i = 0; i < this.processing.length; i++) {
-                    this.processing_lable[i].setVisible(true);
-                }
-                this.menu_button.setVisible(true);
-                this.hext_button.setVisible(false);
-                this.exit_button.setVisible(true);
-                this.save_button.setVisible(true);
-//            this.save_button.setBounds(200,100, 100, 100);
+                    add(title);
+                } else if (this.world.pause_dialog) {
+                    g2d.setColor(new Color(215, 215, 142, 155));
+                    g2d.fillRect(390, 350, 500, 300);
 
-                for (int i = 0; i < this.world.text.result_images.length; i++) {
-                    if (this.world.text.result_images[i] != null) {
-                        g2d.drawImage(this.world.text.result_images[i], 11 * i, 15, null);
-                    }
-                }
-            } else {
-                g2d.setColor(new Color(215, 215, 142, 155));
-                g2d.fillRect(390, 350, 500, 300);
+                    this.hext_button.setVisible(true);
+                    this.hext_button.setLocation(815, 620);
 
-                this.hext_button.setVisible(true);
-                this.hext_button.setLocation(815, 620);
-
-                for (int i = 0; i < this.world.json.texts.length; i++) {
-                    if (this.world.json.texts[i] != null) {
-                        this.world.text.text_parser(this.world.json.texts[i]);
-                        if (i < this.strings) {
-                            for (int j = 0; j < this.world.text.result_images.length; j++) {
-                                if (this.world.text.result_images[j] != null) {
-                                    g2d.drawImage(
-                                            this.world.text.result_images[j],
-                                            ((10 + 2) * j + 390),
-                                            ((15 + 5) * i + 350), null
-                                    );
+                    for (int i = 0; i < this.world.json.texts.length; i++) {
+                        if (this.world.json.texts[i] != null) {
+                            this.world.text.text_parser(this.world.json.texts[i]);
+                            if (i < this.strings) {
+                                for (int j = 0; j < this.world.text.result_images.length; j++) {
+                                    if (this.world.text.result_images[j] != null) {
+                                        g2d.drawImage(
+                                                this.world.text.result_images[j],
+                                                ((10 + 2) * j + 390),
+                                                ((15 + 5) * i + 350), null
+                                        );
+                                    }
                                 }
                             }
                         }
                     }
+                    this.dialog_change_butoon.setVisible(this.world.mode == 1);
+                } else {
+                    g2d.setColor(new Color(255, 255, 255, 155));
+                    g2d.fillRect(0, 0, 1280, 720);
+
+                    if (this.world.mode == 1) {
+                        // world redactor mode
+                        this.world_constructor_button.setVisible(true);
+                        this.new_world_button.setVisible(true);
+                        this.change_world_button.setVisible(true);
+                        this.world_redactor_button.setVisible(false);
+                        this.game_button.setVisible(true);
+                    } else if (this.world.mode == 0) {
+                        // game mode
+                        this.world_redactor_button.setVisible(true);
+                        this.game_button.setVisible(false);
+                        this.world_constructor_button.setVisible(false);
+                        this.new_world_button.setVisible(false);
+                        this.change_world_button.setVisible(false);
+                    }
+
+                    this.menu_button.setVisible(true);
+                    this.hext_button.setVisible(false);
+                    this.exit_button.setVisible(true);
+                    this.save_button.setVisible(true);
+                    //            this.save_button.setBounds(200,100, 100, 100);
+
+                    for (int i = 0; i < this.world.text.result_images.length; i++) {
+                        if (this.world.text.result_images[i] != null) {
+                            g2d.drawImage(this.world.text.result_images[i], 11 * i, 15, null);
+                        }
+
+                    }
                 }
-                this.dialog_change_butoon.setVisible(this.world.mode == 1);
             }
-        } else {
-            for (int i = 0; i < this.processing.length; i++) {
-                this.processing_lable[i].setVisible(false);
+            if (!this.world.pause) {
+                this.menu_button.setVisible(false);
+                this.world_redactor_button.setVisible(false);
+                this.game_button.setVisible(false);
+                this.world_constructor_button.setVisible(false);
+                this.new_world_button.setVisible(false);
+                this.change_world_button.setVisible(false);
+                this.exit_button.setVisible(false);
+                this.save_button.setVisible(false);
             }
-            this.menu_button.setVisible(false);
-            this.world_redactor_button.setVisible(false);
-            this.game_button.setVisible(false);
-            this.world_constructor_button.setVisible(false);
-            this.new_world_button.setVisible(false);
-            this.change_world_button.setVisible(false);
-            this.exit_button.setVisible(false);
-            this.save_button.setVisible(false);
+        } catch (Exception e) {
+            log.logp(Level.WARNING, "GameWindow", "Pause", "Pause:");
+            System.exit(1);
         }
     }
 

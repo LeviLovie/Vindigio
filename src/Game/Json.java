@@ -105,7 +105,7 @@ public class Json {
 
         try {
             JSONParser parser = new JSONParser();
-            json1 = (JSONObject) parser.parse(new FileReader("src/Qwests.json"));
+            json1 = (JSONObject) parser.parse(new FileReader("src/Json_data/Qwests.json"));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
