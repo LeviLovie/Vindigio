@@ -1,6 +1,7 @@
 package Game;
 
 import Java_data_classes.DataQwest;
+import Java_data_classes.Qwests;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -289,6 +290,7 @@ public class GameWindow extends JPanel implements KeyListener {
                         }
                     }
                     this.dialog_change_butoon.setVisible(this.world.mode == 1);
+                    this.world.qwests = new Qwests("Sheep");
                 } else {
                     g2d.setColor(new Color(255, 255, 255, 155));
                     g2d.fillRect(0, 0, 1280, 720);

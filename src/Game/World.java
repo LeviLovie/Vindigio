@@ -3,6 +3,7 @@ package Game;
 import Java_data_classes.DataNPC;
 import Java_data_classes.DataPlayer;
 import Java_data_classes.DataWorld;
+import Java_data_classes.Qwests;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,8 @@ import java.util.logging.SimpleFormatter;
 
 public class World extends JPanel {
     public Json json;
+    public Qwests qwests;
+    public String qwest_now = "shep";
     public DataNPC npc;
     public DataWorld world;
     public DataPlayer player;
@@ -91,7 +94,7 @@ public class World extends JPanel {
         text = new Text();
         npc = new DataNPC();
         player = json.load_player();
-        world = json.load_world("Calibration");
+        world = json.load_world("test");
         json.load_npc("villager");
 
         npc.npc[0][0] = json.villager_y;
@@ -346,8 +349,8 @@ public class World extends JPanel {
             } else if (e.getKeyChar() == 'f') {
                 if (this.player.y == this.json.villager_x && this.player.x == this.json.villager_y) {
                     this.pause = true;
-                    this.pause_dialog = false;
-                    this.pause_qwest = true;
+                    this.pause_dialog = true;
+                    this.pause_qwest = false;
                     this.json.dialog_load("villager", "start");
                 }
 

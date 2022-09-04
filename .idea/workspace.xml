@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Vindigio:jar2" />
+      <artifact name="Vindigio:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,17 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Images_and_sound/Tiles_tiles/10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images_and_sound/Tiles_tiles/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Java_data_classes/Qwests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Text.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Java_data_classes/DataWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java_data_classes/DataWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Json_data/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Json_data/Data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Logs/Log_Game_Window.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logs/Log_Game_Window.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Logs/Log_Main.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logs/Log_Main.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Logs/Log_World.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logs/Log_World.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
