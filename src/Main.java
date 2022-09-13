@@ -20,15 +20,15 @@ public class Main extends JFrame {
     MenuWindow menu_window;
 
     public Main() {
-        Logger log = Logger.getLogger(Main.class.getName());
-        try {
-            FileHandler fileHandler = new FileHandler("src/Logs/Log_Main.log", true);
-            SimpleFormatter simple = new SimpleFormatter();
-            fileHandler.setFormatter(simple);
-            log.addHandler(fileHandler);
-        } catch (IOException e) {
-            System.out.println();
-        }
+//        Logger log = Logger.getLogger(Main.class.getName());
+//        try {
+//            FileHandler fileHandler = new FileHandler("src/Logs/Log_Main.log", true);
+//            SimpleFormatter simple = new SimpleFormatter();
+//            fileHandler.setFormatter(simple);
+//            log.addHandler(fileHandler);
+//        } catch (IOException e) {
+//            System.out.println();
+//        }
         menu_window = new MenuWindow();
         game_window = new GameWindow();
 
@@ -40,12 +40,14 @@ public class Main extends JFrame {
 //        frame.add(menu_window);
 //        TODO no comment back line and comment next line  for finish compilation
         frame.add(game_window);
-        log.info("Game window added");
+//        log.info("Game window added");
         frame.setVisible(true);
 
         Timer timer;
         timer = new Timer(0, e -> {
-            frame.repaint();
+            if (this.game_window.repint) {
+                frame.repaint();
+            }
 //            frame.revalidate();
 
 //            if (this.menu_window.is_menu == false) {
@@ -64,22 +66,24 @@ public class Main extends JFrame {
         timer.setDelay(17);
         timer.start();
 
-        Timer sond_timer;
-        sond_timer = new Timer(0, e -> {
-            Random random = new Random();
-            int random_num = random.nextInt(1, 3);
-//            System.out.println("music_start: " + random_num);
-            if (random_num == 1) {
-                music("musc1");
-                log.info("Musc1 play");
-            } else if (random_num == 2) {
-                music("musc2");
-                log.info("Musc2 play");
-            }
-        });
-        sond_timer.setRepeats(true);
-        sond_timer.setDelay(25000);
-        sond_timer.start();
+//        Timer sond_timer;
+//        sond_timer = new Timer(0, e -> {
+//            Random random = new Random();
+//            int random_num = random.nextInt(1, 3);
+////            System.out.println("music_start: " + random_num);
+//            if (random_num == 1) {
+//                music("musc1");
+//                log.info("Musc1 play");
+//            } else if (random_num == 2) {
+//                music("musc2");
+//                log.info("Musc2 play");
+//            }
+//        });
+//        sond_timer.setRepeats(true);
+//        sond_timer.setDelay(25000);
+//        sond_timer.start();
+
+//        music();
     }
 
     public static void main(String[] args) {
@@ -97,9 +101,48 @@ public class Main extends JFrame {
         new Main();
     }
 
-    private void music(String name) {
-        File audioFile = new File("src/Images_and_sound/sound/" + name + ".wav");
-//        System.out.println("src/Images_and_sound/sound/" + name + ".wav");
+//    private void music(String name) {
+//        File audioFile = new File("src/Images_and_sound/sound/" + name + ".wav");
+////        System.out.println("src/Images_and_sound/sound/" + name + ".wav");
+//        AudioInputStream audioStream = null;
+//        try {
+//            audioStream = AudioSystem.getAudioInputStream(audioFile);
+//        } catch (UnsupportedAudioFileException ex) {
+//            throw new RuntimeException(ex);
+//        } catch (IOException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//
+//        AudioFormat format = audioStream.getFormat();
+//        DataLine.Info info = new DataLine.Info(Clip.class, format);
+//
+//        Clip audioClip = null;
+//        try {
+//            audioClip = (Clip) AudioSystem.getLine(info);
+//        } catch (LineUnavailableException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//
+//        try {
+//            audioClip.open(audioStream);
+//        } catch (LineUnavailableException ex) {
+//            throw new RuntimeException(ex);
+//        } catch (IOException ex) {
+//            throw new RuntimeException(ex);
+//        }
+//        audioClip.start();
+//    }
+    public void music() {
+        Timer timer = new Timer(250, e -> {
+            play("src/Images_and_sound/sound/f.wav");
+        }); timer.start();
+        Timer timer2 = new Timer(200, e -> {
+            play("src/Images_and_sound/sound/g.wav");
+        }); timer2.start();
+    }
+
+    public void play(String path) {
+        File audioFile = new File(path);
         AudioInputStream audioStream = null;
         try {
             audioStream = AudioSystem.getAudioInputStream(audioFile);

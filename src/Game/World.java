@@ -3,21 +3,15 @@ package Game;
 import Java_data_classes.DataNPC;
 import Java_data_classes.DataPlayer;
 import Java_data_classes.DataWorld;
-import Java_data_classes.Qwests;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.Random;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class World extends JPanel {
     public Json json;
-    public Qwests qwests;
-    public String qwest_now = "shep";
+//    public Qwests qwests = new Qwests();
+//    public String qwest_now = "shep";
     public DataNPC npc;
     public DataWorld world;
     public DataPlayer player;
@@ -65,17 +59,17 @@ public class World extends JPanel {
             {{4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}}
     };
 
-    Logger log = Logger.getLogger(World.class.getName());
+//    Logger log = Logger.getLogger(World.class.getName());
 
     public World() {
-        try {
-            FileHandler fileHandler = new FileHandler("src/Logs/Log_World.log", true);
-            SimpleFormatter simple = new SimpleFormatter();
-            fileHandler.setFormatter(simple);
-            log.addHandler(fileHandler);
-        } catch (IOException e) {
-            System.out.println();
-        }
+//        try {
+//            FileHandler fileHandler = new FileHandler("src/Logs/Log_World.log", true);
+//            SimpleFormatter simple = new SimpleFormatter();
+//            fileHandler.setFormatter(simple);
+//            log.addHandler(fileHandler);
+//        } catch (IOException e) {
+//            System.out.println();
+//        }
 
         json = new Json();
 
@@ -107,9 +101,9 @@ public class World extends JPanel {
 //            System.out.println(biom);
 
             Random rn = new Random();
-            if (biom == "grout") {
+            if (biom.equals("grout")) {
 //                System.out.println("grout - generate");
-                log.logp(Level.INFO, "World", "World constructor", "Generate grout world");
+//                log.logp(Level.INFO, "World", "World constructor", "Generate grout world");
                 for (int i = 0; i < this.world.height; i++) {
                     for (int j = 0; j < this.world.width; j++) {
                         int rand = rn.nextInt() % 101;
@@ -144,7 +138,7 @@ public class World extends JPanel {
                 this.npc.npc[0][0] = house_x + 1;
                 this.npc.npc[0][1] = house_y + 1;
             } else {
-                log.logp(Level.INFO, "World", "World constructor", "Generate usually world");
+//                log.logp(Level.INFO, "World", "World constructor", "Generate usually world");
                 for (int i = 0; i < this.world.height; i++) {
                     for (int j = 0; j < this.world.width; j++) {
                         int rand = rn.nextInt() % 101;
@@ -184,7 +178,7 @@ public class World extends JPanel {
             }
             revalidate();
         } catch (Exception e) {
-            log.logp(Level.WARNING, "World", "World constructor", "", e); System.exit(1);
+//            log.logp(Level.WARNING, "World", "World constructor", "", e); System.exit(1);
         }
     }
 
@@ -221,7 +215,7 @@ public class World extends JPanel {
             // говорим, что нужно перерисовать мир
             this.revalidate();
         } catch (Exception e) {
-            log.logp(Level.WARNING, "World", "New world", "", e); System.exit(1);
+//            log.logp(Level.WARNING, "World", "New world", "", e); System.exit(1);/
         }
     }
 
@@ -237,7 +231,7 @@ public class World extends JPanel {
             this.json.dialog_save(npc_name, npc_text, text);
             this.revalidate();
         } catch (Exception e) {
-            log.logp(Level.WARNING, "World", "Dialog change", "", e); System.exit(1);
+//            log.logp(Level.WARNING, "World", "Dialog change", "", e); System.exit(1);
         }
     }
 
@@ -254,7 +248,7 @@ public class World extends JPanel {
 
             this.revalidate();
         } catch (Exception e) {
-            log.logp(Level.WARNING, "World", "Change world", "", e); System.exit(1);
+//            log.logp(Level.WARNING, "World", "Change world", "", e); System.exit(1);
         }
     }
 
@@ -271,7 +265,7 @@ public class World extends JPanel {
 
             this.revalidate();
         } catch (Exception e) {
-            log.logp(Level.WARNING, "World", "Change world", "", e); System.exit(1);
+//            log.logp(Level.WARNING, "World", "Change world", "", e); System.exit(1);
         }
     }
 
@@ -445,7 +439,7 @@ public class World extends JPanel {
                 this.screen_y = this.world.height - this.screen_height;
             }
         } catch (Exception exe) {
-            log.logp(Level.WARNING, "World", "New world", "", exe);
+//            log.logp(Level.WARNING, "World", "New world", "", exe);
             System.exit(1);
         }
     }

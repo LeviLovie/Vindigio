@@ -1,7 +1,6 @@
 package Game;
 
-import Java_data_classes.DataQwest;
-import Java_data_classes.Qwests;
+import Java_data_classes.MyQwests;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,16 +10,15 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class GameWindow extends JPanel implements KeyListener {
 //    Date date = new Date();
 //    public int[] processing = new int[3];
     private final World world;
     public boolean is_game = true;
+    public boolean repint = true;
 //    private JLabel[] processing_lable = new JLabel[processing.length];
     private BufferedImage img0_0 = null;
     private BufferedImage img0_1 = null;
@@ -56,14 +54,14 @@ public class GameWindow extends JPanel implements KeyListener {
     Logger log = Logger.getLogger(GameWindow.class.getName());
 
     public GameWindow() {
-        try {
-            FileHandler fileHandler = new FileHandler("src/Logs/Log_Game_Window.log", true);
-            SimpleFormatter simple = new SimpleFormatter();
-            fileHandler.setFormatter(simple);
-            log.addHandler(fileHandler);
-        } catch (IOException e) {
-            System.out.println();
-        }
+//        try {
+//            FileHandler fileHandler = new FileHandler("src/Logs/Log_Game_Window.log", true);
+//            SimpleFormatter simple = new SimpleFormatter();
+//            fileHandler.setFormatter(simple);
+//            log.addHandler(fileHandler);
+//        } catch (IOException e) {
+//            System.out.println();
+//        }
 
         my_paint = new Paint_2();
         world = new World();
@@ -251,9 +249,11 @@ public class GameWindow extends JPanel implements KeyListener {
         this.pause(g2d);
     }
 
-    DataQwest qwest;
+//    DataQwest qwest = new DataQwest();
 //    JLabel title = new JLabel(qwest.title);
     JLabel title;
+
+    MyQwests MyQwests = new MyQwests();
 
     public void pause(Graphics2D g2d) {
         try {
@@ -264,8 +264,10 @@ public class GameWindow extends JPanel implements KeyListener {
                 if (this.world.pause_qwest) {
                     g2d.setColor(new Color(0, 0, 0, 155));
                     g2d.fillRect(0, 0, 1280, 720);
+                    this.repint = false;
 
-                    add(title);
+                    this.MyQwests.start();
+//                    add(title);
                 } else if (this.world.pause_dialog) {
                     g2d.setColor(new Color(215, 215, 142, 155));
                     g2d.fillRect(390, 350, 500, 300);
@@ -290,7 +292,7 @@ public class GameWindow extends JPanel implements KeyListener {
                         }
                     }
                     this.dialog_change_butoon.setVisible(this.world.mode == 1);
-                    this.world.qwests = new Qwests("Sheep");
+//                    this.world.qwests = new Qwests("Sheep");
                 } else {
                     g2d.setColor(new Color(255, 255, 255, 155));
                     g2d.fillRect(0, 0, 1280, 720);
@@ -350,6 +352,7 @@ public class GameWindow extends JPanel implements KeyListener {
         this.revalidate();
         if (e.getKeyCode() == 27) {
             this.strings = 1;
+            this.repint = true;
         } else if (e.getKeyChar() == 'f') {
 //            world.pause = true;
 //            world.pause_dialog = false;
