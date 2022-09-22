@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -20,10 +21,11 @@ public class Json {
     public int villager_y;
     public int coins;
     private static final String json_filename0 = "src/Json_data/Data.json";
-    private static final String json_filename1 = "src/Json_data/Qwests.json";
+    private final String json_filename = System.getProperty("user.home") + "/Library/Vindigio/";
     public String[] texts = new String[64];
     public int[] inventory = new int[5];
     public int inventory_in;
+    private String quest_num;
 
     public JSONObject json_parse() {
         JSONObject jsonO = new JSONObject();
@@ -31,7 +33,14 @@ public class Json {
         JSONParser parser = new JSONParser();
 
         try {
-            jsonO = (JSONObject) parser.parse(new FileReader(json_filename0));
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream input = classLoader.getResourceAsStream(json_filename0);
+        } catch (Exception e) {}
+
+        System.out.println(json_filename);
+
+        try {
+            jsonO = (JSONObject) parser.parse(new FileReader(json_filename + json_filename0));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -166,7 +175,7 @@ public class Json {
 
         this.coins = ((Long) player.get("coins")).intValue();
 
-        return new DataPlayer(player_x, player_y);
+        return new DataPlayer(player_x, player_y, (String) player.get("quest"), ((Long) player.get("quest_num")).intValue());
     }
 
     public void load_npc(String nps_name) {
@@ -194,7 +203,7 @@ public class Json {
         this.json_save(jsonO);
     }
 
-    public void save_player(DataPlayer player) {
+    public void save_player(DataPlayer player, String quest_name, int quest_num) {
         JSONObject jsonO = this.json_parse();
 
         JSONObject coordinate = new JSONObject();
@@ -213,6 +222,8 @@ public class Json {
         json_player.put("coordinate", coordinate);
         json_player.put("coins", this.coins);
         json_player.put("inventory", inventory);
+        json_player.put("quest", quest_name);
+        json_player.put("quest_num", quest_num);
 
         jsonO.put("player", json_player);
 

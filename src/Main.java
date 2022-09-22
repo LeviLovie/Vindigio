@@ -23,7 +23,7 @@ public class Main extends JFrame {
 //    public void accept(MainVisitor visitor);
 
     public Main() {
-        menu_window = new MenuWindow();
+//        menu_window = new MenuWindow();
         game_window = new GameWindow();
 
         GameFrame.setTitle("Vindigio");
@@ -40,8 +40,9 @@ public class Main extends JFrame {
         Timer timer;
         timer = new Timer(0, e -> {
             if (this.game_window.repaint) {
-                System.out.println("Repaint");
+//                System.out.println("Repaint");
                 GameFrame.repaint();
+                GameFrame.revalidate();
                 TerminalFrame.repaint();
             }
 //            if (this.menu_window.is_menu == false) {
@@ -86,7 +87,7 @@ public class Main extends JFrame {
         });
         sond_timer.setRepeats(true);
         sond_timer.setDelay(30000);
-        sond_timer.start();
+//        sond_timer.start();
 
         music();
     }

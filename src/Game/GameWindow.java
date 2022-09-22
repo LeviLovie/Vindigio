@@ -1,7 +1,6 @@
 package Game;
 
 import Java_data_classes.MyQuests;
-//import Java_data_classes.MyQwests;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,13 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameWindow extends JPanel implements KeyListener {
-//    Date date = new Date();
-//    public int[] processing = new int[3];
+    public int num = 0;
     public final World world;
+    private JLabel task;
+    private boolean Sheep_meee = true;
     MyQuests Quests;
     public boolean is_game = true;
     public boolean repaint = true;
-//    private JLabel[] processing_lable = new JLabel[processing.length];
     private BufferedImage img0_0 = null;
     private BufferedImage img0_1 = null;
     private BufferedImage img0_2 = null;
@@ -48,7 +47,6 @@ public class GameWindow extends JPanel implements KeyListener {
     private final JButton hext_button;
     private final JButton save_button;
     private final JButton dialog_change_butoon;
-    private final JLabel gid_name;
     private final JLabel coins;
     private final Font coins_font;
     private int strings = 1;
@@ -56,15 +54,8 @@ public class GameWindow extends JPanel implements KeyListener {
     Logger log = Logger.getLogger(GameWindow.class.getName());
 
     public GameWindow() {
-//        try {
-//            FileHandler fileHandler = new FileHandler("src/Logs/Log_Game_Window.log", true);
-//            SimpleFormatter simple = new SimpleFormatter();
-//            fileHandler.setFormatter(simple);
-//            log.addHandler(fileHandler);
-//        } catch (IOException e) {
-//            System.out.println();
-//        }
-
+        this.Quests = new MyQuests();
+        task = new JLabel(this.Quests.sheep.Get_name());
         my_paint = new Paint_2();
         world = new World();
 
@@ -124,7 +115,6 @@ public class GameWindow extends JPanel implements KeyListener {
         dialog_change_butoon = new JButton("Dialog change");
         dialog_change_butoon.setVisible(false);
 
-        gid_name = new JLabel(world.npc.nps_names[0]);
         coins = new JLabel("C: " + world.json.coins);
         coins_font = new Font("SansSerif", Font.BOLD, 15);
 
@@ -152,7 +142,7 @@ public class GameWindow extends JPanel implements KeyListener {
         hext_button.addActionListener(e -> strings++);
 
         save_button.addActionListener(e -> {
-            world.json.save_player(world.player);
+            world.json.save_player(world.player, this.world.player.quest, this.world.player.quest_num);
             world.json.save_world(world.world);
         });
         world_constructor_button_0.addActionListener(e -> world.world_constructor(""));
@@ -163,17 +153,6 @@ public class GameWindow extends JPanel implements KeyListener {
         world_redactor_button.addActionListener(e -> world.mode = 1);
         menu_button.addActionListener(e -> is_game = false);
         game_button.addActionListener(e -> world.mode = 0);
-
-        Timer timer;
-        timer = new Timer(0, e -> {
-            revalidate();
-        });
-        timer.setRepeats(true);
-        // Aprox. 60 FPS
-        timer.setDelay(17);
-        timer.start();
-
-        this.title = new JLabel(String.valueOf(this.world.json.qwest_load("shep")));
     }
 
     public void paintComponent(Graphics g) {
@@ -182,6 +161,8 @@ public class GameWindow extends JPanel implements KeyListener {
 
         int player_screen_x = this.world.get_player_screen_x();
         int player_screen_y = this.world.get_player_screen_y();
+
+        this.coins.setText(String.valueOf(this.world.json.coins));
 
         try {
             this.my_paint.world_paint(
@@ -240,7 +221,7 @@ public class GameWindow extends JPanel implements KeyListener {
             System.exit(1);
         }
         try {
-            this.my_paint.redactor_mode_tiles_paint(g2d, this.world.mode, this.world.screen_width, this.world.sprite_size,
+            this.my_paint.redactor_mode_tiles_paint(g2d, this.world.mode,
                     this.img1, this.img2, this.img3, this.img4, this.img5, this.img6);
         } catch (Exception e) {
             log.logp(Level.WARNING, "GameWindow", "PaintComponent", "Redactor mode tiles paint:");
@@ -250,113 +231,126 @@ public class GameWindow extends JPanel implements KeyListener {
         this.hext_button.setVisible(false);
         this.pause(g2d);
     }
-
-//    DataQwest qwest = new DataQwest();
-//    JLabel title = new JLabel(qwest.title);
-    JLabel title;
-
     public void pause(Graphics2D g2d) {
-        try {
-            if (this.world.pause) {
-                if (this.world.mode == 1) {
-                    this.exit_button.setVisible(true);
+        if (this.Quests.sheep.Get_quest_num() == 1 && this.Sheep_meee) {
+//            if (meee) {
+                this.world.pause = false;
+                this.world.pause_qwest = false;
+                this.world.pause_dialog = false;
+//                this.task.setText("You done " + this.world.player.quest + "!");
+                this.world.json.coins += 25;
+                repaint();
+                this.Sheep_meee = false;
+//                add(this.task);
+//                this.repaint = false;
+//            } else {
+//                this.repaint = true;
+//            }
+        }
+        if (this.world.pause) {
+            if (this.world.mode == 1) {
+                this.exit_button.setVisible(true);
+            }
+            if (this.world.pause_qwest) {
+                if (this.num != 4) {
+                    this.num++;
                 }
-                if (this.world.pause_qwest) {
+                g2d.setColor(new Color(215, 215, 142, 155));
+                g2d.fillRect(0, 0, 1280, 720);
+                if (num == 2) {
+                    add(this.task);
+                } else if (num == 3) {
                     this.repaint = false;
-                    g2d.setColor(new Color(0, 0, 0, 155));
-                    g2d.fillRect(0, 0, 1280, 720);
+                }
+            } else if (this.world.pause_dialog) {
+                g2d.setColor(new Color(215, 215, 142, 155));
+                g2d.fillRect(390, 350, 500, 300);
 
-//                    this.MyQwests.start();
-//                    add(title);
-                } else if (this.world.pause_dialog) {
-                    g2d.setColor(new Color(215, 215, 142, 155));
-                    g2d.fillRect(390, 350, 500, 300);
+                this.hext_button.setVisible(true);
+                this.hext_button.setLocation(815, 620);
 
-                    this.hext_button.setVisible(true);
-                    this.hext_button.setLocation(815, 620);
-
-                    for (int i = 0; i < this.world.json.texts.length; i++) {
-                        if (this.world.json.texts[i] != null) {
-                            this.world.text.text_parser(this.world.json.texts[i]);
-                            if (i < this.strings) {
-                                for (int j = 0; j < this.world.text.result_images.length; j++) {
-                                    if (this.world.text.result_images[j] != null) {
-                                        g2d.drawImage(
-                                                this.world.text.result_images[j],
-                                                ((10 + 2) * j + 390),
-                                                ((15 + 5) * i + 350), null
-                                        );
-                                    }
+                for (int i = 0; i < this.world.json.texts.length; i++) {
+                    if (this.world.json.texts[i] != null) {
+                        this.world.text.text_parser(this.world.json.texts[i]);
+                        if (i < this.strings) {
+                            for (int j = 0; j < this.world.text.result_images.length; j++) {
+                                if (this.world.text.result_images[j] != null) {
+                                    g2d.drawImage(
+                                            this.world.text.result_images[j],
+                                            ((10 + 2) * j + 390),
+                                            ((15 + 5) * i + 350), null
+                                    );
                                 }
                             }
                         }
                     }
-                    this.dialog_change_butoon.setVisible(this.world.mode == 1);
-//                    this.world.qwests = new Qwests("Sheep");
-                } else {
-                    g2d.setColor(new Color(255, 255, 255, 155));
-                    g2d.fillRect(0, 0, 1280, 720);
+                }
+                this.dialog_change_butoon.setVisible(this.world.mode == 1);
+            } else {
+                g2d.setColor(new Color(255, 255, 255, 155));
+                g2d.fillRect(0, 0, 1280, 720);
 
-                    if (this.world.mode == 1) {
-                        // world redactor mode
-                        this.world_constructor_button_0.setVisible(true);
-                        this.world_constructor_button_1.setVisible(true);
-                        this.new_world_button.setVisible(true);
-                        this.change_world_button.setVisible(true);
-                        this.world_redactor_button.setVisible(false);
-                        this.game_button.setVisible(true);
-                    } else if (this.world.mode == 0) {
-                        // game mode
-                        this.world_redactor_button.setVisible(true);
-                        this.game_button.setVisible(false);
-                        this.world_constructor_button_0.setVisible(false);
-                        this.world_constructor_button_1.setVisible(false);
-                        this.new_world_button.setVisible(false);
-                        this.change_world_button.setVisible(false);
+                if (this.world.mode == 1) {
+                    // world redactor mode
+                    this.world_constructor_button_0.setVisible(true);
+                    this.world_constructor_button_1.setVisible(true);
+                    this.new_world_button.setVisible(true);
+                    this.change_world_button.setVisible(true);
+                    this.world_redactor_button.setVisible(false);
+                    this.game_button.setVisible(true);
+                } else if (this.world.mode == 0) {
+                    // game mode
+                    this.world_redactor_button.setVisible(true);
+                    this.game_button.setVisible(false);
+                    this.world_constructor_button_0.setVisible(false);
+                    this.world_constructor_button_1.setVisible(false);
+                    this.new_world_button.setVisible(false);
+                    this.change_world_button.setVisible(false);
+                }
+
+                this.menu_button.setVisible(true);
+                this.hext_button.setVisible(false);
+                this.exit_button.setVisible(true);
+                this.save_button.setVisible(true);
+
+                for (int i = 0; i < this.world.text.result_images.length; i++) {
+                    if (this.world.text.result_images[i] != null) {
+                        g2d.drawImage(this.world.text.result_images[i], 11 * i, 15, null);
                     }
 
-                    this.menu_button.setVisible(true);
-                    this.hext_button.setVisible(false);
-                    this.exit_button.setVisible(true);
-                    this.save_button.setVisible(true);
-                    //            this.save_button.setBounds(200,100, 100, 100);
-
-                    for (int i = 0; i < this.world.text.result_images.length; i++) {
-                        if (this.world.text.result_images[i] != null) {
-                            g2d.drawImage(this.world.text.result_images[i], 11 * i, 15, null);
-                        }
-
-                    }
                 }
             }
-            if (!this.world.pause) {
-                this.menu_button.setVisible(false);
-                this.world_redactor_button.setVisible(false);
-                this.game_button.setVisible(false);
-                this.world_constructor_button_0.setVisible(false);
-                this.world_constructor_button_1.setVisible(false);
-                this.new_world_button.setVisible(false);
-                this.change_world_button.setVisible(false);
-                this.exit_button.setVisible(false);
-                this.save_button.setVisible(false);
-            }
-        } catch (Exception e) {
-            log.logp(Level.WARNING, "GameWindow", "Pause", "Pause:");
-            System.exit(1);
+        }
+        if (!this.world.pause) {
+            this.menu_button.setVisible(false);
+            this.world_redactor_button.setVisible(false);
+            this.game_button.setVisible(false);
+            this.world_constructor_button_0.setVisible(false);
+            this.world_constructor_button_1.setVisible(false);
+            this.new_world_button.setVisible(false);
+            this.change_world_button.setVisible(false);
+            this.exit_button.setVisible(false);
+            this.save_button.setVisible(false);
+        }
+        if (!this.world.pause_qwest) {
+            remove(this.task);
         }
     }
 
     public void keyPressed(KeyEvent e) {
-//        System.out.println("+");
-        this.revalidate();
         if (e.getKeyCode() == 27) {
-            this.strings = 1;
-            this.repaint = true;
-            this.world.keyPressed(e);
+//            if (!meee) {
+                this.num = 0;
+                this.strings = 1;
+                this.repaint = true;
+                this.world.keyPressed(e);
+//            } else {
+//                this.meee = false;
+//            }
         } else if (e.getKeyChar() == 'f') {
-//            world.pause = true;
-//            world.pause_dialog = false;
             this.world.keyPressed(e);
+        } else if (e.getKeyChar() == 'j') {
+            this.Quests.sheep.Set_quest_num(1);
         } else {
             this.world.keyPressed(e);
         }
@@ -448,9 +442,7 @@ class Paint_2 {
     }
 
     public void map_paint(
-            Graphics2D g2d, int world_height, int world_width, int[][][] world_tiles, int player_y, int pleyer_x) {
-//        g2d.setColor(new Color(255, 255, 255, 100));
-//        g2d.fillRect(0, 0, world_width * 2, world_height * 2);
+        Graphics2D g2d, int world_height, int world_width, int[][][] world_tiles, int player_y, int pleyer_x) {
 
         for (int i = 0; i < world_height; i++) {
             for (int j = 0; j < world_width; j++) {
@@ -479,8 +471,8 @@ class Paint_2 {
             }
         }
 
-//        g2d.setColor(new Color(255, 0, 0, 200));
-//        g2d.fillRect(pleyer_x * 2 - 1, player_y  * 2 - 1, 4, 4);
+        g2d.setColor(new Color(255, 0, 0, 200));
+        g2d.fillRect(pleyer_x * 2 - 1, player_y  * 2 - 1, 4, 4);
 
         g2d.setColor(Color.GRAY);
         g2d.fillRect(world_width  * 2, 0, 2, world_height  * 2);
@@ -489,22 +481,18 @@ class Paint_2 {
 
     public void flags_paint(
             int[][] flags, int[][][] world_tiles) {
-        for (int i = 0; i < flags.length; i++) {
-            world_tiles[flags[i][0]][flags[i][1]][2] = 9;
+        for (int[] flag : flags) {
+            world_tiles[flag[0]][flag[1]][2] = 9;
         }
     }
 
     public void npc_paint(
             Graphics2D g2d, int[][] npc, int screen_y, int screen_x,
             BufferedImage img0) {
-        for (int i = 0; i < npc.length; i++) {
-            g2d.drawImage(img0, (npc[i][0] * 32) - (screen_x * 32),
-                    (npc[i][1] * 32) - (screen_y * 32), null);
+        for (int[] ints : npc) {
+            g2d.drawImage(img0, (ints[0] * 32) - (screen_x * 32),
+                    (ints[1] * 32) - (screen_y * 32), null);
         }
-
-//        this.gid_name.setText(this.world.npc.nps_names[0]);
-//        this.gid_name.setLocation((this.world.npc.npc[0][0] - this.world.screen_x) * 32 - 5,
-//                (this.world.npc.npc[0][1] - this.world.screen_y) * 32 + 40);
     }
 
     public void player_paint(
@@ -529,8 +517,8 @@ class Paint_2 {
         coins.setFont(coins_font);
     }
 
-    public void redactor_mode_tiles_paint(
-            Graphics2D g2d, int mode, int screen_width, int sprite_size,
+    public void redactor_mode_tiles_paint (
+            Graphics2D g2d, int mode,
             BufferedImage img1, BufferedImage img2, BufferedImage img3, BufferedImage img4, BufferedImage img5,
             BufferedImage img6) {
         if (mode == 1) {
@@ -541,90 +529,5 @@ class Paint_2 {
             g2d.drawImage(img5, 1250, 128, null);
             g2d.drawImage(img6, 1250, 160, null);
         }
-
-        if (mode == 1) {
-            // world redactor mode
-            screen_width =  (1280 / sprite_size) - 3;
-        } else if (mode == 0) {
-            // game mode
-            screen_width = (1280 / sprite_size) - 2;
-        }
     }
-
-//    public void pause(
-//            Graphics2D g2d, boolean pause, int mode, boolean pause_dialog, BufferedImage[] result_images,
-//            JButton exit_button, JButton world_constructor_button_0, JButton new_world_button,
-//            JButton change_world_button, JButton world_redactor_button, JButton game_button,
-//            JButton menu_button, JButton hext_button, JButton save_button, JButton dialog_change_butoon) {
-//        if (pause) {
-//            if (mode == 1) {
-//                exit_button.setVisible(true);
-//            }
-//            if (!pause_dialog) {
-//                g2d.setColor(new Color(255, 255, 255, 155));
-//                g2d.fillRect(0, 0, 1280, 720);
-//
-//                if (mode == 1) {
-//                    // world redactor mode
-//                    world_constructor_button_0.setVisible(true);
-//                    new_world_button.setVisible(true);
-//                    change_world_button.setVisible(true);
-//                    world_redactor_button.setVisible(false);
-//                    game_button.setVisible(true);
-//                } else if (mode == 0) {
-//                    // game mode
-//                    world_redactor_button.setVisible(true);
-//                    game_button.setVisible(false);
-//                    world_constructor_button_0.setVisible(false);
-//                    new_world_button.setVisible(false);
-//                    change_world_button.setVisible(false);
-//                }
-//
-//                menu_button.setVisible(true);
-//                hext_button.setVisible(false);
-//                exit_button.setVisible(true);
-//                save_button.setVisible(true);
-////            save_button.setBounds(200,100, 100, 100);
-//
-//                for (int i = 0; i < text.result_images.length; i++) {
-//                    if (text.result_images[i] != null) {
-//                        g2d.drawImage(text.result_images[i], 11 * i, 15, null);
-//                    }
-//                }
-//            } else {
-//                g2d.setColor(new Color(215, 215, 142, 155));
-//                g2d.fillRect(390, 350, 500, 300);
-//
-//                hext_button.setVisible(true);
-//                hext_button.setLocation(815, 620);
-//
-//                for (int i = 0; i < text.length; i++) {
-//                    if (texts[i] != null) {
-//                        text_parser(texts[i]);
-//                        if (i < strings) {
-//                            for (int j = 0; j < result_images.length; j++) {
-//                                if (result_images[j] != null) {
-//                                    g2d.drawImage(
-//                                            result_images[j],
-//                                            ((10 + 2) * j + 390),
-//                                            ((15 + 5) * i + 350), null
-//                                    );
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                dialog_change_butoon.setVisible(mode == 1);
-//            }
-//        } else {
-//            menu_button.setVisible(false);
-//            world_redactor_button.setVisible(false);
-//            game_button.setVisible(false);
-//            world_constructor_button_0.setVisible(false);
-//            new_world_button.setVisible(false);
-//            change_world_button.setVisible(false);
-//            exit_button.setVisible(false);
-//            save_button.setVisible(false);
-//        }
-//    }
 }

@@ -10,8 +10,6 @@ import java.util.Random;
 
 public class World extends JPanel {
     public Json json;
-//    public Qwests qwests = new Qwests();
-//    public String qwest_now = "shep";
     public DataNPC npc;
     public DataWorld world;
     public DataPlayer player;
@@ -59,32 +57,8 @@ public class World extends JPanel {
             {{4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}}
     };
 
-//    Logger log = Logger.getLogger(World.class.getName());
-
     public World() {
-//        try {
-//            FileHandler fileHandler = new FileHandler("src/Logs/Log_World.log", true);
-//            SimpleFormatter simple = new SimpleFormatter();
-//            fileHandler.setFormatter(simple);
-//            log.addHandler(fileHandler);
-//        } catch (IOException e) {
-//            System.out.println();
-//        }
-
         json = new Json();
-
-//        Java_data_classes.DataQwest qwest = this.json.qwest_load("shep");
-//        System.out.println("Title: " + qwest.title);
-//        System.out.println("Start if: " + qwest.start_if);
-//        System.out.println("After start:  " + qwest.after_start);
-//        System.out.println("Finish if: " + qwest.finish_if);
-//        System.out.println("Reword: " + qwest.reword);
-//        for (int i = 0; i < qwest.dialog.length; i++) {
-//            if (qwest.dialog[i] != null) {
-//                System.out.println("Dialog string " + i + " : " + qwest.dialog[i]);
-//            }
-//        }
-
         text = new Text();
         npc = new DataNPC();
         player = json.load_player();
@@ -96,177 +70,149 @@ public class World extends JPanel {
     }
 
     public void world_constructor(String biom) {
-        try {
-//            String biom = JOptionPane.showInputDialog(null);
-//            System.out.println(biom);
-
-            Random rn = new Random();
-            if (biom.equals("grout")) {
-//                System.out.println("grout - generate");
-//                log.logp(Level.INFO, "World", "World constructor", "Generate grout world");
-                for (int i = 0; i < this.world.height; i++) {
-                    for (int j = 0; j < this.world.width; j++) {
-                        int rand = rn.nextInt() % 101;
-                        this.world.tiles[i][j][0] = 10;
-                        if (rand < 75) {
-                            this.world.tiles[i][j][1] = 0;
-                        } else {
-                            this.world.tiles[i][j][1] = 9;
-                        }
+        Random rn = new Random();
+        if (biom.equals("grout")) {
+            for (int i = 0; i < this.world.height; i++) {
+                for (int j = 0; j < this.world.width; j++) {
+                    int rand = rn.nextInt() % 101;
+                    this.world.tiles[i][j][0] = 10;
+                    if (rand < 75) {
+                        this.world.tiles[i][j][1] = 0;
+                    } else {
+                        this.world.tiles[i][j][1] = 9;
                     }
                 }
+            }
 //                revalidate();
 
-                int house = rn.nextInt((1 + 1) + 2);
-                int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
-                int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
+            int house = rn.nextInt((1 + 1) + 2);
+            int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
+            int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
 
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        if (house == 1) {
-                            this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
-                            this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
-                            this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
-                        } else if (house == 2) {
-                            this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
-                            this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
-                            this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
-                        }
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if (house == 1) {
+                        this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
+                        this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
+                        this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
+                    } else if (house == 2) {
+                        this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
+                        this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
+                        this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
                     }
                 }
-
-                this.npc.npc[0][0] = house_x + 1;
-                this.npc.npc[0][1] = house_y + 1;
-            } else {
-//                log.logp(Level.INFO, "World", "World constructor", "Generate usually world");
-                for (int i = 0; i < this.world.height; i++) {
-                    for (int j = 0; j < this.world.width; j++) {
-                        int rand = rn.nextInt() % 101;
-                        if (rand < 85) {
-                            this.world.tiles[i][j][0] = 1;
-                            this.world.tiles[i][j][1] = 0;
-                        } else if (rand < 90) {
-                            this.world.tiles[i][j][0] = 2;
-                            this.world.tiles[i][j][1] = 0;
-                        } else {
-                            this.world.tiles[i][j][0] = 1;
-                            this.world.tiles[i][j][1] = 7;
-                        }
-                    }
-                }
-
-                int house = rn.nextInt((1 + 1) + 2);
-                int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
-                int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
-
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        if (house == 1) {
-                            this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
-                            this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
-                            this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
-                        } else if (house == 2) {
-                            this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
-                            this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
-                            this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
-                        }
-                    }
-                }
-
-                this.npc.npc[0][0] = house_x + 1;
-                this.npc.npc[0][1] = house_y + 1;
             }
-            revalidate();
-        } catch (Exception e) {
-//            log.logp(Level.WARNING, "World", "World constructor", "", e); System.exit(1);
+
+            this.npc.npc[0][0] = house_x + 1;
+            this.npc.npc[0][1] = house_y + 1;
+        } else {
+            for (int i = 0; i < this.world.height; i++) {
+                for (int j = 0; j < this.world.width; j++) {
+                    int rand = rn.nextInt() % 101;
+                    if (rand < 85) {
+                        this.world.tiles[i][j][0] = 1;
+                        this.world.tiles[i][j][1] = 0;
+                    } else if (rand < 90) {
+                        this.world.tiles[i][j][0] = 2;
+                        this.world.tiles[i][j][1] = 0;
+                    } else {
+                        this.world.tiles[i][j][0] = 1;
+                        this.world.tiles[i][j][1] = 7;
+                    }
+                }
+            }
+
+            int house = rn.nextInt((1 + 1) + 2);
+            int house_x = rn.nextInt(((this.world.width - 10) - 2) + 1) + 2;
+            int house_y = rn.nextInt(((this.world.height - 10) - 2) + 1) + 2;
+
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if (house == 1) {
+                        this.world.tiles[house_y + i][house_x + j][0] = this.house_1[i][j][0];
+                        this.world.tiles[house_y + i][house_x + j][1] = this.house_1[i][j][1];
+                        this.world.tiles[house_y + i][house_x + j][2] = this.house_1[i][j][2];
+                    } else if (house == 2) {
+                        this.world.tiles[house_y + i][house_x + j][0] = this.house_2[i][j][0];
+                        this.world.tiles[house_y + i][house_x + j][1] = this.house_2[i][j][1];
+                        this.world.tiles[house_y + i][house_x + j][2] = this.house_2[i][j][2];
+                    }
+                }
+            }
+
+            this.npc.npc[0][0] = house_x + 1;
+            this.npc.npc[0][1] = house_y + 1;
         }
+        revalidate();
     }
 
     public void new_world() {
-        try {
-            //        System.out.println("New world");
-            JPanel new_world_dialog_name_panel = new JPanel();
-            String name = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Name:");
+        JPanel new_world_dialog_name_panel = new JPanel();
+        String name = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Name:");
 
-            JPanel new_world_dialog_size_panel = new JPanel();
-            String size = JOptionPane.showInputDialog(new_world_dialog_size_panel, "Size (x/y):");
-            String[] size_split = size.split("/");
+        JPanel new_world_dialog_size_panel = new JPanel();
+        String size = JOptionPane.showInputDialog(new_world_dialog_size_panel, "Size (x/y):");
+        String[] size_split = size.split("/");
 
-            // генерируем новый мир
-            int world_width = Integer.parseInt(size_split[0]);
-            int world_height = Integer.parseInt(size_split[1]);
-            int[][][] tiles = new int[world_height][world_width][3];
+        int world_width = Integer.parseInt(size_split[0]);
+        int world_height = Integer.parseInt(size_split[1]);
+        int[][][] tiles = new int[world_height][world_width][3];
 
-            for (int i = 0; i < world_height; i++) {
-                for (int j = 0; j < world_width; j++) {
-                    tiles[i][j][1] = 1;
-                }
+        for (int i = 0; i < world_height; i++) {
+            for (int j = 0; j < world_width; j++) {
+                tiles[i][j][1] = 1;
             }
-
-            // сохраняем новый мир
-            DataWorld new_world = new DataWorld(name, world_width, world_height, tiles);
-            this.json.save_world(new_world);
-
-            // заменяем текущий мир на новый
-            this.world = new_world;
-            // сбрасываем координаты игрока
-            this.player.x = 0;
-            this.player.y = 0;
-            // говорим, что нужно перерисовать мир
-            this.revalidate();
-        } catch (Exception e) {
-//            log.logp(Level.WARNING, "World", "New world", "", e); System.exit(1);/
         }
+
+        // сохраняем новый мир
+        DataWorld new_world = new DataWorld(name, world_width, world_height, tiles);
+        this.json.save_world(new_world);
+
+        // заменяем текущий мир на новый
+        this.world = new_world;
+        // сбрасываем координаты игрока
+        this.player.x = 0;
+        this.player.y = 0;
+        // говорим, что нужно перерисовать мир
+        this.revalidate();
     }
 
     public void dialog_change() {
-        try {
-            JPanel new_world_dialog_name_panel = new JPanel();
-            String intext = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Game.Text (/n for nex line):");
-            String npc_name = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc name:");
-            String npc_text = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc text:");
+        JPanel new_world_dialog_name_panel = new JPanel();
+        String intext = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Game.Text (/n for nex line):");
+        String npc_name = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc name:");
+        String npc_text = JOptionPane.showInputDialog(new_world_dialog_name_panel, "Npc text:");
 
-            String[] text = intext.split("/n ");
+        String[] text = intext.split("/n ");
 
-            this.json.dialog_save(npc_name, npc_text, text);
-            this.revalidate();
-        } catch (Exception e) {
-//            log.logp(Level.WARNING, "World", "Dialog change", "", e); System.exit(1);
-        }
+        this.json.dialog_save(npc_name, npc_text, text);
+        this.revalidate();
     }
 
     public void change_world() {
-        try {
-            JPanel change_world_dialog_world_panel = new JPanel();
-            String message = "Worlds: " + String.join(", ", this.json.list_worlds());
-            String name = JOptionPane.showInputDialog(change_world_dialog_world_panel, message);
+        JPanel change_world_dialog_world_panel = new JPanel();
+        String message = "Worlds: " + String.join(", ", this.json.list_worlds());
+        String name = JOptionPane.showInputDialog(change_world_dialog_world_panel, message);
 
-            this.world = this.json.load_world(name);
+        this.world = this.json.load_world(name);
 
-            this.player.x = 0;
-            this.player.y = 0;
+        this.player.x = 0;
+        this.player.y = 0;
 
-            this.revalidate();
-        } catch (Exception e) {
-//            log.logp(Level.WARNING, "World", "Change world", "", e); System.exit(1);
-        }
+        this.revalidate();
     }
 
     public void change_world2(String world_name, boolean one, boolean two, int one_one, int two_two) {
-        try {
-            this.world = this.json.load_world(world_name);
+        this.world = this.json.load_world(world_name);
 
-            if (one) {
-                this.player.y = one_one;
-            }
-            if (two) {
-                this.player.x = two_two;
-            }
-
-            this.revalidate();
-        } catch (Exception e) {
-//            log.logp(Level.WARNING, "World", "Change world", "", e); System.exit(1);
+        if (one) {
+            this.player.y = one_one;
         }
+        if (two) {
+            this.player.x = two_two;
+        }
+
+        this.revalidate();
     }
 
     public int get_player_screen_x() {
@@ -347,23 +293,13 @@ public class World extends JPanel {
                     this.pause_qwest = false;
                     this.json.dialog_load("villager", "start");
                 }
-
-                //             Java_data_classes.DataQwest qwest = this.json.qwest_load("shep");
-                //             System.out.println("Title: " + qwest.title);
-                //             System.out.println("Start if: " + qwest.start_if);
-                //             System.out.println("After start:  " + qwest.after_start);
-                //             System.out.println("Finish if: " + qwest.finish_if);
-                //             System.out.println("Reword: " + qwest.reword);
-                //             for (int i = 0; i < qwest.dialog.length; i++) {
-                //                 System.out.println("Dialog string " + i + " : " + qwest.dialog[i]);
-                //             }
-            } else if (e.getKeyChar() == 'r') {
+            } else if (e.getKeyChar() == 'p') {
                 this.pause = true;
                 this.pause_dialog = false;
                 this.pause_qwest = true;
                 revalidate();
             } else if (e.getKeyCode() == 27) {
-                if (this.pause = true) {
+                if (this.pause == true) {
                     this.pause = false;
                 } else {
                     this.pause = true;
@@ -443,7 +379,6 @@ public class World extends JPanel {
                 this.screen_y = this.world.height - this.screen_height;
             }
         } catch (Exception exe) {
-//            log.logp(Level.WARNING, "World", "New world", "", exe);
             System.exit(1);
         }
     }

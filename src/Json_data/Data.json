@@ -59895,6 +59895,8 @@
     }
   },
   "player": {
+    "quest": "sheep",
+    "quest_num": 0,
     "coordinate": {
       "x": 25,
       "y": 11
