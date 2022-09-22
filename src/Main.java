@@ -19,30 +19,12 @@ public class Main extends JFrame {
     JFrame TerminalFrame = new JFrame();
     GameWindow game_window;
     MenuWindow menu_window;
-//    TerminalWindow terminalwindow;
+
+//    public void accept(MainVisitor visitor);
 
     public Main() {
-//        Logger log = Logger.getLogger(Main.class.getName());
-//        try {
-//            FileHandler fileHandler = new FileHandler("src/Logs/Log_Main.log", true);
-//            SimpleFormatter simple = new SimpleFormatter();
-//            fileHandler.setFormatter(simple);
-//            log.addHandler(fileHandler);
-//        } catch (IOException e) {
-//            System.out.println();
-//        }
         menu_window = new MenuWindow();
         game_window = new GameWindow();
-
-//        terminalwindow = new TerminalWindow();
-//        TerminalFrame.setTitle("Vindigio terminal");
-//        TerminalFrame.setLocation(1280, 720 + 50);
-//        TerminalFrame.setSize(500, 280);
-//        TerminalFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        TerminalFrame.setResizable(false);
-//        TerminalFrame.add(terminalwindow);
-////        log.info("Game window added");
-//        TerminalFrame.setVisible(true);
 
         GameFrame.setTitle("Vindigio");
         GameFrame.setLocation(0, 0);
@@ -57,32 +39,11 @@ public class Main extends JFrame {
 
         Timer timer;
         timer = new Timer(0, e -> {
-            if (this.game_window.repint) {
+            if (this.game_window.repaint) {
+                System.out.println("Repaint");
                 GameFrame.repaint();
                 TerminalFrame.repaint();
             }
-
-//            if (this.terminalwindow.textField.getText() != null) {
-////                System.out.println(this.terminalwindow.textField.getText());
-//                if (this.terminalwindow.textField.getText() == "true") {
-//                    System.out.println("true");
-//                }
-////                if (this.terminalwindow.textField.getText() == "quest = true") {
-////                    System.out.println(true);
-//////                    this.game_window.world.pause = true;
-//////                    this.game_window.world.pause_qwest = true;
-//////                    this.game_window.world.pause_dialog = false;
-////                    this.terminalwindow.textField.setText(null);
-////                } else if (this.terminalwindow.textField.getText() == "quest = false") {
-////                    System.out.println(false);
-//////                    this.game_window.world.pause = false;
-//////                    this.game_window.world.pause_qwest = false;
-//////                    this.game_window.world.pause_dialog = false;
-////                    this.terminalwindow.textField.setText(null);
-////                }
-//            }
-//            frame.revalidate();
-
 //            if (this.menu_window.is_menu == false) {
 //                frame.remove(menu_window);
 //                frame.add(game_window);

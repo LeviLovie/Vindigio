@@ -363,7 +363,11 @@ public class World extends JPanel {
                 this.pause_qwest = true;
                 revalidate();
             } else if (e.getKeyCode() == 27) {
-                this.pause = true;
+                if (this.pause = true) {
+                    this.pause = false;
+                } else {
+                    this.pause = true;
+                }
                 this.pause_dialog = false;
                 this.pause_qwest = false;
             }

@@ -10,16 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Images_and_sound/sound/Cave_sound/1.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images_and_sound/sound/Cave_sound/2.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images_and_sound/sound/Vilage_sound/1.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images_and_sound/sound/Vilage_sound/2.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Images_and_sound/sound/Vilage_sound/3.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TerminalWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Java_data_classes/MyQwests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java_data_classes/MyQuests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Json_data/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Json_data/Data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

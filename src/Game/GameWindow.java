@@ -18,8 +18,9 @@ public class GameWindow extends JPanel implements KeyListener {
 //    Date date = new Date();
 //    public int[] processing = new int[3];
     public final World world;
+    MyQuests Quests;
     public boolean is_game = true;
-    public boolean repint = true;
+    public boolean repaint = true;
 //    private JLabel[] processing_lable = new JLabel[processing.length];
     private BufferedImage img0_0 = null;
     private BufferedImage img0_1 = null;
@@ -254,8 +255,6 @@ public class GameWindow extends JPanel implements KeyListener {
 //    JLabel title = new JLabel(qwest.title);
     JLabel title;
 
-    MyQuests Quests;
-
     public void pause(Graphics2D g2d) {
         try {
             if (this.world.pause) {
@@ -263,6 +262,7 @@ public class GameWindow extends JPanel implements KeyListener {
                     this.exit_button.setVisible(true);
                 }
                 if (this.world.pause_qwest) {
+                    this.repaint = false;
                     g2d.setColor(new Color(0, 0, 0, 155));
                     g2d.fillRect(0, 0, 1280, 720);
 
@@ -347,15 +347,18 @@ public class GameWindow extends JPanel implements KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
-        this.world.keyPressed(e);
 //        System.out.println("+");
         this.revalidate();
         if (e.getKeyCode() == 27) {
             this.strings = 1;
-            this.repint = true;
+            this.repaint = true;
+            this.world.keyPressed(e);
         } else if (e.getKeyChar() == 'f') {
 //            world.pause = true;
 //            world.pause_dialog = false;
+            this.world.keyPressed(e);
+        } else {
+            this.world.keyPressed(e);
         }
     }
     public void keyReleased (KeyEvent e) {}
