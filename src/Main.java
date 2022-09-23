@@ -23,6 +23,7 @@ public class Main extends JFrame {
 //    public void accept(MainVisitor visitor);
 
     public Main() {
+        System.out.println("Hello, world!");
 //        menu_window = new MenuWindow();
         game_window = new GameWindow();
 
