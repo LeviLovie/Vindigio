@@ -1,4 +1,4 @@
-This's a Vindigio game, now this game in developing, now it's Alpha 0.1.
+This's a Vindigio game, now this game in developing, now it's Alpha 0.2.
 You can use this code for your needs, but I want say: please not say, that 
 this's your code (You can say noting), thank you.
 
