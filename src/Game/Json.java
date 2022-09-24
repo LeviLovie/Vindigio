@@ -8,10 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -20,8 +17,9 @@ public class Json {
     public int villager_x;
     public int villager_y;
     public int coins;
-    private static final String json_filename0 = "src/Json_data/Data.json";
-    private final String json_filename = System.getProperty("user.home") + "/Library/Vindigio/";
+    private static final String path_in_resuorces = "Vindigio/src/Json_data/Data.json";
+    private static final String path_in_local_resuorces = "src/Json_data/Data.json";
+    private final String path_to_resurces = System.getProperty("user.home") + "/Library/";
     public String[] texts = new String[64];
     public int[] inventory = new int[5];
     public int inventory_in;
@@ -34,14 +32,23 @@ public class Json {
 
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream input = classLoader.getResourceAsStream(json_filename0);
-        } catch (Exception e) {}
+            InputStream input = classLoader.getResourceAsStream("src");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-        System.out.println(json_filename);
+//        System.out.println(json_filename);
 
         try {
-            jsonO = (JSONObject) parser.parse(new FileReader(json_filename + json_filename0));
+            jsonO = (JSONObject) parser.parse(new FileReader(path_to_resurces + path_in_resuorces));
+//            jsonO = (JSONObject) parser.parse(new FileReader(path_in_local_resuorces));
         } catch (IOException | ParseException e) {
+//            System.out.println("Create new directory");
+////            File file = new File("~/Documents/Vindigio/src");
+//            String path = "~/documents/test/test2";
+//            File file = new File(path);
+//            file.mkdirs();
+//            file.mkdirs();
             e.printStackTrace();
         }
 
@@ -49,7 +56,7 @@ public class Json {
     }
 
     public void json_save(JSONObject jsonO) {
-        try (FileWriter file = new FileWriter(json_filename0)) {
+        try (FileWriter file = new FileWriter(path_in_resuorces)) {
             file.write(jsonO.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -159,9 +166,17 @@ public class Json {
     public DataPlayer load_player() {
         JSONObject jsonO = this.json_parse();
 
+//        JSONObject game = (JSONObject) jsonO.get("game");
+//        System.out.println(game);
         JSONObject player = (JSONObject) jsonO.get("player");
         JSONObject coordinate = (JSONObject) player.get("coordinate");
         JSONObject inventory = (JSONObject) player.get("inventory");
+
+//        long version = ((Long) game.get("version")).intValue();
+//
+//        if (version != 0.2) { // TODO Change version!
+//            System.err.println("Game version != data.json version");
+//        }
 
         int player_x = ((Long) coordinate.get("x")).intValue();
         int player_y = ((Long) coordinate.get("y")).intValue();

@@ -1,3 +1,5 @@
+// cp ~/Documents/GitHub/Vindigio/src/Json_data/Data.json ~/Library/Vindigio/src/Json_data/
+
 package Game;
 
 import Java_data_classes.MyQuests;
@@ -10,6 +12,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +20,10 @@ public class GameWindow extends JPanel implements KeyListener {
     public int num = 0;
     public final World world;
     private JLabel task;
-    private boolean Sheep_meee = true;
+    private boolean press_i_meee = true;
+    private boolean press_j_meee = true;
     MyQuests Quests;
+    private String quest = "1";
     public boolean is_game = true;
     public boolean repaint = true;
     private BufferedImage img0_0 = null;
@@ -55,7 +60,6 @@ public class GameWindow extends JPanel implements KeyListener {
 
     public GameWindow() {
         this.Quests = new MyQuests();
-        task = new JLabel(this.Quests.sheep.Get_name());
         my_paint = new Paint_2();
         world = new World();
 
@@ -142,7 +146,7 @@ public class GameWindow extends JPanel implements KeyListener {
         hext_button.addActionListener(e -> strings++);
 
         save_button.addActionListener(e -> {
-            world.json.save_player(world.player, this.world.player.quest, this.world.player.quest_num);
+            world.json.save_player(world.player, this.quest, this.world.player.quest_num);
             world.json.save_world(world.world);
         });
         world_constructor_button_0.addActionListener(e -> world.world_constructor(""));
@@ -153,6 +157,9 @@ public class GameWindow extends JPanel implements KeyListener {
         world_redactor_button.addActionListener(e -> world.mode = 1);
         menu_button.addActionListener(e -> is_game = false);
         game_button.addActionListener(e -> world.mode = 0);
+
+        task = new JLabel("");
+        add(task);
     }
 
     public void paintComponent(Graphics g) {
@@ -232,34 +239,66 @@ public class GameWindow extends JPanel implements KeyListener {
         this.pause(g2d);
     }
     public void pause(Graphics2D g2d) {
-        if (this.Quests.sheep.Get_quest_num() == 1 && this.Sheep_meee) {
+        if (Objects.equals(this.quest, "1")) {
+            if (this.Quests.press_i.Get_quest_num() == 1 && this.press_i_meee) {
 //            if (meee) {
                 this.world.pause = false;
                 this.world.pause_qwest = false;
                 this.world.pause_dialog = false;
-//                this.task.setText("You done " + this.world.player.quest + "!");
+//                this.task.setText("You done " + this.quest + "!");
                 this.world.json.coins += 25;
+                this.quest = "2";
                 repaint();
-                this.Sheep_meee = false;
+                this.press_i_meee = false;
 //                add(this.task);
 //                this.repaint = false;
 //            } else {
 //                this.repaint = true;
 //            }
+            }
+        } else if (Objects.equals(this.quest, "2")) {
+            if (this.Quests.press_j.Get_quest_num() == 2 && this.press_j_meee) {
+//            if (meee) {
+                this.world.pause = false;
+                this.world.pause_qwest = false;
+                this.world.pause_dialog = false;
+//                this.task.setText("You done " + this.quest + "!");
+                this.world.json.coins += 50;
+                this.quest = "final";
+                repaint();
+                this.press_j_meee = false;
+//                add(this.task);
+//                this.repaint = false;
+//            } else {
+//                this.repaint = true;
+//            }
+            }
         }
         if (this.world.pause) {
             if (this.world.mode == 1) {
                 this.exit_button.setVisible(true);
             }
             if (this.world.pause_qwest) {
+                this.task.setVisible(true);
                 if (this.num != 4) {
                     this.num++;
+                }
+//                System.out.println(this.quest);
+                if (Objects.equals(this.quest, "1")) {
+                    this.task.setText(this.Quests.press_i.Get_task());
+                } else if (Objects.equals(this.quest, "2")) {
+                    this.task.setText(this.Quests.press_j.Get_task());
+                } else if (Objects.equals(this.quest, "final")) {
+                    this.task.setText("Final");
+                }else {
+                    this.task.setText("Game can't find: " + this.quest + " quest");
+//                    System.out.println("Game can't find: " + this.quest + " quest");
                 }
                 g2d.setColor(new Color(215, 215, 142, 155));
                 g2d.fillRect(0, 0, 1280, 720);
                 if (num == 2) {
-                    add(this.task);
-                } else if (num == 3) {
+                    this.task.setVisible(true);
+                } else if (num == 5) {
                     this.repaint = false;
                 }
             } else if (this.world.pause_dialog) {
@@ -333,7 +372,8 @@ public class GameWindow extends JPanel implements KeyListener {
             this.save_button.setVisible(false);
         }
         if (!this.world.pause_qwest) {
-            remove(this.task);
+            this.task.setVisible(false);
+            this.num = 0;
         }
     }
 
@@ -344,13 +384,22 @@ public class GameWindow extends JPanel implements KeyListener {
                 this.strings = 1;
                 this.repaint = true;
                 this.world.keyPressed(e);
+                this.task.setVisible(false);
+                repaint();
 //            } else {
 //                this.meee = false;
 //            }
         } else if (e.getKeyChar() == 'f') {
             this.world.keyPressed(e);
         } else if (e.getKeyChar() == 'j') {
-            this.Quests.sheep.Set_quest_num(1);
+            if (Objects.equals(this.quest, "2")) {
+                this.Quests.press_j.Set_quest_num(this.Quests.press_j.Get_quest_num() + 1);
+            }
+        } else if (e.getKeyChar() == 'i') {
+            if (Objects.equals(this.quest, "1")) {
+                System.out.println("i");
+                this.Quests.press_i.Set_quest_num(1);
+            }
         } else {
             this.world.keyPressed(e);
         }

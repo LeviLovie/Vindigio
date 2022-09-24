@@ -93,7 +93,7 @@ public class Main extends JFrame {
         music();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        Logger log = Logger.getLogger(Main.class.getName());
 //        try {
 //            FileHandler fileHandler = new FileHandler("src/Logs/Log_Main.log", true);
@@ -106,6 +106,7 @@ public class Main extends JFrame {
 //        log.info("Program start");
 
         new Main();
+//        Files.createDirectory(Path.of("~/documents/a"), null);
     }
 
 //    private void music(String name) {
