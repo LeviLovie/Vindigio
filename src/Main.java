@@ -22,10 +22,10 @@ public class Main extends JFrame {
 
 //    public void accept(MainVisitor visitor);
 
-    public Main() {
-        System.out.println("Hello, world!");
+    public Main(String arg) {
+//        System.out.println("Hello, world!");
 //        menu_window = new MenuWindow();
-        game_window = new GameWindow();
+        game_window = new GameWindow(arg);
 
         GameFrame.setTitle("Vindigio");
         GameFrame.setLocation(0, 0);
@@ -37,6 +37,10 @@ public class Main extends JFrame {
         GameFrame.add(game_window);
 //        log.info("Game window added");
         GameFrame.setVisible(true);
+
+//        System.out.println(this.game_window.world.json.where_load);
+//        this.game_window.world.json.where_load = arg;
+//        System.out.println(this.game_window.world.json.where_load);
 
         Timer timer;
         timer = new Timer(0, e -> {
@@ -105,7 +109,7 @@ public class Main extends JFrame {
 //        }
 //        log.info("Program start");
 
-        new Main();
+        new Main("1");
 //        Files.createDirectory(Path.of("~/documents/a"), null);
     }
 

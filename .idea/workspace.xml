@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Vindigio_Alpha:jar" />
+      <artifact name="Vindigio:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,13 +10,93 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35eb04a6-e470-4b71-abf4-943a6b1414b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Java_data_classes/Quests/j.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Vindigio_Alpha0_1_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Vindigio_Alpha_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Animation_tiles/0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Animation_tiles/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Animation_tiles/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/!.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/,.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/?.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/num9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/prbb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/tck.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/а.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/б.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/в.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/г.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/д.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/е.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ж.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/з.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/и.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/й.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/к.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/л.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/м.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/н.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/о.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/п.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/р.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/с.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/т.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/у.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ф.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/х.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ц.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ч.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ш.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/щ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ъ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ы.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ь.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/э.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/ю.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tekst_tiles/я.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/00.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/8_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/8_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/Tiles_tiles/back2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/Cave_sound/1.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/Cave_sound/2.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/Vilage_sound/1.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/Vilage_sound/2.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/Vilage_sound/3.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/back.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/f.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/g.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/musc1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/musc2.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Images_and_sound/sound/music.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Json_data/Data.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/Vindigio/src/Json_data/Qwests.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/for_play/Vindigio_Alpha_0.3/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Vindigio_Alpha_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Vindigio_jar2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Json.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Java_data_classes/MyQuests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java_data_classes/MyQuests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Java_data_classes/Quests/Sheep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Java_data_classes/Quests/i.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Json_data/Data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Json_data/Data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -57,21 +137,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "18",
-    "last_opened_file_path": "/Users/leo/Documents/GitHub/Vindigio",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "advanced.settings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;18&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/leo/Documents/GitHub/Vindigio&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
@@ -89,19 +169,19 @@
       <recent name="Java_data_classes.Quests" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Game">
-    <configuration name="Game" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.From resurces">
+    <configuration name="From resurces" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Vindigio" />
-      <option name="PROGRAM_PARAMETERS" value="0" />
+      <option name="PROGRAM_PARAMETERS" value="1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="World_Redactor" type="Application" factoryName="Application">
+    <configuration name="from local" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Vindigio" />
-      <option name="PROGRAM_PARAMETERS" value="1" />
+      <option name="PROGRAM_PARAMETERS" value="0" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,8 +195,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Game" />
-      <item itemvalue="Application.World_Redactor" />
+      <item itemvalue="Application.from local" />
+      <item itemvalue="Application.From resurces" />
       <item itemvalue="JAR Application.Vindigio_Alpha0.1_jar.jar" />
       <item itemvalue="JAR Application.Vindigio.jar" />
     </list>

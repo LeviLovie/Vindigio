@@ -59895,7 +59895,7 @@
     }
   },
   "player": {
-    "quest": "1",
+    "quest": "press_i",
     "quest_num": 0,
     "coordinate": {
       "x": 25,

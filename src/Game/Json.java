@@ -8,12 +8,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class Json {
+    public String where_load;
     public int villager_x;
     public int villager_y;
     public int coins;
@@ -24,6 +29,10 @@ public class Json {
     public int[] inventory = new int[5];
     public int inventory_in;
     private String quest_num;
+
+    public Json(String arg) {
+        this.where_load = arg;
+    }
 
     public JSONObject json_parse() {
         JSONObject jsonO = new JSONObject();
@@ -39,9 +48,33 @@ public class Json {
 
 //        System.out.println(json_filename);
 
+//        System.out.println(this.where_load);
+        System.out.println("loading");
         try {
-            jsonO = (JSONObject) parser.parse(new FileReader(path_to_resurces + path_in_resuorces));
-//            jsonO = (JSONObject) parser.parse(new FileReader(path_in_local_resuorces));
+            if (Objects.equals(this.where_load, "0")) {
+                try {
+                    jsonO = (JSONObject) parser.parse(new FileReader(path_in_local_resuorces));
+//                    System.out.println("Loaded from: " + path_in_local_resuorces);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (Objects.equals(this.where_load, "1")) {
+                jsonO = (JSONObject) parser.parse(new FileReader(path_to_resurces + path_in_resuorces));
+//                System.out.println("Laded from: " + path_to_resurces + path_in_resuorces);
+            } else if (Objects.equals(this.where_load, null)) {
+                jsonO = (JSONObject) parser.parse(new FileReader(path_to_resurces + path_in_resuorces));
+                System.out.println("Laded from: " + path_to_resurces + path_in_resuorces + ", because where load data is null");
+            } else {
+                System.out.println("Game can't load data, because data about data location is: " + this.where_load);
+                System.out.println("try load in resurces");
+                try {
+                    jsonO = (JSONObject) parser.parse(new FileReader(path_to_resurces + path_in_resuorces));
+                } catch (Exception e) {
+                    System.out.println("Not done:");
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+            }
         } catch (IOException | ParseException e) {
 //            System.out.println("Create new directory");
 ////            File file = new File("~/Documents/Vindigio/src");

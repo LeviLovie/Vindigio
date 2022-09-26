@@ -57,8 +57,8 @@ public class World extends JPanel {
             {{4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}, {4, 3, 0}}
     };
 
-    public World() {
-        json = new Json();
+    public World(String arg) {
+        json = new Json(arg);
         text = new Text();
         npc = new DataNPC();
         player = json.load_player();

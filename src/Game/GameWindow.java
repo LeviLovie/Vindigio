@@ -23,7 +23,7 @@ public class GameWindow extends JPanel implements KeyListener {
     private boolean press_i_meee = true;
     private boolean press_j_meee = true;
     MyQuests Quests;
-    private String quest = "1";
+    private String quest = "press_i";
     public boolean is_game = true;
     public boolean repaint = true;
     private BufferedImage img0_0 = null;
@@ -57,27 +57,47 @@ public class GameWindow extends JPanel implements KeyListener {
     private int strings = 1;
     Paint_2 my_paint;
     Logger log = Logger.getLogger(GameWindow.class.getName());
+    private static final String path_in_resuorces = "Vindigio/src/Json_data/Data.json";
+    private final String path_to_resurces = System.getProperty("user.home") + "/Library/Vindigio/";
 
-    public GameWindow() {
+    public GameWindow(String arg) {
         this.Quests = new MyQuests();
         my_paint = new Paint_2();
-        world = new World();
+        world = new World(arg);
 
-        try {img0_0 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/0.png - can not load"); System.exit(1);}
-        try {img0_1 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/1.png - can not load"); System.exit(1);}
-        try {img0_2 = ImageIO.read(new File("src/Images_and_sound/Animation_tiles/2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/2.png - can not load"); System.exit(1);}
-        try {img0 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/00.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/00.png - can not load"); System.exit(1);}
-        try {img1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/1.png - can not load"); System.exit(1);}
-        try {img2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/2.png - can not load"); System.exit(1);}
-        try {img3 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/3.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/3.png - can not load"); System.exit(1);}
-        try {img4 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/4.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/4.png - can not load"); System.exit(1);}
-        try {img5 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/5.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/5.png - can not load"); System.exit(1);}
-        try {img6 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/6.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/6.png - can not load"); System.exit(1);}
-        try {img7 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/7.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/7.png - can not load"); System.exit(1);}
-        try {img8_1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_1.png - can not load"); System.exit(1);}
-        try {img8_2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_2.png - can not load"); System.exit(1);}
-        try {img9 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/9.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/9.png - can not load"); System.exit(1);}
-        try {img10 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/10.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/10.png - can not load"); System.exit(1);}
+        if (Objects.equals(arg, "1")) {
+            try {img0_0 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/0.png - can not load");}
+            try {img0_1 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/1.png - can not load");}
+            try {img0_2 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/2.png - can not load");}
+            try {img0 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/00.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/00.png - can not load"); System.exit(1);}
+            try {img1 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/1.png - can not load"); System.exit(1);}
+            try {img2 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/2.png - can not load"); System.exit(1);}
+            try {img3 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/3.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/3.png - can not load"); System.exit(1);}
+            try {img4 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/4.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/4.png - can not load"); System.exit(1);}
+            try {img5 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/5.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/5.png - can not load"); System.exit(1);}
+            try {img6 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/6.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/6.png - can not load"); System.exit(1);}
+            try {img7 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/7.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/7.png - can not load"); System.exit(1);}
+            try {img8_1 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/8_1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_1.png - can not load"); System.exit(1);}
+            try {img8_2 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/8_2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_2.png - can not load"); System.exit(1);}
+            try {img9 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/9.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/9.png - can not load"); System.exit(1);}
+            try {img10 = ImageIO.read(new File(path_to_resurces + "src/Images_and_sound/Tiles_tiles/10.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/10.png - can not load"); System.exit(1);}
+        } else if (Objects.equals(arg, "0")) {
+            try {img0_0 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/0.png - can not load");}
+            try {img0_1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/1.png - can not load");}
+            try {img0_2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/0.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/2.png - can not load");}
+            try {img0 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/00.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Animation_tiles/00.png - can not load"); System.exit(1);}
+            try {img1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/1.png - can not load"); System.exit(1);}
+            try {img2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/2.png - can not load"); System.exit(1);}
+            try {img3 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/3.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/3.png - can not load"); System.exit(1);}
+            try {img4 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/4.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/4.png - can not load"); System.exit(1);}
+            try {img5 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/5.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/5.png - can not load"); System.exit(1);}
+            try {img6 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/6.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/6.png - can not load"); System.exit(1);}
+            try {img7 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/7.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/7.png - can not load"); System.exit(1);}
+            try {img8_1 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_1.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_1.png - can not load"); System.exit(1);}
+            try {img8_2 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/8_2.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/8_2.png - can not load"); System.exit(1);}
+            try {img9 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/9.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/9.png - can not load"); System.exit(1);}
+            try {img10 = ImageIO.read(new File("src/Images_and_sound/Tiles_tiles/10.png"));} catch (IOException ignored) {log.logp(Level.WARNING, "GameWindow", "Constructor", "src/Tiles_tiles/10.png - can not load"); System.exit(1);}
+        }
 
         JPanel panel = new JPanel();
         panel.setFocusable(true);
@@ -239,7 +259,7 @@ public class GameWindow extends JPanel implements KeyListener {
         this.pause(g2d);
     }
     public void pause(Graphics2D g2d) {
-        if (Objects.equals(this.quest, "1")) {
+        if (Objects.equals(this.quest, "press_i")) {
             if (this.Quests.press_i.Get_quest_num() == 1 && this.press_i_meee) {
 //            if (meee) {
                 this.world.pause = false;
@@ -247,7 +267,7 @@ public class GameWindow extends JPanel implements KeyListener {
                 this.world.pause_dialog = false;
 //                this.task.setText("You done " + this.quest + "!");
                 this.world.json.coins += 25;
-                this.quest = "2";
+                this.quest = "press_j";
                 repaint();
                 this.press_i_meee = false;
 //                add(this.task);
@@ -256,7 +276,7 @@ public class GameWindow extends JPanel implements KeyListener {
 //                this.repaint = true;
 //            }
             }
-        } else if (Objects.equals(this.quest, "2")) {
+        } else if (Objects.equals(this.quest, "press_j")) {
             if (this.Quests.press_j.Get_quest_num() == 2 && this.press_j_meee) {
 //            if (meee) {
                 this.world.pause = false;
@@ -279,18 +299,18 @@ public class GameWindow extends JPanel implements KeyListener {
                 this.exit_button.setVisible(true);
             }
             if (this.world.pause_qwest) {
-                this.task.setVisible(true);
+//                this.task.setVisible(true);
                 if (this.num != 4) {
                     this.num++;
                 }
 //                System.out.println(this.quest);
-                if (Objects.equals(this.quest, "1")) {
+                if (Objects.equals(this.quest, "press_i")) {
                     this.task.setText(this.Quests.press_i.Get_task());
-                } else if (Objects.equals(this.quest, "2")) {
+                } else if (Objects.equals(this.quest, "press_j")) {
                     this.task.setText(this.Quests.press_j.Get_task());
                 } else if (Objects.equals(this.quest, "final")) {
                     this.task.setText("Final");
-                }else {
+                } else {
                     this.task.setText("Game can't find: " + this.quest + " quest");
 //                    System.out.println("Game can't find: " + this.quest + " quest");
                 }
@@ -392,11 +412,11 @@ public class GameWindow extends JPanel implements KeyListener {
         } else if (e.getKeyChar() == 'f') {
             this.world.keyPressed(e);
         } else if (e.getKeyChar() == 'j') {
-            if (Objects.equals(this.quest, "2")) {
+            if (Objects.equals(this.quest, "press_j")) {
                 this.Quests.press_j.Set_quest_num(this.Quests.press_j.Get_quest_num() + 1);
             }
         } else if (e.getKeyChar() == 'i') {
-            if (Objects.equals(this.quest, "1")) {
+            if (Objects.equals(this.quest, "press_i")) {
                 System.out.println("i");
                 this.Quests.press_i.Set_quest_num(1);
             }
