@@ -343,7 +343,11 @@ public class World extends JPanel {
                     this.tile_click_any += "9";
                     this.tile_click = Integer.parseInt(tile_click_any);
                 } else if (e.getKeyChar() == 'q') {
-                    this.world.tiles[this.player.y][this.player.x][1] = tile_click;
+                    if (this.tile_click == 3 || this.tile_click == 5 || this.tile_click == 6) {
+                        this.world.tiles[this.player.y][this.player.x][1] = tile_click;
+                    } else {
+                        this.world.tiles[this.player.y][this.player.x][0] = tile_click;
+                    }
                 } else if (e.getKeyCode() == 38) {
                     if (this.string_pr > 0) {
                         this.string_pr--;

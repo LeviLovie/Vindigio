@@ -1,4 +1,4 @@
-import Game.GameWindow;
+import Game.*;
 import Menu.MenuWindow;
 
 import javax.sound.sampled.*;
@@ -18,6 +18,7 @@ public class Main extends JFrame {
     JFrame GameFrame = new JFrame();
     JFrame TerminalFrame = new JFrame();
     GameWindow game_window;
+    MultplayerWindow multiplayerWindow;
     MenuWindow menu_window;
 
 //    public void accept(MainVisitor visitor);
@@ -34,7 +35,12 @@ public class Main extends JFrame {
         GameFrame.setResizable(false);
 //        frame.add(menu_window);
 //        TODO no comment back line and comment next line  for finish compilation
-        GameFrame.add(game_window);
+        if (arg != "2") {
+            GameFrame.add(game_window);
+        } else {
+            multiplayerWindow = new MultplayerWindow();
+            GameFrame.add(multiplayerWindow);
+        }
 //        log.info("Game window added");
         GameFrame.setVisible(true);
 
@@ -98,6 +104,7 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) throws IOException {
+        boolean multiplayer = false;
 //        Logger log = Logger.getLogger(Main.class.getName());
 //        try {
 //            FileHandler fileHandler = new FileHandler("src/Logs/Log_Main.log", true);
@@ -109,7 +116,11 @@ public class Main extends JFrame {
 //        }
 //        log.info("Program start");
 
-        new Main("1");
+        if (!multiplayer) {
+            new Main("1");
+        } else {
+            new Main("3");
+        }
 //        Files.createDirectory(Path.of("~/documents/a"), null);
     }
 
